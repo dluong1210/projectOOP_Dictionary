@@ -3,5 +3,9 @@ package Application;
 import java.util.ArrayList;
 
 public class Dictionary {
-    protected ArrayList<Word> listWord;
+    protected TreeWord listWord;
+
+    public Dictionary() {
+        listWord = new TreeWord();
+    }
 }

@@ -32,13 +32,13 @@ public class TreeNode {
     }
 
     public boolean hasCharNext(Character check) {
-        return child.containsKey(check);
+        return !isLastChar() && child.containsKey(check);
     }
 
     public void insertNode(Character c) {
         if (isLastChar()) {
             new TreeNode();
         }
-        child.put(c, null);
+        child.put(c, new TreeNode());
     }
 }

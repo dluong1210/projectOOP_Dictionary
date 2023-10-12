@@ -5,17 +5,21 @@ import java.util.Scanner;
 import java.io.File;
 
 public class DictionaryManagement extends Dictionary {
+    public DictionaryManagement() {
+        super();
+    }
+
     public void insertFromCommandline() {
        Scanner scan = new Scanner(System.in);
        System.out.print("Number of word added to the dictionary: ");
        int n = scan.nextInt();
        for (int i = 0; i < n; i++) {
-           System.out.print("Word " + i + ": ");
-           String word_target = scan.nextLine();
-           System.out.print("\nExplain of word " + i + ": ");
-           String word_explain = scan.nextLine();
+           System.out.print("Word " + (i + 1) + ": ");
+           String word_target = scan.next();
+           System.out.print("Explain of word " + (i + 1) + ": ");
+           String word_explain = scan.next();
 
-           listWord.add(new Word(word_target, word_explain));
+           listWord.addWord(new Word(word_target, word_explain));
        }
     }
 
@@ -25,11 +29,16 @@ public class DictionaryManagement extends Dictionary {
             Scanner scan = new Scanner(input);
             while (scan.hasNextLine()) {
                 String[] word = scan.nextLine().split("\t");
-                listWord.add(new Word(word[0], word[1]));
+                listWord.addWord(new Word(word[0], word[1]));
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
     }
 
+    public void dictionaryLookup() {
+        Scanner scan = new Scanner(System.in);
+        System.out.print("Nhập từ cần tra cứu: ");
+
+    }
 }

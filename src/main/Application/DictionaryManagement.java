@@ -1,4 +1,4 @@
-package main.Application;
+package Application;
 
 import java.io.FileNotFoundException;
 import java.util.Scanner;

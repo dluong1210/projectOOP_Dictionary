@@ -1,4 +1,4 @@
-package main.Application;
+package Application;
 
 /**
  * Contains an English word and a meaning and definition in Vietnamese.

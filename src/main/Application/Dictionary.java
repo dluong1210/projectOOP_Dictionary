@@ -1,5 +1,5 @@
-package main.Application;
-//package Application;
+//package main.Application;
+package Application;
 
 import java.util.ArrayList;
 
@@ -18,4 +18,5 @@ public class Dictionary {
     public Dictionary() {
         listWord = new TreeWord();
     }
+
 }

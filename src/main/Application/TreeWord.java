@@ -6,13 +6,17 @@ import java.util.List;
 import java.util.Scanner;
 
 public class TreeWord {
-    private TreeNode root;
+    final private TreeNode root;
 
     public TreeWord() {
         root = new TreeNode();
     }
 
-    public void addWord(Word w) {
+    final public TreeNode getRoot() {
+        return root;
+    }
+
+    public boolean addWord(Word w) {
         TreeNode newTree = root;
         String word = w.getWord_target();
         for (int i = 0; i < word.length(); i++) {
@@ -24,12 +28,26 @@ public class TreeWord {
         }
 
         newTree.setCompleteWord(w);
+        return true;
     }
 
     public void addFromList(ArrayList<Word> listWord) {
-        for (int i = 0; i < listWord.size(); i++) {
-            addWord(listWord.get(i));
+        for (Word word : listWord) {
+            addWord(word);
         }
+    }
+
+    public boolean editWord(String currentWord_target, String newWord_target, String newWord_explain) {
+        Word wordEdit = lookup(currentWord_target);
+        if (wordEdit == null) {
+            System.out.println(currentWord_target + " not exist in dictionary");
+            return false;
+        }
+
+        wordEdit.setWord_target(newWord_target);
+        wordEdit.setWord_explain(newWord_explain);
+
+        return delete(currentWord_target) && addWord(wordEdit);
     }
 
     public boolean delete(String word) {
@@ -38,23 +56,25 @@ public class TreeWord {
             return false;
         }
 
-        deleteNode(root, word, 0);
+        deleteBranch(root, word, 0);
         return true;
     }
 
-    public void deleteNode(TreeNode currentNode, String word, int currentIndex) {
+    public void deleteBranch(TreeNode currentNode, String word, int currentIndex) {
         if (currentIndex == word.length()) {
             currentNode.setCompleteWord(null);
         }
 
         else if (currentNode.hasCharNext(word.charAt(currentIndex))) {
-            deleteNode(currentNode.getChild().get(word.charAt(currentIndex)), word, currentIndex + 1);
+            deleteBranch(currentNode.getChild().get(word.charAt(currentIndex)), word, currentIndex + 1);
         }
 
         if ((currentNode.isLastChar() || currentNode.deleteChild()) && currentNode.getCompleteWord() == null) {
             currentNode = null;
         }
     }
+
+
 
     private void traversingFromNode(TreeNode node, List<Word> listFound) {
         if (node.isCompleteWord()) {
@@ -97,24 +117,22 @@ public class TreeWord {
     public static void main(String[] argv) {
         TreeWord test = new TreeWord();
         Scanner scan = new Scanner(System.in);
-        System.out.println("Nhap N");
+        System.out.println("Nhập N");
         int n = scan.nextInt();
         for (int i = 0; i < n; i++) {
             System.out.println("Nhap chu thu " + i );
             String word = scan.next();
             test.addWord(new Word(word, "abc"));
         }
-
-        String check = scan.next();
-        System.out.println(test.delete(check));
+        test.editWord("hello", "hi", "xinchao");
+//        String check = scan.next();
+//        System.out.println(test.delete(check));
 //        test.lookup(check);
 //        System.out.println(test.lookup(check).getWord_explain());
-        ArrayList<Word> list = new ArrayList<>();
-        list = (ArrayList<Word>) test.searchFrom("");
+        ArrayList<Word> list = (ArrayList<Word>) test.searchFrom("");
 //        test.traversingFromNode(test.root, list);
-//
-        for (int i = 0; i < list.size(); i++) {
-            System.out.println(list.get(i).getWord_target());
+        for (Word word : list) {
+            System.out.println(word.getWord_target());
         }
     }
 }

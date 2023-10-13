@@ -1,5 +1,5 @@
-package main.Application;
-//package Application;
+//package main.Application;
+package Application;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,10 +32,36 @@ public class TreeWord {
         }
     }
 
+    public boolean delete(String word) {
+        if (lookup(word) == null) {
+            System.out.println(word + " not exist");
+            return false;
+        }
+
+        deleteNode(root, word, 0);
+        return true;
+    }
+
+    public void deleteNode(TreeNode currentNode, String word, int currentIndex) {
+        if (currentIndex == word.length()) {
+            currentNode.setCompleteWord(null);
+        }
+
+        else if (currentNode.hasCharNext(word.charAt(currentIndex))) {
+            deleteNode(currentNode.getChild().get(word.charAt(currentIndex)), word, currentIndex + 1);
+        }
+
+        if ((currentNode.isLastChar() || currentNode.deleteChild()) && currentNode.getCompleteWord() == null) {
+            currentNode = null;
+        }
+    }
+
     private void traversingFromNode(TreeNode node, List<Word> listFound) {
         if (node.isCompleteWord()) {
             listFound.add(node.getCompleteWord());
         }
+
+        if (node.isLastChar()) return;
         for (Character c : node.getChild().keySet()) {
             traversingFromNode(node.getChild().get(c), listFound); // BackTracking
         }
@@ -79,15 +105,16 @@ public class TreeWord {
             test.addWord(new Word(word, "abc"));
         }
 
-//        String check = scan.next();
+        String check = scan.next();
+        System.out.println(test.delete(check));
 //        test.lookup(check);
 //        System.out.println(test.lookup(check).getWord_explain());
-//        ArrayList<Word> list = new ArrayList<>();
-//        list = (ArrayList<Word>) test.search(check);
+        ArrayList<Word> list = new ArrayList<>();
+        list = (ArrayList<Word>) test.searchFrom("");
 //        test.traversingFromNode(test.root, list);
 //
-//        for (int i = 0; i < list.size(); i++) {
-//            System.out.println(list.get(i).getWord_target());
-//        }
+        for (int i = 0; i < list.size(); i++) {
+            System.out.println(list.get(i).getWord_target());
+        }
     }
 }

@@ -2,8 +2,11 @@
 package Application;
 
 import java.io.FileNotFoundException;
+import java.util.List;
 import java.util.Scanner;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 /**
  * Supports methods managing Dictionary.
@@ -68,6 +71,7 @@ public class DictionaryManagement extends Dictionary {
      */
     public void dictionaryAdd() {
         // Ua co ham insertFromCommandline de lam quai gi?
+        insertFromCommandline();
     }
 
     /**
@@ -75,11 +79,13 @@ public class DictionaryManagement extends Dictionary {
      */
     public void dictionaryUpdate() {
         Scanner scan = new Scanner(System.in);
-        System.out.print("Nhap tu can sua mau: ");
-        String word_target = scan.nextLine();
-        System.out.print("Muon sua gi ha: ");
-        String word_explain = scan.nextLine();
-        //System.out.print(listWord.); chua co ham sua tu o TreeWord
+        System.out.print("Nhập từ cần sửa: ");
+        String old_word_target = scan.nextLine();
+        System.out.print("Nhập từ mới: ");
+        String new_word_target = scan.nextLine();
+        System.out.print("Nghĩa mới là: ");
+        String new_word_explain = scan.nextLine();
+        listWord.editWord(old_word_target, new_word_target, new_word_explain);
     }
 
     /**
@@ -87,16 +93,35 @@ public class DictionaryManagement extends Dictionary {
      */
     public void dictionaryRemove() {
         Scanner scan = new Scanner(System.in);
-        System.out.print("Nhap tu can xoa mau: ");
+        System.out.print("Nhập từ cần xóa: ");
         String word_target = scan.nextLine();
-        // chua co ham xoa tu o TreeWord
+        listWord.delete(word_target);
     }
 
     /**
      * Exports data stored in the Dictionary to a file.
      */
     public void dictionaryExportToFile() {
-        // tu tu roi nghien cuu hihi
+        System.out.print("Nhập tên file +(.txt): ");
+        Scanner scan = new Scanner(System.in);
+        String nameFile = scan.nextLine();
+        try {
+            File newFile = new File("src/" + nameFile + ".txt");
+            if (newFile.createNewFile()) {
+                System.out.println("File created: " + nameFile + ".txt");
+            } else {
+                System.out.println("File already exists");
+            }
+            FileWriter fileWriter = new FileWriter("src/" + nameFile + ".txt");
+            List<Word> listWordToShow = listWord.searchFrom("");
+            for (Word word : listWordToShow) {
+                fileWriter.write(word.getWord_target() + "\t" + word.getWord_explain() + "\n");
+            }
+            fileWriter.close();
+            System.out.println("Successful Export!");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -104,5 +129,18 @@ public class DictionaryManagement extends Dictionary {
      */
     public void dictionaryImportFromFile() {
         // tu tu roi nghien cuu hihi na na insert voi export
+        System.out.print("Nhập đường dẫn file: ");
+        Scanner scanPath = new Scanner(System.in);
+        String nameFile = scanPath.nextLine();
+        try {
+            File input = new File(nameFile);
+            Scanner scan = new Scanner(input);
+            while (scan.hasNextLine()) {
+                String[] word = scan.nextLine().split("\t");
+                listWord.addWord(new Word(word[0], word[1]));
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 }

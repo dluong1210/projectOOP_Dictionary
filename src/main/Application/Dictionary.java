@@ -1,7 +1,22 @@
-package main.Application;
+//package main.Application;
+package Application;
 
 import java.util.ArrayList;
 
+/**
+ * Stores a list of Word objects.
+ */
 public class Dictionary {
-    protected ArrayList<Word> listWord;
+    /**
+     * A trie.
+     */
+    protected TreeWord listWord;
+
+    /**
+     * Constructor (no parameter).
+     */
+    public Dictionary() {
+        listWord = new TreeWord();
+    }
+
 }

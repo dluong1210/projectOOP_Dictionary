@@ -1,7 +1,8 @@
-package main.Application;
+//package main.Application;
+package Application;
 
 /**
- * Contains an English word and a meaning and definition in Vietnamese.
+ * Contains an English word with it's meaning and definition in Vietnamese.
  */
 public class Word {
     /**
@@ -15,8 +16,8 @@ public class Word {
 
     /**
      * Initializes a newly created Word object.
-     * @param word_target - English word
-     * @param word_explain - Vietnamese meaning and definition
+     * @param word_target English word
+     * @param word_explain Vietnamese meaning and definition
      */
     public Word(String word_target, String word_explain) {
         this.word_target = word_target;
@@ -33,7 +34,7 @@ public class Word {
 
     /**
      * Sets the English word.
-     * @param word_target - English word
+     * @param word_target English word
      */
     public void setWord_target(String word_target) {
         this.word_target = word_target;
@@ -49,7 +50,7 @@ public class Word {
 
     /**
      * Sets the Vietnamese meaning and definition.
-     * @param word_explain - Vietnamese meaning and definition
+     * @param word_explain Vietnamese meaning and definition
      */
     public void setWord_explain(String word_explain) {
         this.word_explain = word_explain;

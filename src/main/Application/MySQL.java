@@ -76,7 +76,7 @@ public class MySQL {
             System.out.println("Connected database successfully...");
 
             // Thực hiện các truy vấn SQL ở đây
-            System.out.println(selectFromDB("a"));
+            System.out.println(selectFromDB("inactive"));
 
             // Đóng kết nối khi hoàn thành
             connection.close();

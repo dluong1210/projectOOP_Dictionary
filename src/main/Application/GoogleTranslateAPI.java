@@ -47,7 +47,10 @@ public class GoogleTranslateAPI {
     }
 
     public static void main(String[] argv) throws IOException, InterruptedException {
-        System.out.println(translate("hello world", "en", "vi"));
+        String test = "Lucas goes to school every day of the week. He has many subjects to go to each school day: "
+                + "English, art, science, mathematics, gym, and history. His mother packs a big backpack full of"
+                + " books and lunch for Lucas.";
+        System.out.println(translate(test, "en", "vi"));
     }
 }
 

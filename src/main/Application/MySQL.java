@@ -9,9 +9,9 @@ import java.sql.Connection;
 
 /** Singleton class. */
 public class MySQL {
-    private static final String url = "jdbc:mysql://127.0.0.1:3307/en-vi";
-    private static final String user = "root";
-    private static final String password = "a12102004";
+    private static final String url = "jdbc:mysql://127.0.0.1:3307/en-vi?user=admin";
+//    private static final String user = "root";
+//    private static final String password = "";
     private static Connection connection;
 
     private static MySQL instance;
@@ -22,7 +22,7 @@ public class MySQL {
     public static MySQL getInstance() throws SQLException {
         if (instance == null) {
             instance = new MySQL();
-            connection = DriverManager.getConnection(url, user, password);
+            connection = DriverManager.getConnection(url);
         }
         return instance;
     }
@@ -32,7 +32,8 @@ public class MySQL {
         try {
             getInstance();
             Statement statement = connection.createStatement();
-            ResultSet rs = statement.executeQuery("SELECT definition FROM dictionary WHERE target = \"" + word + "\"");
+            ResultSet rs = statement.executeQuery("SELECT definition FROM dictionary "
+                                                    + "WHERE target = \"" + word + "\"");
 
             if (rs.next()) {
                 String html = rs.getString("definition");

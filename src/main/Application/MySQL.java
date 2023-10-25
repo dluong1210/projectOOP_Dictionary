@@ -41,8 +41,8 @@ public class MySQL {
                 Element q = doc.select("Q").first();
                 if (q != null) {
                     text = q.html().replace("<br>=", "\n\t")
-                            .replace("<br>", "\n")
-                            .replace("+", " --->");
+                                    .replace("<br>", "\n")
+                                    .replace("+", " --->");
                 }
             }
             statement.close();

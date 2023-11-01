@@ -45,7 +45,7 @@ public class DictionaryManagement extends Dictionary {
      */
     public void insertFromFile() {
         try {
-            File input = new File("/"); // Thêm path dictionaries.txt nheee
+            File input = new File("src/resources/data/dictionary.txt"); // Thêm path dictionary.txt nheee
             Scanner scan = new Scanner(input);
             while (scan.hasNextLine()) {
                 String[] word = scan.nextLine().split("\t");
@@ -61,9 +61,18 @@ public class DictionaryManagement extends Dictionary {
      */
     public void dictionaryLookup() {
         Scanner scan = new Scanner(System.in);
-        System.out.print("Nhập từ cần tra cứu: ");
-        String word = scan.nextLine();
-        System.out.print(listWord.lookup(word));
+        String word;
+        while (true) {
+            System.out.print("Nhập từ cần tra cứu: ");
+            word = scan.nextLine();
+            if (!word.isEmpty()) break;
+            System.out.println("Bạn chưa nhập từ !");
+        }
+        if (listWord.lookup(word) == null) {
+            System.out.println("Word not exist in dictionary");
+        }
+        else System.out.println(listWord.lookup(word).getWord_explain());
+//        System.out.println(MySQL.selectFromDB(word));
     }
 
     /**

@@ -9,7 +9,7 @@ public class TreeNode {
     private Word completeWord;
 
     public TreeNode() {
-        child = new HashMap<>(27, 1);
+        child = new HashMap<>(30, 1);
     }
 
     public Map<Character, TreeNode> getChild() {

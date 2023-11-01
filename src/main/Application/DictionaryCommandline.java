@@ -34,6 +34,11 @@ public class DictionaryCommandline extends DictionaryManagement {
         String wordStart = scan.nextLine();
         List<Word> listWordToShow = listWord.searchFrom(wordStart);
 
+        if (listWordToShow == null || listWordToShow.isEmpty()) {
+            System.out.println("Empty !!!");
+            return;
+        }
+
         for (int i = 0; i < listWordToShow.size(); ++i) {
             Word word = listWordToShow.get(i);
             System.out.printf("%-20s | %-20s | %-20s\n", i + 1, word.getWord_target(), word.getWord_explain());
@@ -44,53 +49,74 @@ public class DictionaryCommandline extends DictionaryManagement {
      * Rat la met hic.
      */
     public void dictionaryAdvanced() {
-        System.out.println("Welcome to My Application!");
-        System.out.println("[0] Exit");
-        System.out.println("[1] Add");
-        System.out.println("[2] Remove");
-        System.out.println("[3] Update");
-        System.out.println("[4] Display");
-        System.out.println("[5] Lookup");
-        System.out.println("[6] Search");
-        System.out.println("[7] Game");
-        System.out.println("[8] Import from file");
-        System.out.println("[9] Export to file");
-        System.out.println("Your action: ");
+        boolean quit = false;
+        String choice;
         Scanner scan = new Scanner(System.in);
-        int action = scan.nextInt();
-        switch (action) {
-            case 0:
+
+        System.out.println("Welcome to My Application!");
+        while (true) {
+            System.out.println("MENU:");
+            System.out.println("[0] Exit");
+            System.out.println("[1] Add");
+            System.out.println("[2] Remove");
+            System.out.println("[3] Update");
+            System.out.println("[4] Display");
+            System.out.println("[5] Lookup");
+            System.out.println("[6] Search");
+            System.out.println("[7] Game");
+            System.out.println("[8] Import from file");
+            System.out.println("[9] Export to file");
+            System.out.println("Your action: ");
+            int action = scan.nextInt();
+            switch (action) {
+                case 0:
+                    quit = true;
+                    break;
+                case 1:
+                    dictionaryAdd();
+                    break;
+                case 2:
+                    dictionaryRemove();
+                    break;
+                case 3:
+                    dictionaryUpdate();
+                    break;
+                case 4:
+                    showAllWords();
+                    break;
+                case 5:
+                    dictionaryLookup();
+                    break;
+                case 6:
+                    dictionarySearcher();
+                    break;
+                case 7:
+                    break;
+                case 8:
+    //                dictionaryImportFromFile();
+                    insertFromFile();
+                    break;
+                case 9:
+                    dictionaryExportToFile();
+                    break;
+                default:
+                    System.out.println("Action not supported");
+                    break;
+            }
+            if (quit) break;
+            while (true) {
+                System.out.println("Do you want continue ?:"
+                                    + "\n1.Yes\t2.No");
+                choice = scan.next();
+                if (!choice.equals("1") && !choice.equals("2")) {
+                    System.out.println("Chose 1 of 2 !!");
+                    continue;
+                }
                 break;
-            case 1:
-                dictionaryAdd();
-                break;
-            case 2:
-                dictionaryRemove();
-                break;
-            case 3:
-                dictionaryUpdate();
-                break;
-            case 4:
-                showAllWords();
-                break;
-            case 5:
-                dictionaryLookup();
-                break;
-            case 6:
-                dictionarySearcher();
-                break;
-            case 7:
-                break;
-            case 8:
-                dictionaryImportFromFile();
-                break;
-            case 9:
-                dictionaryExportToFile();
-                break;
-            default:
-                System.out.println("Action not supported");
-                break;
+            }
+            if (choice.equals("2")) break;
         }
+        System.out.println("Byeee");
     }
 
     public static void main(String[] argv) {

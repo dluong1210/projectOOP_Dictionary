@@ -63,7 +63,7 @@ public class DictionaryCommandline extends DictionaryManagement {
             System.out.println("[4] Display");
             System.out.println("[5] Lookup");
             System.out.println("[6] Search");
-            System.out.println("[7] Game");
+            System.out.println("[7] Game (Random Word)");
             System.out.println("[8] Import from file");
             System.out.println("[9] Export to file");
             System.out.println("Your action: ");
@@ -91,9 +91,13 @@ public class DictionaryCommandline extends DictionaryManagement {
                     dictionarySearcher();
                     break;
                 case 7:
+//                    for (int i = 0; i < 25; i++) {
+                        Word test = listWord.getRandomWord(4, 10);
+                        System.out.println(test.getWord_target() + " ---> " + test.getWord_explain());
+//                    }
                     break;
                 case 8:
-    //                dictionaryImportFromFile();
+//                    dictionaryImportFromFile();
                     insertFromFile();
                     break;
                 case 9:

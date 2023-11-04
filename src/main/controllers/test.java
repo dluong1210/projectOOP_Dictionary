@@ -1,5 +1,7 @@
 package controllers;
 
+import Application.MySQL;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -17,8 +19,13 @@ public class test extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(test.class.getResource("add_word.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 600, 400);
+        Thread databaseThread = new Thread(() -> {
+            MySQL.getInstance(); // Đảm bảo bạn đã có phương thức kết nối cơ sở dữ liệu
+        });
+        databaseThread.start();
+
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/searchWord.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 877, 616);
         stage.setTitle("my dictionary!");
         stage.setScene(scene);
         stage.show();

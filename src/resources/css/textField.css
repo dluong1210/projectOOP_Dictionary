@@ -1,0 +1,6 @@
+.custom-textfield {
+    -fx-text-fill: white;
+}
+.valid-text-field {
+    -fx-border-color: transparent;
+}

@@ -1,0 +1,8 @@
+.set-circle {
+    -fx-background-radius: 50%;
+    -fx-bolder-radius: 50%;
+}
+.button {
+    -fx-pref-width: 30;
+    -fx-pref-height: 30;
+}

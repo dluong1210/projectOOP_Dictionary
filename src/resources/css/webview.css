@@ -1,0 +1,13 @@
+/* Các quy tắc CSS mặc định của trình duyệt */
+body {
+    color: blue; /* Đổi màu chữ thành xanh */
+    background-color: yellow; /* Đổi màu nền thành vàng */
+}
+
+/* Quy tắc CSS trong trang web */
+br {
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    font-style: italic;
+    color: blue;
+}

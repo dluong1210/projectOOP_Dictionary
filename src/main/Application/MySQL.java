@@ -41,19 +41,40 @@ public class MySQL {
                                                     + "WHERE target = \"" + word + "\"");
 
             if (rs.next()) {
-                String html = rs.getString("definition");
-                Document doc = Jsoup.parse(html);
-
-                Element q = doc.select("Q").first();
-                if (q != null) {
-                    text = q.html();
-                }
+                text = rs.getString("definition").replace("+", "  --->  ")
+                                                            .replace("*", "<br>*")
+                                                            .replace("=", "Ex: ")
+                                                            .replace("<I>","");
             }
+
             statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return text;
+    }
+
+    public static String htmlSelectFromDB(String word) {
+        String text = selectFromDB(word);
+        String html = "<!DOCTYPE html>\n" +
+                "<html>\n" +
+                "<head>\n" +
+                "    <style>\n" +
+                "        /* Đặt nền trong suốt cho cả body và WebView */\n" +
+                "        body, html {\n" +
+                "            font-size: 14px;\n" +
+                "            font-family: \"Verdana\", Sans-serif;\n" +
+                "            background-color: #1C1A24;\n" +
+                "            color: #E8E8E8;\n" +
+                "        }\n" +
+                "    </style>\n" +
+                "</head>\n" +
+                "<body>\n" +
+                text +
+                "</body>\n" +
+                "</html>";
+
+        return html;
     }
 
     public static List<String> searchFromDB(String word) {
@@ -98,7 +119,7 @@ public class MySQL {
 
             // Thực hiện các truy vấn SQL ở đây
 //            System.out.println(selectFromDB("inactive"));
-            System.out.println(searchFromDB("abstract"));
+            System.out.println(selectFromDB("abstract"));
 
             // Đóng kết nối khi hoàn thành
             connection.close();

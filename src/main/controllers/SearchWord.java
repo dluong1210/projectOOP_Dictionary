@@ -12,7 +12,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Background;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.web.WebView;
 
@@ -28,14 +27,12 @@ public class SearchWord implements Initializable {
     @FXML
     private ListView<String> listFound;
     @FXML
-    private WebView webView = null;
+    private BorderPane result;
+    @FXML
+    private WebView webView;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        if (webView == null) {
-            webView = new WebView();
-            webView.getEngine().setUserStyleSheetLocation(getClass().getResource("/css/webview.css").toString());
-        }
         search(new ActionEvent());
         selectFromList(new ActionEvent());
     }
@@ -56,11 +53,13 @@ public class SearchWord implements Initializable {
                     isSelected = true;
                     wordSelected = wordClicked;
                 } else if (wordSelected.equals(wordClicked)) {
-                    String definition = MySQL.selectFromDB(wordSelected);
+                    String definition = MySQL.htmlSelectFromDB(wordSelected);
 //                    System.out.println(definition);
 
                     listFound.setVisible(false);
                     listFound.getSelectionModel().select(-1);
+                    textSearch.setText(wordSelected);
+                    result.setVisible(true);
                     webView.getEngine().loadContent(definition);
 
                     isSelected = false;

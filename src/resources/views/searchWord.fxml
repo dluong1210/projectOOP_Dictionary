@@ -24,13 +24,8 @@
    <children>
       <BorderPane fx:id="scene" prefHeight="616.0" prefWidth="877.0" style="-fx-background-radius: 15; -fx-background-color: #000000;">
          <left>
-            <VBox prefHeight="616.0" prefWidth="70.0" style="-fx-background-color: #191919; -fx-background-radius: 15 5 5 15;" BorderPane.alignment="CENTER">
+            <VBox prefHeight="554.0" prefWidth="70.0" style="-fx-background-color: #191919; -fx-background-radius: 0 0 0 15;" BorderPane.alignment="CENTER">
                <children>
-                  <Pane>
-                     <children>
-                        <ImageView fitHeight="62.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true" />
-                     </children>
-                  </Pane>
                   <Button mnemonicParsing="false" prefHeight="70.0" prefWidth="70.0" style="-fx-background-color: transparent;">
                      <graphic>
                         <ImageView fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true" />
@@ -58,36 +53,10 @@
             <DropShadow />
          </effect>
          <center>
-            <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #0E0C17; -fx-background-radius: 10;" BorderPane.alignment="CENTER">
+            <Pane maxHeight="554.0" maxWidth="807.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #0E0C17; -fx-background-radius: 10;" BorderPane.alignment="CENTER">
                <children>
-                  <Line endX="700.0" endY="-20.0" layoutX="101.0" layoutY="81.0" startX="-200.0" startY="-20.0" stroke="#2d2b33" />
-                  <HBox layoutX="58.0" layoutY="14.0" prefHeight="30.0" prefWidth="280.0" style="-fx-background-radius: 5; -fx-background-color: #2A2931;">
-                     <children>
-                        <Pane>
-                           <children>
-                              <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="5.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../css/search_icon.png" />
-                                 </image></ImageView>
-                           </children>
-                        </Pane>
-                        <TextField fx:id="textSearch" depthTest="ENABLE" onAction="#search" prefHeight="30.0" prefWidth="260.0" promptText="Search" style="-fx-background-color: #2A2931; -fx-background-radius: 5;">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                           <stylesheets>
-                              <URL value="@../css/font.css" />
-                              <URL value="@../css/textField.css" />
-                           </stylesheets>
-                           <styleClass>
-                              <String fx:value="custom-textfield" />
-                              <String fx:value="font1" />
-                              <String fx:value="valid-text-field" />
-                           </styleClass>
-                        </TextField>
-                     </children>
-                  </HBox>
-                  <BorderPane layoutX="58.0" layoutY="91.0" prefHeight="445.0" prefWidth="564.0" style="-fx-background-color: #1C1A24; -fx-background-radius: 15;">
+                  <Line endX="700.0" endY="-20.0" layoutX="115.0" layoutY="20.0" startX="-200.0" startY="-20.0" stroke="#2d2b33" />
+                  <BorderPane fx:id="result" layoutX="57.0" layoutY="32.0" prefHeight="445.0" prefWidth="600.0" style="-fx-background-color: #1C1A24; -fx-background-radius: 15;" visible="false">
                      <top>
                         <HBox prefHeight="25.0" prefWidth="544.0" style="-fx-background-color: #2A2931; -fx-background-radius: 15 15 0 0;" BorderPane.alignment="CENTER">
                            <children>
@@ -109,14 +78,56 @@
                         </HBox>
                      </top>
                      <center>
-                        <WebView fx:id="webView" prefHeight="200.0" prefWidth="200.0" style="-fx-blend-mode: darken;" stylesheets="@../css/webview.css" BorderPane.alignment="CENTER" />
+                        <WebView fx:id="webView" prefHeight="200.0" prefWidth="200.0" stylesheets="@../css/styles-html.css" BorderPane.alignment="CENTER">
+                           <BorderPane.margin>
+                              <Insets left="20.0" right="10.0" />
+                           </BorderPane.margin>
+                        </WebView>
                      </center>
                   </BorderPane>
-                  <ListView fx:id="listFound" layoutX="77.0" layoutY="44.0" maxHeight="235.0" onMouseClicked="#selectFromList" prefHeight="210.0" prefWidth="260.0" style="-fx-background-color: #2A2931; -fx-background-radius: 0 0 5 5;" stylesheets="@../css/listView.css" visible="false" />
                   <StackPane layoutX="763.0" layoutY="14.0" prefHeight="30.0" prefWidth="30.0" style="-fx-border-radius: 180;" styleClass="set-circle" stylesheets="@../css/icon.css" />
                </children>
             </Pane>
          </center>
+         <top>
+            <HBox prefHeight="62.0" prefWidth="877.0" BorderPane.alignment="CENTER">
+               <children>
+                  <VBox prefHeight="62.0" prefWidth="103.0" style="-fx-background-color: #191919; -fx-background-radius: 15 0 0 0;" />
+                  <Pane maxHeight="62.0" maxWidth="807.0" prefHeight="62.0" prefWidth="807.0" style="-fx-background-color: #0E0C17; -fx-background-radius: 0 15 0 0;">
+                     <children>
+                        <HBox layoutX="62.0" layoutY="16.0" prefHeight="30.0" prefWidth="280.0" style="-fx-background-radius: 5; -fx-background-color: #2A2931;">
+                           <children>
+                              <Pane prefHeight="30.0" prefWidth="20.0">
+                                 <children>
+                                    <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="5.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../css/search_icon.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </Pane>
+                              <TextField fx:id="textSearch" depthTest="ENABLE" onAction="#search" prefHeight="30.0" prefWidth="260.0" promptText="Search" style="-fx-background-color: #2A2931; -fx-background-radius: 5;">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                                 <stylesheets>
+                                    <URL value="@../css/font.css" />
+                                    <URL value="@../css/textField.css" />
+                                 </stylesheets>
+                                 <styleClass>
+                                    <String fx:value="custom-textfield" />
+                                    <String fx:value="font1" />
+                                    <String fx:value="valid-text-field" />
+                                 </styleClass>
+                              </TextField>
+                           </children>
+                        </HBox>
+                        <ListView fx:id="listFound" layoutX="82.0" layoutY="46.0" maxHeight="235.0" onMouseClicked="#selectFromList" prefHeight="235.0" prefWidth="260.0" style="-fx-background-color: #2A2931; -fx-background-radius: 0 0 5 5;" stylesheets="@../css/listView.css" visible="false" />
+                     </children>
+                  </Pane>
+               </children>
+            </HBox>
+         </top>
       </BorderPane>
    </children>
 </AnchorPane>

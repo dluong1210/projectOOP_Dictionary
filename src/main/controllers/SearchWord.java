@@ -4,8 +4,9 @@ import Application.MySQL;
 
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.control.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -15,11 +16,19 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.web.WebView;
 
+import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
 public class SearchWord implements Initializable {
+    @FXML
+    private Button homeButton;
+    @FXML
+    private Button translateButton;
+    @FXML
+    private TabPane tabPane;
     @FXML
     private BorderPane scene;
     @FXML
@@ -33,8 +42,27 @@ public class SearchWord implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        homeButton.setOnAction(e -> tabPane.getSelectionModel().select(0));
+        check(new ActionEvent());
+
         search(new ActionEvent());
         selectFromList(new ActionEvent());
+    }
+
+    public void check(ActionEvent event) {
+            System.out.println("Ye");
+        translateButton.setOnAction(e -> {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/Translate.fxml"));
+            try {
+                Parent translateTab = loader.load();
+                Tab tab = new Tab("Google Translate", translateTab);
+                tabPane.getTabs().add(tab);
+                tabPane.getSelectionModel().select(tab);
+            } catch (IOException ex) {
+                System.out.println(ex.getMessage());
+            }
+
+        });
     }
 
     /*---Check double click---*/
@@ -59,6 +87,7 @@ public class SearchWord implements Initializable {
                     listFound.setVisible(false);
                     listFound.getSelectionModel().select(-1);
                     textSearch.setText(wordSelected);
+                    tabPane.getSelectionModel().select(0);
                     result.setVisible(true);
                     webView.getEngine().loadContent(definition);
 

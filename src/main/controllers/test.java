@@ -4,12 +4,10 @@ import Application.MySQL;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.Objects;
 
 public class test extends Application {
 
@@ -24,8 +22,8 @@ public class test extends Application {
         });
         databaseThread.start();
 
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/searchWord.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 877, 616);
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/homeTab.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 893, 616);
         stage.setTitle("my dictionary!");
         stage.setScene(scene);
         stage.show();

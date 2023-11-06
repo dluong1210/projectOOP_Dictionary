@@ -16,7 +16,6 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.web.WebView?>
@@ -24,46 +23,18 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="616.0" prefWidth="893.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.SearchWord">
    <children>
       <BorderPane fx:id="scene" prefHeight="616.0" prefWidth="893.0" style="-fx-background-radius: 15; -fx-background-color: #000000;">
-         <left>
-            <VBox prefHeight="554.0" prefWidth="0.0" style="-fx-background-color: #191919; -fx-background-radius: 0 0 0 15;" BorderPane.alignment="CENTER">
-               <children>
-                  <Button fx:id="homeButton" mnemonicParsing="false" prefHeight="70.0" prefWidth="70.0" style="-fx-background-color: transparent;">
-                     <graphic>
-                        <ImageView fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true" />
-                     </graphic>
-                  </Button>
-                  <Button fx:id="translateButton" mnemonicParsing="false" prefHeight="70.0" prefWidth="70.0" style="-fx-background-color: Transparent;">
-                     <graphic>
-                        <ImageView fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true" />
-                     </graphic>
-                  </Button>
-                  <Button mnemonicParsing="false" prefHeight="70.0" prefWidth="70.0" style="-fx-background-color: Transparent;">
-                     <graphic>
-                        <ImageView fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true" />
-                     </graphic>
-                  </Button>
-                  <Button mnemonicParsing="false" prefHeight="70.0" prefWidth="70.0" style="-fx-background-color: Transparent;">
-                     <graphic>
-                        <ImageView fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true" />
-                     </graphic>
-                  </Button>
-               </children>
-            </VBox>
-         </left>
          <effect>
             <DropShadow />
          </effect>
          <center>
             <Pane maxHeight="554.0" maxWidth="807.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #0E0C17; -fx-background-radius: 10;" BorderPane.alignment="CENTER">
                <children>
-                  <Line endX="700.0" endY="-20.0" layoutX="115.0" layoutY="20.0" startX="-200.0" startY="-20.0" stroke="#2d2b33" />
                   <TabPane fx:id="tabPane" prefHeight="560.0" prefWidth="807.0" side="BOTTOM" style="-fx-background-radius: 0 0 15 0;" tabMaxHeight="0.0" tabMaxWidth="0.0">
                      <tabs>
                         <Tab closable="false">
                            <content>
-                              <Pane maxHeight="554.0" maxWidth="807.0" prefHeight="534.0" prefWidth="807.0" style="-fx-background-color: #0E0C17; -fx-background-radius: 0 0 15 0;">
+                              <Pane maxHeight="554.0" maxWidth="807.0" prefHeight="534.0" prefWidth="626.0" style="-fx-background-color: #0E0C17; -fx-background-radius: 0 0 15 0;">
                                  <children>
-                                    <Line endX="700.0" endY="-20.0" layoutX="115.0" layoutY="20.0" startX="-200.0" startY="-20.0" stroke="#2d2b33" />
                                     <BorderPane fx:id="result" layoutX="57.0" layoutY="32.0" prefHeight="445.0" prefWidth="600.0" style="-fx-background-color: #1C1A24; -fx-background-radius: 15;" visible="false">
                                        <top>
                                           <HBox prefHeight="25.0" prefWidth="544.0" style="-fx-background-color: #2A2931; -fx-background-radius: 15 15 0 0;" BorderPane.alignment="CENTER">
@@ -97,13 +68,14 @@
                               </Pane>
                            </content>
                         </Tab>
+                        <Tab closable="false" />
                      </tabs>
                   </TabPane>
                </children>
             </Pane>
          </center>
          <top>
-            <HBox prefHeight="62.0" prefWidth="862.0" BorderPane.alignment="CENTER">
+            <HBox prefHeight="62.0" prefWidth="862.0" style="-fx-border-color: transparent transparent #484848 transparent;" BorderPane.alignment="CENTER">
                <children>
                   <VBox prefHeight="62.0" prefWidth="86.4" style="-fx-background-color: #191919; -fx-background-radius: 15 0 0 0;" />
                   <Pane maxHeight="62.0" maxWidth="807.0" prefHeight="62.0" prefWidth="807.0" style="-fx-background-color: #0E0C17; -fx-background-radius: 0 15 0 0;">
@@ -124,13 +96,11 @@
                                     <Font size="14.0" />
                                  </font>
                                  <stylesheets>
-                                    <URL value="@../css/font.css" />
                                     <URL value="@../css/textField.css" />
                                  </stylesheets>
                                  <styleClass>
                                     <String fx:value="custom-textfield" />
-                                    <String fx:value="font1" />
-                                    <String fx:value="valid-text-field" />
+                                    <String fx:value="non-border" />
                                  </styleClass>
                               </TextField>
                            </children>
@@ -141,6 +111,22 @@
                </children>
             </HBox>
          </top>
+         <left>
+            <VBox prefHeight="554.0" prefWidth="86.4" style="-fx-background-color: #191919;" BorderPane.alignment="CENTER">
+               <children>
+                  <Pane prefHeight="64.0" prefWidth="86.0">
+                     <children>
+                        <Button fx:id="homeButton" layoutX="17.0" layoutY="20.0" mnemonicParsing="false" text="home" />
+                     </children>
+                  </Pane>
+                  <Pane prefHeight="74.0" prefWidth="86.0">
+                     <children>
+                        <Button fx:id="translateButton" layoutX="-3.0" layoutY="39.0" mnemonicParsing="false" onAction="#check" prefHeight="26.0" prefWidth="88.0" text="Translate" />
+                     </children>
+                  </Pane>
+               </children>
+            </VBox>
+         </left>
       </BorderPane>
    </children>
 </AnchorPane>

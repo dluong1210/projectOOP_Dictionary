@@ -1,0 +1,6 @@
+.active-pane {
+    -fx-border-color: #BB86FC; /* Màu border khi focus */
+}
+.inactive-pane {
+    -fx-border-color: #484848;
+}

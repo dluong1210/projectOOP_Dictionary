@@ -60,7 +60,6 @@ public class MySQL {
                 "<html>\n" +
                 "<head>\n" +
                 "    <style>\n" +
-                "        /* Đặt nền trong suốt cho cả body và WebView */\n" +
                 "        body, html {\n" +
                 "            font-size: 14px;\n" +
                 "            font-family: \"Verdana\", Sans-serif;\n" +

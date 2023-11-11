@@ -10,6 +10,7 @@ import java.util.Scanner;
 public abstract class MultipleChoiceGame {
 
     protected DictionaryManagement dictionaryManagement = new DictionaryManagement();
+    protected static final String[] option = {"A", "B", "C", "D"};
     protected String question;
     protected String[] choices = new String[4];
     protected int playerChoice;
@@ -20,10 +21,21 @@ public abstract class MultipleChoiceGame {
         return "Congratulation! Your points is: " + points;
     }
 
-    public String giveQuestion() {
-        return "Question " + (points + 1) + ": \n";
+    public abstract String giveQuestion() ;
+
+    public String giveChoice(int i) {
+        return option[i] + ". " + choices[i];
     }
 
+    public void setPlayerAnswer(String inputChoice) {
+        for (int i = 0; i < 4; i += 1) {
+            if (inputChoice.equals(option[i])) {
+                setPlayerChoice(i);
+            }
+        }
+    }
+
+    public abstract Word getRandomWord();
     public abstract void initGame();
 
 

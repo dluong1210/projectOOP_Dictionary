@@ -104,12 +104,12 @@ public class DictionaryCommandline extends DictionaryManagement {
                     dictionaryExportToFile();
                     break;
                 default:
-                    System.out.println("Action not supported");
+                    System.out.println("Action not supported"); // nen de xu li la String khong phai int, sua sau
                     break;
             }
             if (quit) break;
             while (true) {
-                System.out.println("Do you want continue ?:"
+                System.out.println("Do you want continue ?:"    // nen them using dictionary
                                     + "\n1.Yes\t2.No");
                 choice = scan.next();
                 if (!choice.equals("1") && !choice.equals("2")) {

@@ -1,7 +1,9 @@
 //package main.Application;
 package Application;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 /**
  * The `TreeWord` class represents a tree-based dictionary.
@@ -105,10 +107,10 @@ public class TreeWord {
      */
     public boolean editWord(String currentWord_target, String newWord_target, String newWord_explain) {
         Word wordEdit = lookup(currentWord_target);
-        if (wordEdit == null) {
-            System.out.println(currentWord_target + " does not exist in dictionary");
-            return false;
-        }
+//        if (wordEdit == null) {
+//            System.out.println(currentWord_target + " does not exist in dictionary");
+//            return false;
+//        }
 
         wordEdit.setWord_target(newWord_target);
         wordEdit.setWord_explain(newWord_explain);
@@ -173,30 +175,6 @@ public class TreeWord {
         return newTree.getCompleteWord();
     }
 
-    /** return a random word with 2 param. */
-    public Word getRandomWord(int minLength, int maxLength) {
-        Random rand = new Random();
-        TreeNode newNode = root;
-        int count = 0;
-
-        while (true) {
-            int random = rand.nextInt(newNode.getChild().size() + 1);
-            for (Map.Entry<Character, TreeNode> entry : newNode.getChild().entrySet()) {
-                if (random <= 1) {
-                    newNode = entry.getValue();
-                    break;
-                }
-                random--;
-            }
-            count++;
-
-            if (newNode.isLastChar() || newNode.isCompleteWord()) break;
-        }
-
-        if (count < minLength || count > maxLength) return getRandomWord(minLength, maxLength);
-        return newNode.getCompleteWord();
-    }
-
     /**
      * Main method for testing the TreeWord class.
      */
@@ -210,18 +188,15 @@ public class TreeWord {
             String word = scan.next();
             test.addWord(new Word(word, "abc"));
         }
-//        test.editWord("hello", "hi", "xinchao");
+        test.editWord("hello", "hi", "xinchao");
 //        String check = scan.next();
 //        System.out.println(test.delete(check));
 //        test.lookup(check);
 //        System.out.println(test.lookup(check).getWord_explain());
-//        ArrayList<Word> list = (ArrayList<Word>) test.searchFrom("");
+        ArrayList<Word> list = (ArrayList<Word>) test.searchFrom("");
 //        test.traversingFromNode(test.root, list);
-//        for (Word word : list) {
-//            System.out.println(word.getWord_target());
-//        }
-//        for (int i = 0; i < 25; i++) {
-//            System.out.println(test.getRandomWord().getWord_target());
-//        }
+        for (Word word : list) {
+            System.out.println(word.getWord_target());
+        }
     }
 }

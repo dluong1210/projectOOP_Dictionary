@@ -63,7 +63,7 @@ public class DictionaryCommandline extends DictionaryManagement {
             System.out.println("[4] Display");
             System.out.println("[5] Lookup");
             System.out.println("[6] Search");
-            System.out.println("[7] Game (Random Word)");
+            System.out.println("[7] Game");
             System.out.println("[8] Import from file");
             System.out.println("[9] Export to file");
             System.out.println("Your action: ");
@@ -91,25 +91,21 @@ public class DictionaryCommandline extends DictionaryManagement {
                     dictionarySearcher();
                     break;
                 case 7:
-//                    for (int i = 0; i < 25; i++) {
-                        Word test = listWord.getRandomWord(4, 10);
-                        System.out.println(test.getWord_target() + " ---> " + test.getWord_explain());
-//                    }
                     break;
                 case 8:
-//                    dictionaryImportFromFile();
+    //                dictionaryImportFromFile();
                     insertFromFile();
                     break;
                 case 9:
                     dictionaryExportToFile();
                     break;
                 default:
-                    System.out.println("Action not supported");
+                    System.out.println("Action not supported"); // nen de xu li la String khong phai int, sua sau
                     break;
             }
             if (quit) break;
             while (true) {
-                System.out.println("Do you want continue ?:"
+                System.out.println("Do you want continue ?:"    // nen them using dictionary
                                     + "\n1.Yes\t2.No");
                 choice = scan.next();
                 if (!choice.equals("1") && !choice.equals("2")) {

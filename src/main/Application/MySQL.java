@@ -6,6 +6,8 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
 import java.sql.Connection;
+import java.util.ArrayList;
+import java.util.List;
 
 /** Singleton class. */
 public class MySQL {
@@ -13,16 +15,19 @@ public class MySQL {
 //    private static final String user = "root";
 //    private static final String password = "";
     private static Connection connection;
-
     private static MySQL instance;
 
-    private MySQL() {
+    public MySQL() {
     }
 
-    public static MySQL getInstance() throws SQLException {
+    public static MySQL getInstance() {
         if (instance == null) {
             instance = new MySQL();
-            connection = DriverManager.getConnection(url);
+            try {
+                connection = DriverManager.getConnection(url);
+            } catch (SQLException e) {
+                System.out.println(e.getErrorCode());
+            }
         }
         return instance;
     }
@@ -36,21 +41,57 @@ public class MySQL {
                                                     + "WHERE target = \"" + word + "\"");
 
             if (rs.next()) {
-                String html = rs.getString("definition");
-                Document doc = Jsoup.parse(html);
-
-                Element q = doc.select("Q").first();
-                if (q != null) {
-                    text = q.html().replace("<br>=", "\n\t")
-                                    .replace("<br>", "\n")
-                                    .replace("+", " --->");
-                }
+                text = rs.getString("definition").replace("+", "  --->  ")
+                                                            .replace("*", "<br>*")
+                                                            .replace("=", "Ex: ")
+                                                            .replace("<I>","");
             }
+
             statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return text;
+    }
+
+    public static String htmlSelectFromDB(String word) {
+        String text = selectFromDB(word);
+        String html = "<!DOCTYPE html>\n" +
+                "<html>\n" +
+                "<head>\n" +
+                "    <style>\n" +
+                "        body, html {\n" +
+                "            font-size: 14px;\n" +
+                "            font-family: \"Verdana\", Sans-serif;\n" +
+                "            background-color: #1C1A24;\n" +
+                "            color: #E8E8E8;\n" +
+                "        }\n" +
+                "    </style>\n" +
+                "</head>\n" +
+                "<body>\n" +
+                text +
+                "</body>\n" +
+                "</html>";
+
+        return html;
+    }
+
+    public static List<String> searchFromDB(String word) {
+        List<String> wordFound = new ArrayList<>();
+        try {
+            getInstance();
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery("SELECT target FROM dictionary "
+                    + "WHERE target like \"" + word + "%\"");
+
+            while (rs.next()) {
+                wordFound.add(rs.getString("target"));
+            }
+            statement.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return wordFound;
     }
 
     public static void deleteFromDB(String word) throws SQLException {
@@ -76,7 +117,8 @@ public class MySQL {
             System.out.println("Connected database successfully...");
 
             // Thực hiện các truy vấn SQL ở đây
-            System.out.println(selectFromDB("inactive"));
+//            System.out.println(selectFromDB("inactive"));
+            System.out.println(selectFromDB("abstract"));
 
             // Đóng kết nối khi hoàn thành
             connection.close();

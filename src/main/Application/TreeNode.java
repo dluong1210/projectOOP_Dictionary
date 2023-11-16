@@ -37,7 +37,7 @@ public class TreeNode {
     }
 
     public boolean isLastChar() {
-        return child == null || child.isEmpty();
+        return child == null;
     }
 
     public boolean hasCharNext(Character check) {

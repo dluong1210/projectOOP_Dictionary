@@ -1,0 +1,6 @@
+.custom-textfield {
+    -fx-text-fill: white;
+}
+.non-border {
+    -fx-border-color: transparent;
+}

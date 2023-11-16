@@ -2,16 +2,12 @@ package Application;
 
 import java.util.Scanner;
 
-public class MemoryWordGame extends GameCommandLine{
-
-    protected String[] previousChoices = new String[4];
-
-    protected int previousCorrectChoice;
+public class MemoryMeaningGame extends GameCommandLine{
     protected Word nextWord;
 
 
     public String giveQuestion() {
-        return "Question " + (points + 1) + ": \nMeaning: " + question;
+        return "Question " + (points + 1) + ": \nWord: " + question;
     }
 
     public Word getRandomWord() {
@@ -21,9 +17,9 @@ public class MemoryWordGame extends GameCommandLine{
     public void setChoicesAndQuestion(Word[] words) {
         int nextRandom = (int) (Math.random() * 4);
         for (int i = 0; i < 4; i++) {
-            choices[i] = words[i].getWord_target();                           // tao cac lua chon
+            choices[i] = words[i].getWord_explain();                           // tao cac lua chon
         }
-        setQuestion(words[correctChoice].getWord_explain());                      // tao cau hoi
+        setQuestion(words[correctChoice].getWord_target());                      // tao cau hoi
         nextWord = words[nextRandom];
     }
 
@@ -87,9 +83,8 @@ public class MemoryWordGame extends GameCommandLine{
 
         Word[] words = getWordChoices();
         setChoicesAndQuestion(words);
-        //String[] previousChoices = choices;
-        //int previousCorrectChoice = correctChoice;
-        previousCorrectChoice = copyChoices(previousChoices, choices, correctChoice);
+        String[] previousChoices = choices;
+        int previousCorrectChoice = correctChoice;
 
         System.out.println("Meaning: " + question + "\n");
         waitingToReady(scan);
@@ -117,7 +112,7 @@ public class MemoryWordGame extends GameCommandLine{
     }
 
     public static void main(String[] args) {
-        MemoryWordGame huy = new MemoryWordGame();
+        MemoryMeaningGame huy = new MemoryMeaningGame();
         huy.gameCommandline();
     }
 

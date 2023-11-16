@@ -124,6 +124,48 @@ public class MySQL {
         System.out.println("Update successfully word: " + word);
     }
 
+    public static boolean checkBookmark(String word) throws SQLException {
+        Statement statement = connection.createStatement();
+        ResultSet rs = statement.executeQuery("SELECT word FROM bookmark WHERE word = '" + word + "'");
+        boolean check = rs.next();
+
+        statement.close();
+        return check;
+    }
+
+    public static void addBookmark(String word) throws SQLException {
+        Statement statement = connection.createStatement();
+        statement.executeUpdate("INSERT INTO bookmark VALUES('" + word + "')");
+
+        statement.close();
+        System.out.println("Insert into bookmark successfully word: " + word);
+    }
+
+    public static void deleteBookmark(String word) throws SQLException {
+        Statement statement = connection.createStatement();
+        statement.executeUpdate("DELETE FROM bookmark WHERE word = '" + word + "'");
+
+        statement.close();
+        System.out.println("delete from bookmark successfully word: " + word);
+    }
+
+    public static List<String> getAllFromBookmark() {
+        List<String> wordFound = new ArrayList<>();
+        try {
+            getInstance();
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery("SELECT word FROM bookmark");
+
+            while (rs.next()) {
+                wordFound.add(rs.getString("word"));
+            }
+            statement.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return wordFound;
+    }
+
     public static void main(String[] args) {
         // Thông tin kết nối cơ sở dữ liệu MySQL
         System.out.println("Connecting to database...");
@@ -134,7 +176,15 @@ public class MySQL {
 
             // Thực hiện các truy vấn SQL ở đây
 //            System.out.println(selectFromDB("inactive"));
-            System.out.println(selectFromDB("abstract"));
+//            System.out.println(selectFromDB("abstract"));
+
+            for (String s : getAllFromBookmark()) {
+                System.out.println(s);
+            }
+            deleteBookmark("abstract");
+            for (String s : getAllFromBookmark()) {
+                System.out.println(s);
+            }
 
             // Đóng kết nối khi hoàn thành
             connection.close();

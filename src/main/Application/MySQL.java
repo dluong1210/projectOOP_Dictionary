@@ -102,7 +102,7 @@ public class MySQL {
 
     public static void deleteFromDB(String word) throws SQLException {
         Statement statement = connection.createStatement();
-        statement.executeUpdate("DELETE FROM dictionary WHERE word = \"" + word + "\"");
+        statement.executeUpdate("DELETE FROM dictionary WHERE target = \"" + word + "\"");
 
         statement.close();
         System.out.println("Delete successfully word: " + word);

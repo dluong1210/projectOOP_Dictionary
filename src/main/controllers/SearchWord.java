@@ -19,9 +19,11 @@ import javafx.scene.web.WebView;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.Optional;
 
 public class SearchWord implements Initializable {
     @FXML
@@ -55,6 +57,9 @@ public class SearchWord implements Initializable {
 
         controllerSearch(new ActionEvent());
         selectFromList(new ActionEvent());
+
+        controllerMark(new ActionEvent());
+        controllerDelete(new ActionEvent());
     }
 
     public void check(ActionEvent event) {
@@ -88,10 +93,10 @@ public class SearchWord implements Initializable {
                     isSelected = true;
                     wordSelected = wordClicked;
                 } else if (wordSelected.equals(wordClicked)) {
+                    System.out.println(wordSelected);
                     lookup(wordSelected);
                     textSearch.setText(wordSelected);
                     isSelected = false;
-                    wordSelected = null;
                 } else {
                     wordSelected = wordClicked;
                 }
@@ -140,9 +145,55 @@ public class SearchWord implements Initializable {
         });
     }
 
+    public void controllerMark(ActionEvent event) {
+        markButton.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> {
+            System.out.println(wordSelected);
+
+            try {
+                if (!MySQL.checkBookmark(wordSelected)) MySQL.addBookmark(wordSelected);
+                else MySQL.deleteBookmark(wordSelected);
+            } catch (SQLException exception) {
+                System.out.println(exception.getMessage());
+            }
+        });
+    }
+
+    public void controllerDelete(ActionEvent event) {
+        deleteButton.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirmation");
+            alert.setHeaderText("Do you want delete word : \"" + wordSelected + "\"");
+
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.isPresent() && result.get() == ButtonType.OK){
+                try {
+                    MySQL.deleteFromDB(wordSelected);
+                    lookup(wordSelected);
+
+                } catch (SQLException exception) {
+                    System.out.println(exception.getMessage());
+                }
+            }
+        });
+    }
+
+    public void controllerEdit(ActionEvent event) {
+
+    }
+
     private void lookup(String word) {
         String definition = MySQL.htmlSelectFromDB(word);
 //        System.out.println(definition);
+        if (MySQL.selectFromDB(word) == null) {
+            markButton.setVisible(false);
+            deleteButton.setVisible(false);
+            editButton.setVisible(false);
+        } else {
+            wordSelected = word;
+            markButton.setVisible(true);
+            deleteButton.setVisible(true);
+            editButton.setVisible(true);
+        }
 
         listFound.setVisible(false);
         listFound.getSelectionModel().select(-1);

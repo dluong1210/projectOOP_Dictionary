@@ -40,6 +40,12 @@ public class SearchWord implements Initializable {
     private BorderPane result;
     @FXML
     private WebView webView;
+    @FXML
+    private Button markButton;
+    @FXML
+    private Button deleteButton;
+    @FXML
+    private Button editButton;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -145,5 +151,7 @@ public class SearchWord implements Initializable {
         webView.getEngine().loadContent(definition);
 
     }
+
+
 
 }

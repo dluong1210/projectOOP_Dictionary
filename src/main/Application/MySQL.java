@@ -108,10 +108,20 @@ public class MySQL {
         System.out.println("Delete successfully word: " + word);
     }
 
-    public static void insertIntoDB(String word, String definition) {
+    public static void insertIntoDB(String word, String definition) throws SQLException {
+        Statement statement = connection.createStatement();
+        statement.executeUpdate("INSERT INTO dictionary VALUES ('" + word + "', '" + definition + "')");
+
+        statement.close();
+        System.out.println("Insert successfully word: " + word);
     }
 
-    public static void updateDB(String word, String newDefinition){
+    public static void updateDB(String word, String newDefinition) throws SQLException {
+        Statement statement = connection.createStatement();
+        statement.executeUpdate("UPDATE dictionary SET definition = '" + newDefinition + "' WHERE word = \"" + word + "\"");
+
+        statement.close();
+        System.out.println("Update successfully word: " + word);
     }
 
     public static void main(String[] args) {

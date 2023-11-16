@@ -11,6 +11,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
@@ -43,14 +44,14 @@ public class SearchWord implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         homeButton.setOnAction(e -> tabPane.getSelectionModel().select(0));
+        webView.getEngine().loadContent(MySQL.htmlSelectFromDB(""));
         check(new ActionEvent());
 
-        search(new ActionEvent());
+        controllerSearch(new ActionEvent());
         selectFromList(new ActionEvent());
     }
 
     public void check(ActionEvent event) {
-            System.out.println("Ye");
         translateButton.setOnAction(e -> {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/Translate.fxml"));
             try {
@@ -81,27 +82,18 @@ public class SearchWord implements Initializable {
                     isSelected = true;
                     wordSelected = wordClicked;
                 } else if (wordSelected.equals(wordClicked)) {
-                    String definition = MySQL.htmlSelectFromDB(wordSelected);
-//                    System.out.println(definition);
-
-                    listFound.setVisible(false);
-                    listFound.getSelectionModel().select(-1);
+                    lookup(wordSelected);
                     textSearch.setText(wordSelected);
-                    tabPane.getSelectionModel().select(0);
-                    result.setVisible(true);
-                    webView.getEngine().loadContent(definition);
-
                     isSelected = false;
                     wordSelected = null;
                 } else {
-                    isSelected = true;
                     wordSelected = wordClicked;
                 }
             }
         });
     }
 
-    public void search(ActionEvent event) {
+    public void controllerSearch(ActionEvent event) {
         scene.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> {
             if (!listFound.getBoundsInLocal().contains(e.getX(), e.getY())
                 && !textSearch.getBoundsInLocal().contains(e.getX(), e.getY())) {
@@ -118,17 +110,40 @@ public class SearchWord implements Initializable {
         });
 
         textSearch.addEventFilter(KeyEvent.ANY, e -> {
-            if (textSearch.getText().isEmpty()) {
-                listFound.setVisible(false);
-                return;
-            } else {
-                listFound.setVisible(true);
-                List<String> listWord = MySQL.searchFromDB(textSearch.getText());
-                listFound.setPrefHeight(Math.min(23 * listWord.size(), 235));
-                ObservableList<String> observableList = FXCollections.observableArrayList(listWord);
+            if (e.getCode().equals(KeyCode.ENTER)) {
+                textSearch.setEditable(false);
+                lookup(textSearch.getText());
+            }
+            else {
+                if (!textSearch.isEditable()) {
+                    textSearch.setEditable(true);
+                }
 
-                listFound.setItems(observableList);
+                if (textSearch.getText().isEmpty()) {
+                    listFound.setVisible(false);
+                    return;
+                } else {
+                    listFound.setVisible(true);
+                    List<String> listWord = MySQL.searchFromDB(textSearch.getText());
+                    listFound.setPrefHeight(Math.min(23 * listWord.size(), 235));
+                    ObservableList<String> observableList = FXCollections.observableArrayList(listWord);
+
+                    listFound.setItems(observableList);
+                }
             }
         });
     }
+
+    private void lookup(String word) {
+        String definition = MySQL.htmlSelectFromDB(word);
+//        System.out.println(definition);
+
+        listFound.setVisible(false);
+        listFound.getSelectionModel().select(-1);
+        tabPane.getSelectionModel().select(0);
+        result.setVisible(true);
+        webView.getEngine().loadContent(definition);
+
+    }
+
 }

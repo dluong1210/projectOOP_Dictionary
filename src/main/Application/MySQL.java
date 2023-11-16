@@ -55,7 +55,13 @@ public class MySQL {
     }
 
     public static String htmlSelectFromDB(String word) {
-        String text = selectFromDB(word);
+        String text;
+        if (word.isEmpty()) text = "Search something!";
+        else {
+            text = selectFromDB(word);
+            if (text == null) text = "<b>'" + word + "'</b> not exist in dictionary !";
+        }
+
         String html = "<!DOCTYPE html>\n" +
                 "<html>\n" +
                 "<head>\n" +

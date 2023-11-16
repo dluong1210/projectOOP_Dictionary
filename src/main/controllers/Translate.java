@@ -9,16 +9,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextArea;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.input.*;
 import javafx.scene.layout.Pane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
 import java.io.File;
-import java.io.IOException;
 import java.net.URL;
-import java.nio.BufferUnderflowException;
 import java.util.ResourceBundle;
 
 public class Translate implements Initializable {
@@ -72,36 +69,48 @@ public class Translate implements Initializable {
         langueInput.getSelectionModel().select("Vietnamese");
         langueOutput.getItems().addAll("Vietnamese", "English", "Japanese", "Chinese", "French");
         langueOutput.getSelectionModel().select("English");
-        checkFocus(new ActionEvent());
-        translate(new ActionEvent());
-        speak(new ActionEvent());
+
+        checkMouse(new ActionEvent());
+        controllerTranslate(new ActionEvent());
+        controllerSpeak(new ActionEvent());
     }
 
-    public void translate(ActionEvent event) {
-        textInput.setOnKeyReleased(e -> {
-            if (e.getCode() == KeyCode.ENTER) {
-                String textIn = textInput.getText();
-                String textOut;
-                try {
-                    String src = convertLangueLabel(langueInput.getValue());
-                    String target = convertLangueLabel(langueOutput.getValue());
-                    textOut = GoogleTranslateAPI.translate(textIn, src, target);
-                } catch (Exception exception) {
-                    textOut = textIn;
+    private void translate() {
+            textInput.setEditable(false);
+            input.getStyleClass().clear();
+            input.getStyleClass().add("inactive-pane");
+
+            String textIn = textInput.getText();
+            String textOut;
+            try {
+                String src = convertLangueLabel(langueInput.getValue());
+                String target = convertLangueLabel(langueOutput.getValue());
+                textOut = GoogleTranslateAPI.translate(textIn, src, target);
+            } catch (Exception exception) {
+                textOut = textIn;
+            }
+
+            textOutput.setText(textOut);
+            output.getStyleClass().clear();
+            output.getStyleClass().add("active-pane");
+    }
+
+    private void controllerTranslate(ActionEvent event) {
+        KeyCombination nextLine = new KeyCodeCombination(KeyCode.ENTER, KeyCombination.SHIFT_DOWN);
+        textInput.addEventFilter(KeyEvent.KEY_PRESSED, e -> {
+            if (e.getCode().equals(KeyCode.ENTER)) {
+                if (nextLine.match(e)) {
+                    textInput.appendText("\n");
                 }
-
-                textInput.setEditable(false);
-                input.getStyleClass().clear();
-                input.getStyleClass().add("inactive-pane");
-
-                textOutput.setText(textOut);
-                output.getStyleClass().clear();
-                output.getStyleClass().add("active-pane");
+                else{
+                    e.consume();
+                    translate();
+                }
             }
         });
     }
 
-    public void speak(ActionEvent event) {
+    private void controllerSpeak(ActionEvent event) {
         speakInput.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> {
             speakText(textInput, langueInput.getValue(), true);
         });
@@ -113,6 +122,7 @@ public class Translate implements Initializable {
     }
 
     private void speakText(TextArea text, String label, boolean isInput) {
+        if (text.getText().isEmpty()) return;
         String check = isInput ? currentInputText : currentOutputText;
         String labelSpeech = convertSpeechLabel(label);
 
@@ -148,7 +158,7 @@ public class Translate implements Initializable {
 
     }
 
-    public void checkFocus(ActionEvent event) {
+    private void checkMouse(ActionEvent event) {
         textInput.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> {
             textInput.setEditable(true);
             input.getStyleClass().clear();

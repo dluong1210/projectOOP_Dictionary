@@ -36,7 +36,7 @@ public abstract class MultipleChoiceGame {
     }
 
     public abstract Word getRandomWord();
-    public abstract void initGame();
+    public abstract void setChoicesAndQuestion(Word[] words);
 
 
 

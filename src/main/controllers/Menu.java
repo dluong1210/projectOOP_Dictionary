@@ -1,6 +1,6 @@
 package controllers;
 
-import package Application
+import Application.*;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -26,7 +26,7 @@ public class Menu {
     @FXML
     public void add(ActionEvent event)
     {
-        dictionaryAdd();
+//        dictionaryAdd();
 
     }
 

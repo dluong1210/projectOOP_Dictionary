@@ -2,9 +2,11 @@ package controllers;
 
 import Application.MySQL;
 
+import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.collections.FXCollections;
@@ -15,12 +17,14 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.web.HTMLEditor;
 import javafx.scene.web.WebView;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Optional;
@@ -48,6 +52,12 @@ public class SearchWord implements Initializable {
     private Button deleteButton;
     @FXML
     private Button editButton;
+    @FXML
+    private BorderPane editor;
+    @FXML
+    private HTMLEditor htmlEditor;
+    @FXML
+    private Button changeButton;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -60,6 +70,7 @@ public class SearchWord implements Initializable {
 
         controllerMark(new ActionEvent());
         controllerDelete(new ActionEvent());
+        controllerEdit(new ActionEvent());
     }
 
     public void check(ActionEvent event) {
@@ -178,7 +189,34 @@ public class SearchWord implements Initializable {
     }
 
     public void controllerEdit(ActionEvent event) {
+        editButton.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> {
+            result.setVisible(false);
+            editor.setVisible(true);
 
+            htmlEditor.setHtmlText(MySQL.htmlSelectFromDB(wordSelected));
+            Platform.runLater(() -> {
+                Node[] nodes = htmlEditor.lookupAll(".tool-bar").toArray(new Node[0]);
+                for (Node node : nodes) {
+                    node.setVisible(false);
+                    node.setManaged(false);
+                }
+                htmlEditor.setVisible(true);
+            });
+        });
+
+        changeButton.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> {
+            editor.setVisible(false);
+            result.setVisible(true);
+
+            Document doc = Jsoup.parse(htmlEditor.getHtmlText());
+            String htmlTextToDB = doc.body().html();
+            System.out.println(doc.body().html());
+            try {
+                MySQL.updateDB(wordSelected, htmlTextToDB);
+            } catch (SQLException exception) {
+                System.out.println(exception.getMessage());
+            }
+        });
     }
 
     private void lookup(String word) {

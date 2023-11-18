@@ -18,6 +18,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
+<?import javafx.scene.web.HTMLEditor?>
 <?import javafx.scene.web.WebView?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="616.0" prefWidth="893.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.SearchWord">
@@ -47,10 +48,10 @@
                                                       <Insets left="30.0" top="5.0" />
                                                    </HBox.margin>
                                                 </Text>
-                                                <Pane prefHeight="35.0" prefWidth="387.0" />
-                                                <Button mnemonicParsing="false" prefHeight="35.0" text="Button" />
-                                                <Button mnemonicParsing="false" prefHeight="35.0" text="Button" />
-                                                <Button mnemonicParsing="false" prefHeight="35.0" text="Button">
+                                                <Pane prefHeight="35.0" prefWidth="370.0" />
+                                                <Button fx:id="editButton" mnemonicParsing="false" prefHeight="35.0" text="Edit" />
+                                                <Button fx:id="deleteButton" mnemonicParsing="false" prefHeight="35.0" prefWidth="35.0" text="Delete" />
+                                                <Button fx:id="markButton" mnemonicParsing="false" prefHeight="35.0" prefWidth="35.0" text="Mark">
                                                    <HBox.margin>
                                                       <Insets right="10.0" />
                                                    </HBox.margin>
@@ -65,6 +66,31 @@
                                              </BorderPane.margin>
                                           </WebView>
                                        </center>
+                                    </BorderPane>
+                                    <BorderPane fx:id="editor" layoutX="57.0" layoutY="32.0" prefHeight="445.0" prefWidth="600.0" style="-fx-background-color: #1C1A24; -fx-background-radius: 15;" visible="false">
+                                       <center>
+                                          <Pane BorderPane.alignment="CENTER">
+                                             <children>
+                                                <HTMLEditor fx:id="htmlEditor" htmlText="&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable=&quot;true&quot;&gt;&lt;/body&gt;&lt;/html&gt;" layoutX="15.0" prefHeight="418.0" prefWidth="570.0" style="-fx-border-color: #000000;" stylesheets="@../css/styles-html.css" />
+                                             </children>
+                                          </Pane>
+                                       </center>
+                                       <top>
+                                          <HBox prefHeight="35.0" prefWidth="600.0" style="-fx-background-color: #2A2931; -fx-background-radius: 15 15 0 0;" BorderPane.alignment="CENTER">
+                                             <children>
+                                                <Text fill="#bb86fc" strokeType="OUTSIDE" strokeWidth="0.0" text="Editor" wrappingWidth="80">
+                                                   <font>
+                                                      <Font size="16.0" />
+                                                   </font>
+                                                   <HBox.margin>
+                                                      <Insets left="30.0" top="5.0" />
+                                                   </HBox.margin>
+                                                </Text>
+                                                <Pane prefHeight="35.0" prefWidth="422.0" />
+                                                <Button fx:id="changeButton" mnemonicParsing="false" prefHeight="26.0" prefWidth="62.0" text="Change" />
+                                             </children>
+                                          </HBox>
+                                       </top>
                                     </BorderPane>
                                  </children>
                               </Pane>

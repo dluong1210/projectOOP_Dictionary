@@ -44,7 +44,7 @@ public class MySQL {
                 text = rs.getString("definition").replace("+", "  --->  ")
                                                             .replace("*", "<br>*")
                                                             .replace("=", "Ex: ")
-                                                            .replace("<I>","");
+                                                            .replace("<I><Q>","");
             }
 
             statement.close();
@@ -176,15 +176,15 @@ public class MySQL {
 
             // Thực hiện các truy vấn SQL ở đây
 //            System.out.println(selectFromDB("inactive"));
-//            System.out.println(selectFromDB("abstract"));
+            System.out.println(selectFromDB("he"));
 
-            for (String s : getAllFromBookmark()) {
-                System.out.println(s);
-            }
-            deleteBookmark("abstract");
-            for (String s : getAllFromBookmark()) {
-                System.out.println(s);
-            }
+//            for (String s : getAllFromBookmark()) {
+//                System.out.println(s);
+//            }
+//            deleteBookmark("abstract");
+//            for (String s : getAllFromBookmark()) {
+//                System.out.println(s);
+//            }
 
             // Đóng kết nối khi hoàn thành
             connection.close();

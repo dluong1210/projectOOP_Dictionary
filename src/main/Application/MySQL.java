@@ -62,7 +62,11 @@ public class MySQL {
             if (text == null) text = "<b>'" + word + "'</b> not exist in dictionary !";
         }
 
-        String html = "<!DOCTYPE html>\n" +
+        return htmlization(text);
+    }
+
+    public static String htmlization(String text) {
+        return  "<!DOCTYPE html>\n" +
                 "<html>\n" +
                 "<head>\n" +
                 "    <style>\n" +
@@ -78,8 +82,6 @@ public class MySQL {
                 text +
                 "</body>\n" +
                 "</html>";
-
-        return html;
     }
 
     public static List<String> searchFromDB(String word) {
@@ -110,7 +112,7 @@ public class MySQL {
 
     public static void insertIntoDB(String word, String definition) throws SQLException {
         Statement statement = connection.createStatement();
-        statement.executeUpdate("INSERT INTO dictionary VALUES ('" + word + "', '" + definition + "')");
+        statement.executeUpdate("INSERT INTO dictionary VALUES (\"" + word + "\", \"" + definition + "\")");
 
         statement.close();
         System.out.println("Insert successfully word: " + word);
@@ -118,7 +120,7 @@ public class MySQL {
 
     public static void updateDB(String word, String newDefinition) throws SQLException {
         Statement statement = connection.createStatement();
-        statement.executeUpdate("UPDATE dictionary SET definition = '" + newDefinition + "' WHERE word = \"" + word + "\"");
+        statement.executeUpdate("UPDATE dictionary SET definition = \"" + newDefinition + "\" WHERE target = \"" + word + "\"");
 
         statement.close();
         System.out.println("Update successfully word: " + word);
@@ -126,7 +128,7 @@ public class MySQL {
 
     public static boolean checkBookmark(String word) throws SQLException {
         Statement statement = connection.createStatement();
-        ResultSet rs = statement.executeQuery("SELECT word FROM bookmark WHERE word = '" + word + "'");
+        ResultSet rs = statement.executeQuery("SELECT word FROM bookmark WHERE word = \"" + word + "\"");
         boolean check = rs.next();
 
         statement.close();
@@ -135,7 +137,7 @@ public class MySQL {
 
     public static void addBookmark(String word) throws SQLException {
         Statement statement = connection.createStatement();
-        statement.executeUpdate("INSERT INTO bookmark VALUES('" + word + "')");
+        statement.executeUpdate("INSERT INTO bookmark VALUES(\"" + word + "\")");
 
         statement.close();
         System.out.println("Insert into bookmark successfully word: " + word);
@@ -143,7 +145,7 @@ public class MySQL {
 
     public static void deleteBookmark(String word) throws SQLException {
         Statement statement = connection.createStatement();
-        statement.executeUpdate("DELETE FROM bookmark WHERE word = '" + word + "'");
+        statement.executeUpdate("DELETE FROM bookmark WHERE word = \"" + word + "\"");
 
         statement.close();
         System.out.println("delete from bookmark successfully word: " + word);

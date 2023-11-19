@@ -11,7 +11,6 @@ import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -34,6 +33,8 @@ public class SearchWord implements Initializable {
     private Button homeButton;
     @FXML
     private Button translateButton;
+    @FXML
+    private Button addWordButton;
     @FXML
     private TabPane tabPane;
     @FXML
@@ -63,17 +64,17 @@ public class SearchWord implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         homeButton.setOnAction(e -> tabPane.getSelectionModel().select(0));
         webView.getEngine().loadContent(MySQL.htmlSelectFromDB(""));
-        check(new ActionEvent());
+        check();
 
-        controllerSearch(new ActionEvent());
-        selectFromList(new ActionEvent());
+        controllerSearch();
+        selectFromList();
 
-        controllerMark(new ActionEvent());
-        controllerDelete(new ActionEvent());
-        controllerEdit(new ActionEvent());
+        controllerMark();
+        controllerDelete();
+        controllerEdit();
     }
 
-    public void check(ActionEvent event) {
+    public void check() {
         translateButton.setOnAction(e -> {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/Translate.fxml"));
             try {
@@ -81,10 +82,23 @@ public class SearchWord implements Initializable {
                 Tab tab = new Tab("Google Translate", translateTab);
                 tabPane.getTabs().add(tab);
                 tabPane.getSelectionModel().select(tab);
+
             } catch (IOException ex) {
                 System.out.println(ex.getMessage());
             }
+        });
 
+        addWordButton.setOnAction(e -> {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/addWordTab.fxml"));
+            try {
+                Parent addWordTab = loader.load();
+                Tab tab = new Tab("Add new word", addWordTab);
+                tabPane.getTabs().add(tab);
+                tabPane.getSelectionModel().select(tab);
+
+            } catch (IOException exception) {
+                System.out.println(exception.getMessage());
+            }
         });
     }
 
@@ -93,7 +107,7 @@ public class SearchWord implements Initializable {
     String wordSelected = null;
     /*------------------------*/
 
-    public void selectFromList(ActionEvent event) {
+    public void selectFromList() {
         listFound.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
@@ -115,7 +129,7 @@ public class SearchWord implements Initializable {
         });
     }
 
-    public void controllerSearch(ActionEvent event) {
+    public void controllerSearch() {
         scene.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> {
             if (!listFound.getBoundsInLocal().contains(e.getX(), e.getY())
                 && !textSearch.getBoundsInLocal().contains(e.getX(), e.getY())) {
@@ -156,7 +170,7 @@ public class SearchWord implements Initializable {
         });
     }
 
-    public void controllerMark(ActionEvent event) {
+    public void controllerMark() {
         markButton.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> {
             System.out.println(wordSelected);
 
@@ -169,7 +183,7 @@ public class SearchWord implements Initializable {
         });
     }
 
-    public void controllerDelete(ActionEvent event) {
+    public void controllerDelete() {
         deleteButton.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Confirmation");
@@ -188,7 +202,7 @@ public class SearchWord implements Initializable {
         });
     }
 
-    public void controllerEdit(ActionEvent event) {
+    public void controllerEdit() {
         editButton.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> {
             result.setVisible(false);
             editor.setVisible(true);

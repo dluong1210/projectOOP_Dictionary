@@ -71,7 +71,7 @@
                                        <center>
                                           <Pane BorderPane.alignment="CENTER">
                                              <children>
-                                                <HTMLEditor fx:id="htmlEditor" htmlText="&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable=&quot;true&quot;&gt;&lt;/body&gt;&lt;/html&gt;" layoutX="15.0" prefHeight="418.0" prefWidth="570.0" style="-fx-border-color: #000000;" stylesheets="@../css/styles-html.css" />
+                                                <HTMLEditor fx:id="htmlEditor" htmlText="&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable=&quot;true&quot;&gt;&lt;/body&gt;&lt;/html&gt;" layoutX="15.0" prefHeight="410.0" prefWidth="570.0" style="-fx-border-width: 0;" stylesheets="@../css/styles-html.css" />
                                              </children>
                                           </Pane>
                                        </center>
@@ -96,7 +96,57 @@
                               </Pane>
                            </content>
                         </Tab>
-                        <Tab closable="false" />
+                        <Tab closable="false">
+                           <content>
+                              <Pane fx:id="sceneTrans" maxHeight="554.0" maxWidth="807.0" prefHeight="534.0" prefWidth="807.0" style="-fx-background-color: #0E0C17; -fx-background-radius: 0 0 15 0;">
+                                 <children>
+                                    <TextField fx:id="textNewWord" depthTest="ENABLE" layoutX="208.0" layoutY="41.0" prefHeight="30.0" prefWidth="260.0" promptText="New Word" style="-fx-background-color: #2A2931; -fx-background-radius: 5 0 0 5;">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                       <stylesheets>
+                                          <URL value="@../css/textField.css" />
+                                       </stylesheets>
+                                       <styleClass>
+                                          <String fx:value="custom-textfield" />
+                                          <String fx:value="non-border" />
+                                       </styleClass>
+                                    </TextField>
+                                    <BorderPane fx:id="definitionPane" layoutX="67.0" layoutY="100.0" prefHeight="387.0" prefWidth="600.0" style="-fx-background-color: #1C1A24; -fx-background-radius: 15;">
+                                       <center>
+                                          <Pane BorderPane.alignment="CENTER">
+                                             <children>
+                                                <HTMLEditor fx:id="htmlEditor1" htmlText="&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable=&quot;true&quot;&gt;&lt;/body&gt;&lt;/html&gt;" layoutX="15.0" prefHeight="357.0" prefWidth="570.0" stylesheets="@../css/styles-html.css" />
+                                             </children>
+                                          </Pane>
+                                       </center>
+                                       <top>
+                                          <HBox prefHeight="35.0" prefWidth="600.0" style="-fx-background-color: #2A2931; -fx-background-radius: 15 15 0 0;" BorderPane.alignment="CENTER">
+                                             <children>
+                                                <Text fill="#bb86fc" strokeType="OUTSIDE" strokeWidth="0.0" text="Definition" wrappingWidth="80">
+                                                   <font>
+                                                      <Font size="16.0" />
+                                                   </font>
+                                                   <HBox.margin>
+                                                      <Insets left="30.0" top="5.0" />
+                                                   </HBox.margin>
+                                                </Text>
+                                                <Pane prefHeight="35.0" prefWidth="386.0" />
+                                                <Button fx:id="cancelButton" mnemonicParsing="false" text="Cancel" />
+                                                <Button fx:id="addButton" mnemonicParsing="false" prefHeight="26.0" prefWidth="62.0" text="Add" />
+                                             </children>
+                                          </HBox>
+                                       </top>
+                                    </BorderPane>
+                                    <Button fx:id="checkButton" layoutX="468.0" layoutY="41.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="58.0" style="-fx-background-radius: 0 5 5 0;" text="Check" />
+                                    <Text fill="RED" layoutX="215.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Please enter a word in the box">
+                                       <font>
+                                          <Font size="13.0" />
+                                       </font>
+                                    </Text>
+                                 </children>
+                              </Pane>
+                           </content></Tab>
                      </tabs>
                   </TabPane>
                </children>
@@ -144,12 +194,17 @@
                <children>
                   <Pane prefHeight="64.0" prefWidth="86.0">
                      <children>
-                        <Button fx:id="homeButton" layoutX="17.0" layoutY="20.0" mnemonicParsing="false" text="home" />
+                        <Button fx:id="homeButton" layoutX="17.0" layoutY="20.0" mnemonicParsing="false" text="Home" />
                      </children>
                   </Pane>
                   <Pane prefHeight="74.0" prefWidth="86.0">
                      <children>
                         <Button fx:id="translateButton" layoutX="-3.0" layoutY="39.0" mnemonicParsing="false" onAction="#check" prefHeight="26.0" prefWidth="88.0" text="Translate" />
+                     </children>
+                  </Pane>
+                  <Pane prefHeight="74.0" prefWidth="86.0">
+                     <children>
+                        <Button fx:id="addWordButton" layoutX="-3.0" layoutY="39.0" mnemonicParsing="false" onAction="#check" prefHeight="26.0" prefWidth="88.0" text="Add Word" />
                      </children>
                   </Pane>
                </children>

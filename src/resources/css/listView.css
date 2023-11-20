@@ -1,10 +1,8 @@
-/* Thay đổi màu nền của mục khi được chọn */
 .list-cell:selected {
     -fx-background-color: #BB86FC;
     -fx-background-radius: 5;
 }
 
-/* Thay đổi màu nền của mục khi không được chọn */
 .list-cell {
     -fx-background-color: #2A2931;
     -fx-text-fill: white;
@@ -17,4 +15,8 @@
 .list-view .scroll-bar:horizontal {
     -fx-pref-height: 0;
     -fx-opacity: 0;
+}
+.list-view {
+    -fx-background-color: #2A2931;
+    -fx-background-radius: 0 0 5 5;
 }

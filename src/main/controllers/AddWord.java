@@ -7,6 +7,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
@@ -43,17 +45,12 @@ public class AddWord implements Initializable {
 
     public void controllerCheck() {
         checkButton.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> {
-            if (textNewWord.getText().isEmpty()) {
-                reponseText.setText("Please enter a word in the box");
-                reponseText.setFill(Color.RED);
-            } else if (checkExist(textNewWord.getText())) {
-                reponseText.setText("Word exist. If you want edit that, search and edit it !");
-                reponseText.setFill(Color.RED);
-            } else {
-                reponseText.setText("Wow!!! A new word. Please tell me it's definition");
-                reponseText.setFill(Color.GREEN);
-                textNewWord.setEditable(false);
-                definitionPane.setVisible(true);
+            check();
+        });
+
+        textNewWord.addEventFilter(KeyEvent.KEY_PRESSED, e -> {
+            if (e.getCode().equals(KeyCode.ENTER)) {
+                check();
             }
         });
 
@@ -63,6 +60,21 @@ public class AddWord implements Initializable {
                 reponseText.setFill(Color.RED);
             }
         });
+    }
+
+    private void check() {
+        if (textNewWord.getText().isEmpty()) {
+            reponseText.setText("Please enter a word in the box");
+            reponseText.setFill(Color.RED);
+        } else if (checkExist(textNewWord.getText())) {
+            reponseText.setText("Word exist. If you want edit that, search and edit it !");
+            reponseText.setFill(Color.RED);
+        } else {
+            reponseText.setText("Wow!!! A new word. Please tell me it's definition");
+            reponseText.setFill(Color.GREEN);
+            textNewWord.setEditable(false);
+            definitionPane.setVisible(true);
+        }
     }
 
     public void controllerDefine() {

@@ -151,12 +151,12 @@ public class MySQL {
         System.out.println("delete from bookmark successfully word: " + word);
     }
 
-    public static List<String> getAllFromBookmark() {
+    public static List<String> searchFromBookmark(String word) {
         List<String> wordFound = new ArrayList<>();
         try {
             getInstance();
             Statement statement = connection.createStatement();
-            ResultSet rs = statement.executeQuery("SELECT word FROM bookmark");
+            ResultSet rs = statement.executeQuery("SELECT word FROM bookmark WHERE word LIKE \"" + word + "%\"");
 
             while (rs.next()) {
                 wordFound.add(rs.getString("word"));
@@ -166,6 +166,19 @@ public class MySQL {
             e.printStackTrace();
         }
         return wordFound;
+    }
+
+    public static String htmlSelectFromBookmark(String word) throws SQLException {
+        String text;
+        if (word.isEmpty()) {
+            text = "Choose a Bookmark!";
+        } else if (!checkBookmark(word)) {
+            text = "<b>'" + word + "'</b> has not been bookmarked yet";
+        } else {
+            text = selectFromDB(word);
+        }
+
+        return htmlization(text);
     }
 
     public static void main(String[] args) {
@@ -178,15 +191,15 @@ public class MySQL {
 
             // Thực hiện các truy vấn SQL ở đây
 //            System.out.println(selectFromDB("inactive"));
-            System.out.println(selectFromDB("he"));
+//            System.out.println(selectFromDB("he"));
 
 //            for (String s : getAllFromBookmark()) {
 //                System.out.println(s);
 //            }
 //            deleteBookmark("abstract");
-//            for (String s : getAllFromBookmark()) {
-//                System.out.println(s);
-//            }
+            for (String s : searchFromBookmark("h")) {
+                System.out.println(s);
+            }
 
             // Đóng kết nối khi hoàn thành
             connection.close();

@@ -1,5 +1,7 @@
 package Application;
 
+import java.util.Scanner;
+
 /**
  * Game chon tu mang nghia trong cau hoi.
  */
@@ -13,11 +15,32 @@ public class ChooseWordGame extends GameCommandLine {
         return dictionaryManagement.listWord.getRandomWord(1,1);                                                            // tra ve Word random lay trong database
     }
 
-    public void setChoicesAndQuestion(Word[] words) {
+    public void initGame() {
+        dictionaryManagement.insertFromFile();                                  // tao database
+        int random = (int) (Math.random() * 4);
+        setCorrectChoice(random);                                               // chon 1 lua chon se la dap an dung
+
         for (int i = 0; i < 4; i++) {
-            choices[i] = words[i].getWord_target();                           // tao cac lua chon
+            Word choiceWord = getRandomWord();
+            boolean pickAgain = true;
+
+            while (pickAgain) {
+                choiceWord = getRandomWord();
+                pickAgain = false;                                   // tim tu thoa man rang buoc
+
+                for (int j = 0; j < i; j += 1) {
+                    if (choiceWord.getWord_target().equals(choices[j])) {
+                        pickAgain = true;
+                        break;
+                    }
+                }
+            }
+
+            choices[i] = choiceWord.getWord_target();                           // tao cac lua chon
+            if (i == correctChoice) {
+                setQuestion(choiceWord.getWord_explain());                      // tao cau hoi
+            }
         }
-        setQuestion(words[correctChoice].getWord_explain());                      // tao cau hoi
     }
 
     public static void main(String[] args) {

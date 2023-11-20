@@ -1,5 +1,7 @@
 package Application;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public abstract class GameCommandLine extends MultipleChoiceGame{
@@ -10,7 +12,7 @@ public abstract class GameCommandLine extends MultipleChoiceGame{
         }
     }
 
-    public boolean checkAnswer() {
+    private boolean checkAnswer() {
         if (playerChoice != correctChoice) {
             System.out.println(endGame());
             return false;
@@ -20,7 +22,7 @@ public abstract class GameCommandLine extends MultipleChoiceGame{
         return true;
     }
 
-    public String getValidInput(Scanner scan) {
+    private static String getValidInput(Scanner scan) {
         String inputChoice;
         while (true) {
             System.out.println("Your answer is: ");
@@ -34,44 +36,12 @@ public abstract class GameCommandLine extends MultipleChoiceGame{
         return inputChoice;
     }
 
-    public Word[] getWordChoices() {
-        int random = (int) (Math.random() * 4);
-        setCorrectChoice(random);                                               // chon 1 lua chon se la dap an dung
-        Word[] words = new Word[4];
-
-        for (int i = 0; i < 4; i++) {
-            words[i] = getValidWord(i, words);
-        }
-        return words;
-    }
-
-    public Word getValidWord(int i, Word[] words) {
-        Word choiceWord = getRandomWord();
-        boolean pickAgain = true;
-
-        while (pickAgain) {
-            choiceWord = getRandomWord();
-            pickAgain = false;                                   // tim tu thoa man rang buoc
-
-            for (int j = 0; j < i; j += 1) {
-                if (choiceWord.equals(words[j])) {
-                    pickAgain = true;
-                    break;
-                }
-            }
-        }
-        return choiceWord;
-    }
-
-
     public void gameCommandline() {
         String inputChoice;
         Scanner scan = new Scanner(System.in);
         setPoints(0);
-        dictionaryManagement.insertFromFile();                                  // tao database
         do {
-            Word[] words = getWordChoices();
-            setChoicesAndQuestion(words);
+            initGame();
             printQuestion();
             inputChoice = getValidInput(scan);
             setPlayerAnswer(inputChoice);

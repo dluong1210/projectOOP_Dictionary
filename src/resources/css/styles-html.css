@@ -1,0 +1,12 @@
+/* Ẩn thanh cuộn */
+.web-view .scroll-bar:vertical {
+    -fx-pref-width: 0;
+    -fx-opacity: 0;
+}
+.web-view .scroll-bar:horizontal {
+    -fx-pref-height: 0;
+    -fx-opacity: 0;
+}
+.html-editor {
+    -fx-border-color: #1C1A24;
+}

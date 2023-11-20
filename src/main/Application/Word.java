@@ -25,6 +25,25 @@ public class Word {
     }
 
     /**
+     * Compares this word to the specified object.  The result is {@code
+     * true} if and only if the argument is not {@code null} and is a {@code
+     * Word} object that represents the same word_target and word_explain as this object.
+     *
+     * @param  obj
+     *         The object to compare this {@code Word} against
+     *
+     * @return  {@code true} if the given object represents a {@code Word}
+     *          equivalent to this word, {@code false} otherwise
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Word anotherWord) {
+            return this.word_target.equals(anotherWord.word_target) && this.word_explain.equals(anotherWord.word_explain);
+        }
+        return false;
+    }
+
+    /**
      * Gets the English word.
      * @return word_target - English word
      */

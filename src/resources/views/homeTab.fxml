@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.web.HTMLEditor?>
+<?import javafx.scene.web.WebView?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="616.0" prefWidth="893.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.SearchWord">
+   <children>
+      <BorderPane fx:id="scene" prefHeight="616.0" prefWidth="893.0" style="-fx-background-radius: 15; -fx-background-color: #000000;">
+         <effect>
+            <DropShadow />
+         </effect>
+         <center>
+            <Pane maxHeight="554.0" maxWidth="807.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #0E0C17; -fx-background-radius: 10;" BorderPane.alignment="CENTER">
+               <children>
+                  <TabPane fx:id="tabPane" prefHeight="560.0" prefWidth="807.0" side="BOTTOM" style="-fx-background-radius: 0 0 15 0;" tabMaxHeight="0.0" tabMaxWidth="0.0">
+                     <tabs>
+                        <Tab closable="false">
+                           <content>
+                              <Pane maxHeight="554.0" maxWidth="807.0" prefHeight="534.0" prefWidth="626.0" style="-fx-background-color: #0E0C17; -fx-background-radius: 0 0 15 0;">
+                                 <children>
+                                    <BorderPane fx:id="result" layoutX="57.0" layoutY="32.0" prefHeight="445.0" prefWidth="600.0" style="-fx-background-color: #1C1A24; -fx-background-radius: 15;">
+                                       <top>
+                                          <HBox prefHeight="35.0" prefWidth="544.0" style="-fx-background-color: #2A2931; -fx-background-radius: 15 15 0 0;" BorderPane.alignment="CENTER">
+                                             <children>
+                                                <Text fill="#bb86fc" strokeType="OUTSIDE" strokeWidth="0.0" text="Result" wrappingWidth="80">
+                                                   <font>
+                                                      <Font size="16.0" />
+                                                   </font>
+                                                   <HBox.margin>
+                                                      <Insets left="30.0" top="5.0" />
+                                                   </HBox.margin>
+                                                </Text>
+                                                <Pane prefHeight="35.0" prefWidth="370.0" />
+                                                <Button fx:id="editButton" mnemonicParsing="false" prefHeight="35.0" text="Edit" />
+                                                <Button fx:id="deleteButton" mnemonicParsing="false" prefHeight="35.0" prefWidth="35.0" text="Delete" />
+                                                <Button fx:id="markButton" mnemonicParsing="false" prefHeight="35.0" prefWidth="35.0" text="Mark">
+                                                   <HBox.margin>
+                                                      <Insets right="10.0" />
+                                                   </HBox.margin>
+                                                </Button>
+                                             </children>
+                                          </HBox>
+                                       </top>
+                                       <center>
+                                          <WebView fx:id="webView" prefHeight="200.0" prefWidth="200.0" stylesheets="@../css/styles-html.css" BorderPane.alignment="CENTER">
+                                             <BorderPane.margin>
+                                                <Insets left="20.0" right="10.0" />
+                                             </BorderPane.margin>
+                                          </WebView>
+                                       </center>
+                                    </BorderPane>
+                                    <BorderPane fx:id="editor" layoutX="57.0" layoutY="32.0" prefHeight="445.0" prefWidth="600.0" style="-fx-background-color: #1C1A24; -fx-background-radius: 15;" visible="false">
+                                       <center>
+                                          <Pane BorderPane.alignment="CENTER">
+                                             <children>
+                                                <HTMLEditor fx:id="htmlEditor" htmlText="&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable=&quot;true&quot;&gt;&lt;/body&gt;&lt;/html&gt;" layoutX="15.0" prefHeight="410.0" prefWidth="570.0" style="-fx-border-width: 0;" stylesheets="@../css/styles-html.css" />
+                                             </children>
+                                          </Pane>
+                                       </center>
+                                       <top>
+                                          <HBox prefHeight="35.0" prefWidth="600.0" style="-fx-background-color: #2A2931; -fx-background-radius: 15 15 0 0;" BorderPane.alignment="CENTER">
+                                             <children>
+                                                <Text fill="#bb86fc" strokeType="OUTSIDE" strokeWidth="0.0" text="Editor" wrappingWidth="80">
+                                                   <font>
+                                                      <Font size="16.0" />
+                                                   </font>
+                                                   <HBox.margin>
+                                                      <Insets left="30.0" top="5.0" />
+                                                   </HBox.margin>
+                                                </Text>
+                                                <Pane prefHeight="35.0" prefWidth="422.0" />
+                                                <Button fx:id="changeButton" mnemonicParsing="false" prefHeight="26.0" prefWidth="62.0" text="Change" />
+                                             </children>
+                                          </HBox>
+                                       </top>
+                                    </BorderPane>
+                                 </children>
+                              </Pane>
+                           </content>
+                        </Tab>
+                        <Tab closable="false">
+                           <content>
+                              <Pane fx:id="sceneTrans" maxHeight="554.0" maxWidth="807.0" prefHeight="534.0" prefWidth="807.0" style="-fx-background-color: #0E0C17; -fx-background-radius: 0 0 15 0;">
+                                 <children>
+                                    <TextField fx:id="textNewWord" depthTest="ENABLE" layoutX="208.0" layoutY="41.0" prefHeight="30.0" prefWidth="260.0" promptText="New Word" style="-fx-background-color: #2A2931; -fx-background-radius: 5 0 0 5;">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                       <stylesheets>
+                                          <URL value="@../css/textField.css" />
+                                       </stylesheets>
+                                       <styleClass>
+                                          <String fx:value="custom-textfield" />
+                                          <String fx:value="non-border" />
+                                       </styleClass>
+                                    </TextField>
+                                    <BorderPane fx:id="definitionPane" layoutX="67.0" layoutY="100.0" prefHeight="387.0" prefWidth="600.0" style="-fx-background-color: #1C1A24; -fx-background-radius: 15;">
+                                       <center>
+                                          <Pane BorderPane.alignment="CENTER">
+                                             <children>
+                                                <HTMLEditor fx:id="htmlEditor1" htmlText="&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable=&quot;true&quot;&gt;&lt;/body&gt;&lt;/html&gt;" layoutX="15.0" prefHeight="357.0" prefWidth="570.0" stylesheets="@../css/styles-html.css" />
+                                             </children>
+                                          </Pane>
+                                       </center>
+                                       <top>
+                                          <HBox prefHeight="35.0" prefWidth="600.0" style="-fx-background-color: #2A2931; -fx-background-radius: 15 15 0 0;" BorderPane.alignment="CENTER">
+                                             <children>
+                                                <Text fill="#bb86fc" strokeType="OUTSIDE" strokeWidth="0.0" text="Definition" wrappingWidth="80">
+                                                   <font>
+                                                      <Font size="16.0" />
+                                                   </font>
+                                                   <HBox.margin>
+                                                      <Insets left="30.0" top="5.0" />
+                                                   </HBox.margin>
+                                                </Text>
+                                                <Pane prefHeight="35.0" prefWidth="386.0" />
+                                                <Button fx:id="cancelButton" mnemonicParsing="false" text="Cancel" />
+                                                <Button fx:id="addButton" mnemonicParsing="false" prefHeight="26.0" prefWidth="62.0" text="Add" />
+                                             </children>
+                                          </HBox>
+                                       </top>
+                                    </BorderPane>
+                                    <Button fx:id="checkButton" layoutX="468.0" layoutY="41.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="58.0" style="-fx-background-radius: 0 5 5 0;" text="Check" />
+                                    <Text fill="RED" layoutX="215.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Please enter a word in the box">
+                                       <font>
+                                          <Font size="13.0" />
+                                       </font>
+                                    </Text>
+                                 </children>
+                              </Pane>
+                           </content></Tab>
+                        <Tab text="Untitled Tab">
+                           <content>
+                              <Pane fx:id="sceneTrans1" maxHeight="554.0" maxWidth="807.0" prefHeight="534.0" prefWidth="807.0" style="-fx-background-color: #0E0C17; -fx-background-radius: 0 0 15 0;">
+                                 <children>
+                                    <VBox layoutX="58.0" layoutY="87.0" prefHeight="400.0" prefWidth="176.0">
+                                       <children>
+                                          <HBox prefHeight="34.0" prefWidth="176.0" style="-fx-background-color: #2A2931; -fx-background-radius: 15 15 0 0;">
+                                             <children>
+                                                <Text fill="#bb86fc" strokeType="OUTSIDE" strokeWidth="0.0" text="Bookmark" wrappingWidth="80">
+                                                   <font>
+                                                      <Font size="16.0" />
+                                                   </font>
+                                                   <HBox.margin>
+                                                      <Insets left="20.0" top="5.0" />
+                                                   </HBox.margin>
+                                                </Text>
+                                                <Pane prefHeight="35.0" prefWidth="386.0" />
+                                             </children>
+                                          </HBox>
+                                          <ListView fx:id="listBookmark" prefHeight="368.0" prefWidth="176.0" stylesheets="@../css/listView.css" />
+                                       </children>
+                                    </VBox>
+                                    <BorderPane fx:id="definitionPane1" layoutX="278.0" layoutY="87.0" prefHeight="400.0" prefWidth="490.0" style="-fx-background-color: #1C1A24; -fx-background-radius: 15;">
+                                       <top>
+                                          <HBox prefHeight="35.0" prefWidth="600.0" style="-fx-background-color: #2A2931; -fx-background-radius: 15 15 0 0;" BorderPane.alignment="CENTER">
+                                             <children>
+                                                <Text fill="#bb86fc" strokeType="OUTSIDE" strokeWidth="0.0" text="Definition" wrappingWidth="80">
+                                                   <font>
+                                                      <Font size="16.0" />
+                                                   </font>
+                                                   <HBox.margin>
+                                                      <Insets left="20.0" top="5.0" />
+                                                   </HBox.margin>
+                                                </Text>
+                                                <Pane prefHeight="35.0" prefWidth="386.0" />
+                                             </children>
+                                          </HBox>
+                                       </top>
+                                       <center>
+                                          <WebView fx:id="webView1" prefHeight="338.0" prefWidth="415.0" stylesheets="@../css/styles-html.css" BorderPane.alignment="CENTER">
+                                             <BorderPane.margin>
+                                                <Insets left="10.0" right="5.0" />
+                                             </BorderPane.margin>
+                                          </WebView>
+                                       </center>
+                                    </BorderPane>
+                                    <TextField fx:id="textSearch1" depthTest="ENABLE" layoutX="58.0" layoutY="32.0" onAction="#controllerSearch" prefHeight="31.0" prefWidth="220.0" promptText="Search Bookmark" style="-fx-background-radius: 5; -fx-background-color: #2A2931;">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                       <stylesheets>
+                                          <URL value="@../css/textField.css" />
+                                       </stylesheets>
+                                       <styleClass>
+                                          <String fx:value="custom-textfield" />
+                                          <String fx:value="non-border" />
+                                       </styleClass>
+                                    </TextField>
+                                 </children>
+                              </Pane>
+                           </content>
+                        </Tab>
+                     </tabs>
+                  </TabPane>
+               </children>
+            </Pane>
+         </center>
+         <top>
+            <HBox prefHeight="62.0" prefWidth="862.0" style="-fx-border-color: transparent transparent #484848 transparent;" BorderPane.alignment="CENTER">
+               <children>
+                  <VBox prefHeight="62.0" prefWidth="86.4" style="-fx-background-color: #191919; -fx-background-radius: 15 0 0 0;" />
+                  <Pane maxHeight="62.0" maxWidth="807.0" prefHeight="62.0" prefWidth="807.0" style="-fx-background-color: #0E0C17; -fx-background-radius: 0 15 0 0;">
+                     <children>
+                        <HBox layoutX="62.0" layoutY="16.0" prefHeight="30.0" prefWidth="280.0" style="-fx-background-radius: 5; -fx-background-color: #2A2931;">
+                           <children>
+                              <Pane prefHeight="30.0" prefWidth="20.0">
+                                 <children>
+                                    <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="5.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../css/search_icon.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </Pane>
+                              <TextField fx:id="textSearch" depthTest="ENABLE" onAction="#controllerSearch" prefHeight="30.0" prefWidth="260.0" promptText="Search" style="-fx-background-color: #2A2931; -fx-background-radius: 5;">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                                 <stylesheets>
+                                    <URL value="@../css/textField.css" />
+                                 </stylesheets>
+                                 <styleClass>
+                                    <String fx:value="custom-textfield" />
+                                    <String fx:value="non-border" />
+                                 </styleClass>
+                              </TextField>
+                           </children>
+                        </HBox>
+                        <ListView fx:id="listFound" layoutX="82.0" layoutY="46.0" maxHeight="235.0" onMouseClicked="#selectFromList" prefHeight="235.0" prefWidth="260.0" style="-fx-background-color: #2A2931; -fx-background-radius: 0 0 5 5;" stylesheets="@../css/listView.css" visible="false" />
+                     </children>
+                  </Pane>
+               </children>
+            </HBox>
+         </top>
+         <left>
+            <VBox prefHeight="554.0" prefWidth="86.4" style="-fx-background-color: #191919;" BorderPane.alignment="CENTER">
+               <children>
+                  <Pane prefHeight="64.0" prefWidth="86.0">
+                     <children>
+                        <Button fx:id="homeButton" layoutX="17.0" layoutY="20.0" mnemonicParsing="false" text="Home" />
+                     </children>
+                  </Pane>
+                  <Pane prefHeight="74.0" prefWidth="86.0">
+                     <children>
+                        <Button fx:id="translateButton" layoutX="-3.0" layoutY="39.0" mnemonicParsing="false" onAction="#check" prefHeight="26.0" prefWidth="88.0" text="Translate" />
+                     </children>
+                  </Pane>
+                  <Pane prefHeight="74.0" prefWidth="86.0">
+                     <children>
+                        <Button fx:id="addWordButton" layoutX="-3.0" layoutY="39.0" mnemonicParsing="false" onAction="#check" prefHeight="26.0" prefWidth="88.0" text="Add Word" />
+                     </children>
+                  </Pane>
+                  <Pane prefHeight="74.0" prefWidth="86.0">
+                     <children>
+                        <Button fx:id="bookmarkButton" layoutX="-3.0" layoutY="39.0" mnemonicParsing="false" onAction="#check" prefHeight="26.0" prefWidth="88.0" text="Bookmark" />
+                     </children>
+                  </Pane>
+               </children>
+            </VBox>
+         </left>
+      </BorderPane>
+   </children>
+</AnchorPane>

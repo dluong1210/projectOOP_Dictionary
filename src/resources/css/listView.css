@@ -1,0 +1,25 @@
+.list-cell:selected {
+    -fx-background-color: #BB86FC;
+    -fx-background-radius: 5;
+}
+
+.list-cell {
+    -fx-background-color: #2A2931;
+    -fx-text-fill: white;
+}
+/* Ẩn thanh cuộn */
+.list-view .scroll-bar:vertical {
+    -fx-pref-width: 0;
+    -fx-opacity: 0;
+}
+.list-view .scroll-bar:horizontal {
+    -fx-pref-height: 0;
+    -fx-opacity: 0;
+}
+.list-view {
+    -fx-background-color: #2A2931;
+    -fx-background-radius: 0 0 5 5;
+}
+.list-view: focused {
+    -fx-padding: 1;
+}

@@ -44,9 +44,7 @@ public class AddWord implements Initializable {
     }
 
     public void controllerCheck() {
-        checkButton.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> {
-            check();
-        });
+        checkButton.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> check());
 
         textNewWord.addEventFilter(KeyEvent.KEY_PRESSED, e -> {
             if (e.getCode().equals(KeyCode.ENTER)) {

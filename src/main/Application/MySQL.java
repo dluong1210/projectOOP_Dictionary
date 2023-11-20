@@ -1,9 +1,6 @@
 package Application;
 
 import java.sql.*;
-import org.jsoup.*;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -49,7 +46,7 @@ public class MySQL {
 
             statement.close();
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
         return text;
     }
@@ -97,7 +94,7 @@ public class MySQL {
             }
             statement.close();
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
         return wordFound;
     }
@@ -175,7 +172,7 @@ public class MySQL {
             }
             statement.close();
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
         return wordFound;
     }

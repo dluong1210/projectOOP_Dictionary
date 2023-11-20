@@ -3,7 +3,6 @@ package controllers;
 import Application.MySQL;
 
 import javafx.application.Platform;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -123,26 +122,23 @@ public class SearchWord implements Initializable {
     /*------------------------*/
 
     public void selectFromList() {
-        listFound.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-//                if (mouseEvent.getClickCount() == 1) {
-                    String wordClicked = listFound.getSelectionModel().getSelectedItem();
+        listFound.setOnMouseClicked(e -> {
+//                if (e.getClickCount() == 1) {
+                String wordClicked = listFound.getSelectionModel().getSelectedItem();
 
-                    if (!isSelected) {
-                        listFound.getSelectionModel().select(listFound.getSelectionModel().getSelectedIndex());
-                        isSelected = true;
-                        wordSelected = wordClicked;
-                    } else if (wordSelected.equals(wordClicked)) {
-                        System.out.println(wordSelected);
-                        lookup(wordSelected);
-                        textSearch.setText(wordSelected);
-                        isSelected = false;
-                    } else {
-                        wordSelected = wordClicked;
-                    }
+                if (!isSelected) {
+                    listFound.getSelectionModel().select(listFound.getSelectionModel().getSelectedIndex());
+                    isSelected = true;
+                    wordSelected = wordClicked;
+                } else if (wordSelected.equals(wordClicked)) {
+                    System.out.println(wordSelected);
+                    lookup(wordSelected);
+                    textSearch.setText(wordSelected);
+                    isSelected = false;
+                } else {
+                    wordSelected = wordClicked;
+                }
 //                }
-            }
         });
     }
 
@@ -155,27 +151,24 @@ public class SearchWord implements Initializable {
             }
         });
 
-        textSearch.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                textSearch.setEditable(true);
-                if (!textSearch.getText().isEmpty()) listFound.setVisible(true);
-            }
+        textSearch.setOnMouseClicked(e -> {
+            textSearch.setEditable(true);
+            if (!textSearch.getText().isEmpty()) listFound.setVisible(true);
         });
 
         textSearch.addEventFilter(KeyEvent.ANY, e -> {
             if (e.getCode().equals(KeyCode.ENTER)) {
                 textSearch.setEditable(false);
                 lookup(textSearch.getText());
-            }
-            else {
+
+            } else {
                 if (!textSearch.isEditable()) {
                     textSearch.setEditable(true);
                 }
 
                 if (textSearch.getText().isEmpty()) {
                     listFound.setVisible(false);
-                    return;
+
                 } else {
                     listFound.setVisible(true);
                     List<String> listWord = MySQL.searchFromDB(textSearch.getText());

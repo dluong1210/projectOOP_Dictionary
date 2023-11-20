@@ -11,7 +11,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.web.WebView;
 
 import java.net.URL;
@@ -23,8 +22,6 @@ public class Bookmark implements Initializable {
     private TextField textSearch;
     @FXML
     private ListView<String> listBookmark;
-    @FXML
-    private BorderPane definitionPane;
     @FXML
     private WebView webView;
     @FXML

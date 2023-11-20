@@ -91,6 +91,7 @@ public class DictionaryCommandline extends DictionaryManagement {
                     dictionarySearcher();
                     break;
                 case 7:
+                    dictionaryGame();
                     break;
                 case 8:
     //                dictionaryImportFromFile();
@@ -122,5 +123,40 @@ public class DictionaryCommandline extends DictionaryManagement {
     public static void main(String[] argv) {
         DictionaryCommandline test = new DictionaryCommandline();
         test.dictionaryAdvanced();
+    }
+
+    /**
+     * Four cute games.
+     */
+    public void dictionaryGame() {
+        String[] gameType = new String[2];
+        gameType[0] = "0";
+        gameType[1] = "1";
+        String[] gameVersion = new String[2];
+        gameVersion[0] = "0";
+        gameVersion[1] = "1";
+
+        String inputType;
+        String inputVersion;
+
+        inputType = GameCommandline.getValidInput(gameType, "Type of game: \n[0] Word Game \n[1] Meaning Game");
+        inputVersion = GameCommandline.getValidInput(gameType, "Version of game: \n[0] Choice Game \n[1] Memory Game");
+
+        if(inputType.equals(gameType[0]) && inputVersion.equals(gameVersion[0])) {
+            WordChoiceGame wordChoiceGame = new WordChoiceGame();
+            wordChoiceGame.gameCommandline();
+        }
+        if(inputType.equals(gameType[0]) && inputVersion.equals(gameVersion[1])) {
+            WordMemoryGame wordMemoryGame = new WordMemoryGame();
+            wordMemoryGame.gameCommandline();
+        }
+        if(inputType.equals(gameType[1]) && inputVersion.equals(gameVersion[0])) {
+            MeaningChoiceGame meaningChoiceGame = new MeaningChoiceGame();
+            meaningChoiceGame.gameCommandline();
+        }
+        if(inputType.equals(gameType[1]) && inputVersion.equals(gameVersion[1])) {
+            MeaningMemoryGame meaningMemoryGame = new MeaningMemoryGame();
+            meaningMemoryGame.gameCommandline();
+        }
     }
 }

@@ -151,24 +151,25 @@
                            <content>
                               <Pane fx:id="sceneTrans1" maxHeight="554.0" maxWidth="807.0" prefHeight="534.0" prefWidth="807.0" style="-fx-background-color: #0E0C17; -fx-background-radius: 0 0 15 0;">
                                  <children>
-                                    <VBox layoutX="58.0" layoutY="61.0" prefHeight="400.0" prefWidth="176.0">
+                                    <VBox layoutX="58.0" layoutY="87.0" prefHeight="400.0" prefWidth="176.0">
                                        <children>
-                                          <TextField fx:id="textSearch1" depthTest="ENABLE" onAction="#controllerSearch" prefHeight="35.0" prefWidth="176.0" promptText="Search bookmark" style="-fx-background-color: #2A2931; -fx-background-radius: 10 10 0 0;">
-                                             <font>
-                                                <Font size="14.0" />
-                                             </font>
-                                             <stylesheets>
-                                                <URL value="@../css/textField.css" />
-                                             </stylesheets>
-                                             <styleClass>
-                                                <String fx:value="custom-textfield" />
-                                                <String fx:value="non-border" />
-                                             </styleClass>
-                                          </TextField>
-                                          <ListView prefHeight="397.0" prefWidth="176.0" style="-fx-background-color: #1C1A24;" stylesheets="@../css/listView.css" />
+                                          <HBox prefHeight="34.0" prefWidth="176.0" style="-fx-background-color: #2A2931; -fx-background-radius: 15 15 0 0;">
+                                             <children>
+                                                <Text fill="#bb86fc" strokeType="OUTSIDE" strokeWidth="0.0" text="Bookmark" wrappingWidth="80">
+                                                   <font>
+                                                      <Font size="16.0" />
+                                                   </font>
+                                                   <HBox.margin>
+                                                      <Insets left="20.0" top="5.0" />
+                                                   </HBox.margin>
+                                                </Text>
+                                                <Pane prefHeight="35.0" prefWidth="386.0" />
+                                             </children>
+                                          </HBox>
+                                          <ListView fx:id="listBookmark" prefHeight="368.0" prefWidth="176.0" stylesheets="@../css/listView.css" />
                                        </children>
                                     </VBox>
-                                    <BorderPane fx:id="definitionPane1" layoutX="278.0" layoutY="61.0" prefHeight="400.0" prefWidth="490.0" style="-fx-background-color: #1C1A24; -fx-background-radius: 15;">
+                                    <BorderPane fx:id="definitionPane1" layoutX="278.0" layoutY="87.0" prefHeight="400.0" prefWidth="490.0" style="-fx-background-color: #1C1A24; -fx-background-radius: 15;">
                                        <top>
                                           <HBox prefHeight="35.0" prefWidth="600.0" style="-fx-background-color: #2A2931; -fx-background-radius: 15 15 0 0;" BorderPane.alignment="CENTER">
                                              <children>
@@ -192,6 +193,18 @@
                                           </WebView>
                                        </center>
                                     </BorderPane>
+                                    <TextField fx:id="textSearch1" depthTest="ENABLE" layoutX="58.0" layoutY="32.0" onAction="#controllerSearch" prefHeight="31.0" prefWidth="220.0" promptText="Search Bookmark" style="-fx-background-radius: 5; -fx-background-color: #2A2931;">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                       <stylesheets>
+                                          <URL value="@../css/textField.css" />
+                                       </stylesheets>
+                                       <styleClass>
+                                          <String fx:value="custom-textfield" />
+                                          <String fx:value="non-border" />
+                                       </styleClass>
+                                    </TextField>
                                  </children>
                               </Pane>
                            </content>
@@ -258,7 +271,7 @@
                   </Pane>
                   <Pane prefHeight="74.0" prefWidth="86.0">
                      <children>
-                        <Button fx:id="addWordButton1" layoutX="-3.0" layoutY="39.0" mnemonicParsing="false" onAction="#check" prefHeight="26.0" prefWidth="88.0" text="Bookmark" />
+                        <Button fx:id="bookmarkButton" layoutX="-3.0" layoutY="39.0" mnemonicParsing="false" onAction="#check" prefHeight="26.0" prefWidth="88.0" text="Bookmark" />
                      </children>
                   </Pane>
                </children>

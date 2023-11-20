@@ -36,6 +36,8 @@ public class SearchWord implements Initializable {
     @FXML
     private Button addWordButton;
     @FXML
+    private Button bookmarkButton;
+    @FXML
     private TabPane tabPane;
     @FXML
     private BorderPane scene;
@@ -100,6 +102,19 @@ public class SearchWord implements Initializable {
                 System.out.println(exception.getMessage());
             }
         });
+
+        bookmarkButton.setOnAction(e -> {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/bookmarkTab.fxml"));
+            try {
+                Parent bookmarkTab = loader.load();
+                Tab tab = new Tab("Bookmark", bookmarkTab);
+                tabPane.getTabs().add(tab);
+                tabPane.getSelectionModel().select(tab);
+
+            } catch (IOException exception) {
+                System.out.println(exception.getMessage());
+            }
+        });
     }
 
     /*---Check double click---*/
@@ -111,38 +126,41 @@ public class SearchWord implements Initializable {
         listFound.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                String wordClicked = listFound.getSelectionModel().getSelectedItem();
+//                if (mouseEvent.getClickCount() == 1) {
+                    String wordClicked = listFound.getSelectionModel().getSelectedItem();
 
-                if (!isSelected) {
-                    listFound.getSelectionModel().select(listFound.getSelectionModel().getSelectedIndex());
-                    isSelected = true;
-                    wordSelected = wordClicked;
-                } else if (wordSelected.equals(wordClicked)) {
-                    System.out.println(wordSelected);
-                    lookup(wordSelected);
-                    textSearch.setText(wordSelected);
-                    isSelected = false;
-                } else {
-                    wordSelected = wordClicked;
-                }
+                    if (!isSelected) {
+                        listFound.getSelectionModel().select(listFound.getSelectionModel().getSelectedIndex());
+                        isSelected = true;
+                        wordSelected = wordClicked;
+                    } else if (wordSelected.equals(wordClicked)) {
+                        System.out.println(wordSelected);
+                        lookup(wordSelected);
+                        textSearch.setText(wordSelected);
+                        isSelected = false;
+                    } else {
+                        wordSelected = wordClicked;
+                    }
+//                }
             }
         });
     }
 
     public void controllerSearch() {
-        scene.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> {
-            if (!listFound.getBoundsInLocal().contains(e.getX(), e.getY())
-                && !textSearch.getBoundsInLocal().contains(e.getX(), e.getY())) {
+        scene.setOnMouseClicked(event -> {
+            Node source = (Node) event.getTarget();
+            if (!source.getParent().equals(listFound)) {
                 listFound.setVisible(false);
                 textSearch.setEditable(false);
             }
-            textSearch.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent mouseEvent) {
-                    textSearch.setEditable(true);
-                    if (!textSearch.getText().isEmpty()) listFound.setVisible(true);
-                }
-            });
+        });
+
+        textSearch.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                textSearch.setEditable(true);
+                if (!textSearch.getText().isEmpty()) listFound.setVisible(true);
+            }
         });
 
         textSearch.addEventFilter(KeyEvent.ANY, e -> {
@@ -161,9 +179,10 @@ public class SearchWord implements Initializable {
                 } else {
                     listFound.setVisible(true);
                     List<String> listWord = MySQL.searchFromDB(textSearch.getText());
-                    listFound.setPrefHeight(Math.min(23 * listWord.size(), 235));
                     ObservableList<String> observableList = FXCollections.observableArrayList(listWord);
 
+                    listFound.setPrefHeight(Math.min(24 * listWord.size(), 235));
+//                    listFound.setFocusTraversable(false);
                     listFound.setItems(observableList);
                 }
             }

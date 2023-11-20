@@ -108,6 +108,8 @@ public class MySQL {
 
         statement.close();
         System.out.println("Delete successfully word: " + word);
+
+        deleteBookmark(word);
     }
 
     public static void insertIntoDB(String word, String definition) throws SQLException {
@@ -126,12 +128,18 @@ public class MySQL {
         System.out.println("Update successfully word: " + word);
     }
 
-    public static boolean checkBookmark(String word) throws SQLException {
-        Statement statement = connection.createStatement();
-        ResultSet rs = statement.executeQuery("SELECT word FROM bookmark WHERE word = \"" + word + "\"");
-        boolean check = rs.next();
+    public static boolean checkBookmark(String word) {
+        boolean check = false;
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery("SELECT word FROM bookmark WHERE word = \"" + word + "\"");
+            check = rs.next();
 
-        statement.close();
+            statement.close();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
         return check;
     }
 
@@ -143,12 +151,16 @@ public class MySQL {
         System.out.println("Insert into bookmark successfully word: " + word);
     }
 
-    public static void deleteBookmark(String word) throws SQLException {
-        Statement statement = connection.createStatement();
-        statement.executeUpdate("DELETE FROM bookmark WHERE word = \"" + word + "\"");
+    public static void deleteBookmark(String word) {
+        try {
+            Statement statement = connection.createStatement();
+            statement.executeUpdate("DELETE FROM bookmark WHERE word = \"" + word + "\"");
 
-        statement.close();
-        System.out.println("delete from bookmark successfully word: " + word);
+            statement.close();
+            System.out.println("Delete from bookmark successfully word: " + word);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public static List<String> searchFromBookmark(String word) {
@@ -168,9 +180,9 @@ public class MySQL {
         return wordFound;
     }
 
-    public static String htmlSelectFromBookmark(String word) throws SQLException {
+    public static String htmlSelectFromBookmark(String word) {
         String text;
-        if (word.isEmpty()) {
+        if (word == null || word.isEmpty()) {
             text = "Choose a Bookmark!";
         } else if (!checkBookmark(word)) {
             text = "<b>'" + word + "'</b> has not been bookmarked yet";

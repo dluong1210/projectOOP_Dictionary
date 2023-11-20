@@ -105,10 +105,10 @@ public class TreeWord {
      */
     public boolean editWord(String currentWord_target, String newWord_target, String newWord_explain) {
         Word wordEdit = lookup(currentWord_target);
-        if (wordEdit == null) {
-            System.out.println(currentWord_target + " does not exist in dictionary");
-            return false;
-        }
+//        if (wordEdit == null) {
+//            System.out.println(currentWord_target + " does not exist in dictionary");
+//            return false;
+//        }
 
         wordEdit.setWord_target(newWord_target);
         wordEdit.setWord_explain(newWord_explain);

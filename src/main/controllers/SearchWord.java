@@ -2,6 +2,7 @@ package controllers;
 
 import Application.MySQL;
 
+import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,8 +16,10 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.web.HTMLEditor;
 import javafx.scene.web.WebView;
+import javafx.util.Duration;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
@@ -36,6 +39,8 @@ public class SearchWord implements Initializable {
     private Button addWordButton;
     @FXML
     private Button bookmarkButton;
+    @FXML
+    private Button gameButton;
     @FXML
     private TabPane tabPane;
     @FXML
@@ -60,10 +65,13 @@ public class SearchWord implements Initializable {
     private HTMLEditor htmlEditor;
     @FXML
     private Button changeButton;
+    @FXML
+    private Rectangle rectangle;
+    private Button tabSelected;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        homeButton.setOnAction(e -> tabPane.getSelectionModel().select(0));
+        tabSelected = homeButton;
         webView.getEngine().loadContent(MySQL.htmlSelectFromDB(""));
         check();
 
@@ -76,7 +84,27 @@ public class SearchWord implements Initializable {
     }
 
     public void check() {
+        TranslateTransition transition = new TranslateTransition(Duration.seconds(0.4), rectangle);
+
+        homeButton.setOnAction(e -> {
+            tabSelected.setOpacity(0.5);
+            tabSelected = homeButton;
+
+            homeButton.setOpacity(1);
+            transition.setByY(92.5 - rectangle.localToScene(rectangle.getBoundsInLocal()).getMinY());
+            transition.play();
+
+            tabPane.getSelectionModel().select(0);
+        });
+
         translateButton.setOnAction(e -> {
+            tabSelected.setOpacity(0.5);
+            tabSelected = translateButton;
+
+            translateButton.setOpacity(1);
+            transition.setByY(137.5 - rectangle.localToScene(rectangle.getBoundsInLocal()).getMinY());
+            transition.play();
+
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/Translate.fxml"));
             try {
                 Parent translateTab = loader.load();
@@ -90,6 +118,13 @@ public class SearchWord implements Initializable {
         });
 
         addWordButton.setOnAction(e -> {
+            tabSelected.setOpacity(0.5);
+            tabSelected = addWordButton;
+
+            addWordButton.setOpacity(1);
+            transition.setByY(182.5 - rectangle.localToScene(rectangle.getBoundsInLocal()).getMinY());
+            transition.play();
+
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/addWordTab.fxml"));
             try {
                 Parent addWordTab = loader.load();
@@ -103,6 +138,13 @@ public class SearchWord implements Initializable {
         });
 
         bookmarkButton.setOnAction(e -> {
+            tabSelected.setOpacity(0.5);
+            tabSelected = bookmarkButton;
+
+            bookmarkButton.setOpacity(1);
+            transition.setByY(227.5 - rectangle.localToScene(rectangle.getBoundsInLocal()).getMinY());
+            transition.play();
+
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/bookmarkTab.fxml"));
             try {
                 Parent bookmarkTab = loader.load();
@@ -113,6 +155,15 @@ public class SearchWord implements Initializable {
             } catch (IOException exception) {
                 System.out.println(exception.getMessage());
             }
+        });
+
+        gameButton.setOnAction(e -> {
+            tabSelected.setOpacity(0.5);
+            tabSelected = gameButton;
+
+            gameButton.setOpacity(1);
+            transition.setByY(272.5 - rectangle.localToScene(rectangle.getBoundsInLocal()).getMinY());
+            transition.play();
         });
     }
 
@@ -159,6 +210,17 @@ public class SearchWord implements Initializable {
         textSearch.addEventFilter(KeyEvent.ANY, e -> {
             if (e.getCode().equals(KeyCode.ENTER)) {
                 textSearch.setEditable(false);
+                if (tabSelected != homeButton) {
+                    tabSelected.setOpacity(0.5);
+                    tabSelected = homeButton;
+
+                    homeButton.setOpacity(1);
+                    TranslateTransition transition = new TranslateTransition(Duration.seconds(0.3), rectangle);
+                    transition.setByY(92.5 - rectangle.localToScene(rectangle.getBoundsInLocal()).getMinY());
+                    transition.play();
+
+                    tabPane.getSelectionModel().select(0);
+                }
                 lookup(textSearch.getText());
 
             } else {
@@ -261,12 +323,9 @@ public class SearchWord implements Initializable {
 
         listFound.setVisible(false);
         listFound.getSelectionModel().select(-1);
-        tabPane.getSelectionModel().select(0);
         result.setVisible(true);
         webView.getEngine().loadContent(definition);
 
     }
-
-
 
 }

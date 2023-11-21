@@ -23,7 +23,7 @@ public class test extends Application {
         databaseThread.start();
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/homeTab.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 893, 616);
+        Scene scene = new Scene(fxmlLoader.load(), 1080, 720);
         stage.setTitle("my dictionary!");
         stage.setScene(scene);
         stage.show();

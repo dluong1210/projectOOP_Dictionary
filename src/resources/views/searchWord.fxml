@@ -114,7 +114,7 @@
                                  <children>
                                     <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="5.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@../css/search_icon.png" />
+                                          <Image url="@../icon/search_icon.png" />
                                        </image>
                                     </ImageView>
                                  </children>

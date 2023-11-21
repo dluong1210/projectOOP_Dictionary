@@ -4,11 +4,14 @@
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.Glow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -16,27 +19,28 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.web.HTMLEditor?>
 <?import javafx.scene.web.WebView?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="616.0" prefWidth="893.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.SearchWord">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.SearchWord">
    <children>
-      <BorderPane fx:id="scene" prefHeight="616.0" prefWidth="893.0" style="-fx-background-radius: 15; -fx-background-color: #000000;">
+      <BorderPane fx:id="scene" prefHeight="720.0" prefWidth="1080.0" style="-fx-background-radius: 15; -fx-background-color: #000000;">
          <effect>
             <DropShadow />
          </effect>
          <center>
-            <Pane maxHeight="554.0" maxWidth="807.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #0E0C17; -fx-background-radius: 10;" BorderPane.alignment="CENTER">
+            <Pane maxHeight="554.0" maxWidth="807.0" prefHeight="200.0" prefWidth="925.0" style="-fx-background-color: #0E0C17; -fx-background-radius: 10;" BorderPane.alignment="CENTER">
                <children>
-                  <TabPane fx:id="tabPane" prefHeight="560.0" prefWidth="807.0" side="BOTTOM" style="-fx-background-radius: 0 0 15 0;" tabMaxHeight="0.0" tabMaxWidth="0.0">
+                  <TabPane fx:id="tabPane" layoutX="-58.0" layoutY="-53.0" prefHeight="665.0" prefWidth="925.0" side="BOTTOM" style="-fx-background-radius: 0 0 15 0;" tabMaxHeight="0.0" tabMaxWidth="0.0">
                      <tabs>
                         <Tab closable="false">
                            <content>
-                              <Pane maxHeight="554.0" maxWidth="807.0" prefHeight="534.0" prefWidth="626.0" style="-fx-background-color: #0E0C17; -fx-background-radius: 0 0 15 0;">
+                              <Pane maxHeight="677.0" maxWidth="925.0" prefHeight="659.0" prefWidth="925.0" style="-fx-background-color: #0E0C17; -fx-background-radius: 0 0 15 0;">
                                  <children>
-                                    <BorderPane fx:id="result" layoutX="57.0" layoutY="32.0" prefHeight="445.0" prefWidth="600.0" style="-fx-background-color: #1C1A24; -fx-background-radius: 15;">
+                                    <BorderPane fx:id="result" layoutX="57.0" layoutY="80.0" prefHeight="445.0" prefWidth="600.0" style="-fx-background-color: #1C1A24; -fx-background-radius: 15;">
                                        <top>
                                           <HBox prefHeight="35.0" prefWidth="544.0" style="-fx-background-color: #2A2931; -fx-background-radius: 15 15 0 0;" BorderPane.alignment="CENTER">
                                              <children>
@@ -91,6 +95,93 @@
                                              </children>
                                           </HBox>
                                        </top>
+                                    </BorderPane>
+                                 </children>
+                              </Pane>
+                           </content>
+                        </Tab>
+                        <Tab text="Untitled Tab">
+                           <content>
+                              <Pane fx:id="sceneTrans2" maxHeight="554.0" maxWidth="807.0" prefHeight="534.0" prefWidth="807.0" style="-fx-background-color: #0E0C17; -fx-background-radius: 0 0 15 0;">
+                                 <children>
+                                    <BorderPane layoutX="77.0" layoutY="80.0" prefHeight="380.0" prefWidth="660.0" style="-fx-background-color: #1C1A24; -fx-background-radius: 15;">
+                                       <top>
+                                          <HBox prefHeight="42.0" prefWidth="540.0" style="-fx-background-color: #2A2931; -fx-background-radius: 15 15 0 0;" BorderPane.alignment="CENTER">
+                                             <children>
+                                                <Pane prefHeight="42.0" prefWidth="310.0">
+                                                   <children>
+                                                      <ChoiceBox fx:id="langueInput" layoutX="14.0" layoutY="9.0" prefHeight="25.0" prefWidth="100.0" style="-fx-background-color: #825CE8;" stylesheets="@../css/style-choiceBox.css">
+                                                         <effect>
+                                                            <DropShadow />
+                                                         </effect>
+                                                      </ChoiceBox>
+                                                   </children>
+                                                </Pane>
+                                                <Pane prefHeight="42.0" prefWidth="40.0">
+                                                   <children>
+                                                      <ImageView fitHeight="38.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true" />
+                                                      <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="38.0" style="-fx-background-radius: 30;" text="Swap" />
+                                                   </children>
+                                                   <HBox.margin>
+                                                      <Insets top="2.0" />
+                                                   </HBox.margin>
+                                                </Pane>
+                                                <Pane prefHeight="42.0" prefWidth="310.0">
+                                                   <children>
+                                                      <ChoiceBox fx:id="langueOutput" layoutX="14.0" layoutY="9.0" prefHeight="25.0" prefWidth="100.0" style="-fx-background-color: #825CE8;" stylesheets="@../css/style-choiceBox.css">
+                                                         <effect>
+                                                            <DropShadow />
+                                                         </effect>
+                                                      </ChoiceBox>
+                                                   </children>
+                                                </Pane>
+                                             </children>
+                                          </HBox>
+                                       </top>
+                                       <center>
+                                          <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                                             <children>
+                                                <Pane fx:id="input" prefHeight="200.0" prefWidth="330.0" style="-fx-border-radius: 0 0 0 15;" styleClass="inactive-pane" stylesheets="@../css/styles-pane.css">
+                                                   <children>
+                                                      <TextArea fx:id="textInput" layoutX="14.0" layoutY="14.0" prefHeight="230.0" prefWidth="280.0" styleClass="text-area" stylesheets="@../css/textArea.css" wrapText="true">
+                                                         <font>
+                                                            <Font size="16.0" />
+                                                         </font>
+                                                      </TextArea>
+                                                      <Button fx:id="speakInput" layoutX="14.0" layoutY="289.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="35.0" stylesheets="@../css/button.css">
+                                                         <effect>
+                                                            <Glow />
+                                                         </effect>
+                                                      </Button>
+                                                      <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="22.0" layoutY="296.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@../../../../../Downloads/speaker-256.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                   </children>
+                                                </Pane>
+                                                <Pane fx:id="output" prefHeight="200.0" prefWidth="330.0" style="-fx-border-radius: 0 0 15 0;" styleClass="inactive-pane" stylesheets="@../css/styles-pane.css">
+                                                   <children>
+                                                      <TextArea fx:id="textOutput" editable="false" layoutX="14.0" layoutY="14.0" prefHeight="230.0" prefWidth="280.0" promptText="Bản dịch" styleClass="text-area" stylesheets="@../css/textArea.css" wrapText="true">
+                                                         <font>
+                                                            <Font size="16.0" />
+                                                         </font>
+                                                      </TextArea>
+                                                      <Button fx:id="speakOutput" layoutX="14.0" layoutY="289.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="35.0" stylesheets="@../css/button.css">
+                                                         <effect>
+                                                            <Glow />
+                                                         </effect>
+                                                      </Button>
+                                                      <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="22.0" layoutY="297.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@../../../../../Downloads/speaker-256.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                   </children>
+                                                </Pane>
+                                             </children>
+                                          </HBox>
+                                       </center>
                                     </BorderPane>
                                  </children>
                               </Pane>
@@ -217,16 +308,16 @@
          <top>
             <HBox prefHeight="62.0" prefWidth="862.0" style="-fx-border-color: transparent transparent #484848 transparent;" BorderPane.alignment="CENTER">
                <children>
-                  <VBox prefHeight="62.0" prefWidth="86.4" style="-fx-background-color: #191919; -fx-background-radius: 15 0 0 0;" />
-                  <Pane maxHeight="62.0" maxWidth="807.0" prefHeight="62.0" prefWidth="807.0" style="-fx-background-color: #0E0C17; -fx-background-radius: 0 15 0 0;">
+                  <VBox prefHeight="62.0" prefWidth="155.0" style="-fx-background-color: #191919; -fx-background-radius: 15 0 0 0;" />
+                  <Pane maxHeight="62.0" maxWidth="927.0" prefHeight="61.0" prefWidth="927.0" style="-fx-background-color: #0E0C17; -fx-background-radius: 0 15 0 0;">
                      <children>
-                        <HBox layoutX="62.0" layoutY="16.0" prefHeight="30.0" prefWidth="280.0" style="-fx-background-radius: 5; -fx-background-color: #2A2931;">
+                        <HBox layoutX="62.0" layoutY="16.0" prefHeight="30.0" prefWidth="315.0" style="-fx-background-radius: 5; -fx-background-color: #2A2931;">
                            <children>
                               <Pane prefHeight="30.0" prefWidth="20.0">
                                  <children>
                                     <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="5.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@../css/search_icon.png" />
+                                          <Image url="@../icon/search_icon.png" />
                                        </image>
                                     </ImageView>
                                  </children>
@@ -252,28 +343,94 @@
             </HBox>
          </top>
          <left>
-            <VBox prefHeight="554.0" prefWidth="86.4" style="-fx-background-color: #191919;" BorderPane.alignment="CENTER">
+            <VBox prefHeight="554.0" prefWidth="155.0" style="-fx-background-color: #191919;" BorderPane.alignment="CENTER">
                <children>
-                  <Pane prefHeight="64.0" prefWidth="86.0">
+                  <Pane prefHeight="30.0" prefWidth="86.0" />
+                  <HBox>
                      <children>
-                        <Button fx:id="homeButton" layoutX="17.0" layoutY="20.0" mnemonicParsing="false" text="Home" />
+                        <Button fx:id="homeButton" mnemonicParsing="false" prefHeight="45.0" prefWidth="155.0" style="-fx-background-color: transparent;" text="   Home     " textAlignment="CENTER" textFill="WHITE">
+                           <graphic>
+                              <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../icon/home_icon.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Button>
+                        <Rectangle fx:id="rectangle" fill="#8466ff" height="40.0" stroke="BLACK" strokeType="INSIDE" width="5.0">
+                           <HBox.margin>
+                              <Insets top="2.5" />
+                           </HBox.margin>
+                        </Rectangle>
                      </children>
-                  </Pane>
-                  <Pane prefHeight="74.0" prefWidth="86.0">
+                  </HBox>
+                  <HBox>
                      <children>
-                        <Button fx:id="translateButton" layoutX="-3.0" layoutY="39.0" mnemonicParsing="false" onAction="#check" prefHeight="26.0" prefWidth="88.0" text="Translate" />
+                        <Button fx:id="translateButton" mnemonicParsing="false" onAction="#check" opacity="0.5" prefHeight="45.0" prefWidth="155.0" style="-fx-background-color: transparent;" text="   Translate  " textFill="WHITE">
+                           <graphic>
+                              <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../icon/translate-icon.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Button>
                      </children>
-                  </Pane>
-                  <Pane prefHeight="74.0" prefWidth="86.0">
+                  </HBox>
+                  <HBox>
                      <children>
-                        <Button fx:id="addWordButton" layoutX="-3.0" layoutY="39.0" mnemonicParsing="false" onAction="#check" prefHeight="26.0" prefWidth="88.0" text="Add Word" />
+                        <Button fx:id="addWordButton" mnemonicParsing="false" onAction="#check" opacity="0.5" prefHeight="45.0" prefWidth="155.0" style="-fx-background-color: transparent;" text="   Add word" textFill="WHITE">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../icon/add-icon.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
                      </children>
-                  </Pane>
-                  <Pane prefHeight="74.0" prefWidth="86.0">
+                  </HBox>
+                  <HBox>
                      <children>
-                        <Button fx:id="bookmarkButton" layoutX="-3.0" layoutY="39.0" mnemonicParsing="false" onAction="#check" prefHeight="26.0" prefWidth="88.0" text="Bookmark" />
+                        <Button fx:id="bookmarkButton" mnemonicParsing="false" onAction="#check" opacity="0.5" prefHeight="45.0" prefWidth="155.0" style="-fx-background-color: transparent;" text="   Bookmark" textFill="WHITE">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../icon/bookmark-icon.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
                      </children>
-                  </Pane>
+                  </HBox>
+                  <HBox>
+                     <children>
+                        <Button fx:id="gameButton" mnemonicParsing="false" onAction="#check" opacity="0.5" prefHeight="45.0" prefWidth="155.0" style="-fx-background-color: transparent;" text="   Game      " textFill="WHITE">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../icon/game-icon.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                     </children>
+                  </HBox>
                </children>
             </VBox>
          </left>

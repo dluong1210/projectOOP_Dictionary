@@ -27,9 +27,11 @@ public class Bookmark implements Initializable {
     @FXML
     private Button deleteButton;
 
+    private MySQL mySQL = MySQL.getInstance();
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        webView.getEngine().loadContent(MySQL.htmlSelectFromBookmark(""));
+        webView.getEngine().loadContent(mySQL.htmlSelectFromBookmark(""));
         searchBookmark();
 
         controllerSearch();
@@ -58,7 +60,7 @@ public class Bookmark implements Initializable {
     }
 
     public void searchBookmark() {
-        List<String> listWord = MySQL.searchFromBookmark(textSearch.getText());
+        List<String> listWord = mySQL.searchFromBookmark(textSearch.getText());
 //        listBookmark.setPrefHeight(Math.min(25 * listWord.size(), 370));
         ObservableList<String> observableList = FXCollections.observableArrayList(listWord);
 
@@ -81,7 +83,7 @@ public class Bookmark implements Initializable {
 
     public void controllerDelete() {
         deleteButton.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> {
-            MySQL.deleteBookmark(listBookmark.getSelectionModel().getSelectedItem());
+            mySQL.deleteBookmark(listBookmark.getSelectionModel().getSelectedItem());
 
             searchBookmark();
             deleteButton.setVisible(false);
@@ -89,7 +91,7 @@ public class Bookmark implements Initializable {
     }
 
     private void lookup(String word) {
-        String definition = MySQL.htmlSelectFromBookmark(word);
+        String definition = mySQL.htmlSelectFromBookmark(word);
 //        System.out.println(definition);
 
         webView.getEngine().loadContent(definition);

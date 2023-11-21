@@ -37,6 +37,8 @@ public class AddWord implements Initializable {
     @FXML
     private Button cancelButton;
 
+    private MySQL mySQL = MySQL.getInstance();
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         controllerCheck();
@@ -84,7 +86,7 @@ public class AddWord implements Initializable {
             }
             htmlEditor.setVisible(true);
         });
-        htmlEditor.setHtmlText(MySQL.htmlization(""));
+        htmlEditor.setHtmlText(mySQL.htmlization(""));
 
         addButton.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> {
             Document doc = Jsoup.parse(htmlEditor.getHtmlText());
@@ -92,7 +94,7 @@ public class AddWord implements Initializable {
             System.out.println(doc.body().html());
 
             try {
-                MySQL.insertIntoDB(textNewWord.getText(), htmlTextToDB);
+                mySQL.insertIntoDB(textNewWord.getText(), htmlTextToDB);
             } catch (SQLException exception) {
                 System.out.println(exception.getMessage());
             }
@@ -116,6 +118,6 @@ public class AddWord implements Initializable {
     }
 
     private boolean checkExist(String word) {
-        return MySQL.selectFromDB(word) != null;
+        return mySQL.selectFromDB(word) != null;
     }
 }

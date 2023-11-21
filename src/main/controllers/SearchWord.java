@@ -30,6 +30,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Optional;
 
+
 public class SearchWord implements Initializable {
     @FXML
     private Button homeButton;
@@ -68,11 +69,13 @@ public class SearchWord implements Initializable {
     @FXML
     private Rectangle rectangle;
     private Button tabSelected;
+    
+    private MySQL mySQL = MySQL.getInstance();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         tabSelected = homeButton;
-        webView.getEngine().loadContent(MySQL.htmlSelectFromDB(""));
+        webView.getEngine().loadContent(mySQL.htmlSelectFromDB(""));
         check();
 
         controllerSearch();
@@ -233,7 +236,7 @@ public class SearchWord implements Initializable {
 
                 } else {
                     listFound.setVisible(true);
-                    List<String> listWord = MySQL.searchFromDB(textSearch.getText());
+                    List<String> listWord = mySQL.searchFromDB(textSearch.getText());
                     ObservableList<String> observableList = FXCollections.observableArrayList(listWord);
 
                     listFound.setPrefHeight(Math.min(24 * listWord.size(), 235));
@@ -249,8 +252,8 @@ public class SearchWord implements Initializable {
             System.out.println(wordSelected);
 
             try {
-                if (!MySQL.checkBookmark(wordSelected)) MySQL.addBookmark(wordSelected);
-                else MySQL.deleteBookmark(wordSelected);
+                if (!mySQL.checkBookmark(wordSelected)) mySQL.addBookmark(wordSelected);
+                else mySQL.deleteBookmark(wordSelected);
             } catch (SQLException exception) {
                 System.out.println(exception.getMessage());
             }
@@ -266,7 +269,7 @@ public class SearchWord implements Initializable {
             Optional<ButtonType> result = alert.showAndWait();
             if (result.isPresent() && result.get() == ButtonType.OK){
                 try {
-                    MySQL.deleteFromDB(wordSelected);
+                    mySQL.deleteFromDB(wordSelected);
                     lookup(wordSelected);
 
                 } catch (SQLException exception) {
@@ -281,7 +284,7 @@ public class SearchWord implements Initializable {
             result.setVisible(false);
             editor.setVisible(true);
 
-            htmlEditor.setHtmlText(MySQL.htmlSelectFromDB(wordSelected));
+            htmlEditor.setHtmlText(mySQL.htmlSelectFromDB(wordSelected));
             Platform.runLater(() -> {
                 Node[] nodes = htmlEditor.lookupAll(".tool-bar").toArray(new Node[0]);
                 for (Node node : nodes) {
@@ -300,7 +303,7 @@ public class SearchWord implements Initializable {
             String htmlTextToDB = doc.body().html();
             System.out.println(doc.body().html());
             try {
-                MySQL.updateDB(wordSelected, htmlTextToDB);
+                mySQL.updateDB(wordSelected, htmlTextToDB);
             } catch (SQLException exception) {
                 System.out.println(exception.getMessage());
             }
@@ -308,9 +311,9 @@ public class SearchWord implements Initializable {
     }
 
     private void lookup(String word) {
-        String definition = MySQL.htmlSelectFromDB(word);
+        String definition = mySQL.htmlSelectFromDB(word);
 //        System.out.println(definition);
-        if (MySQL.selectFromDB(word) == null) {
+        if (mySQL.selectFromDB(word) == null) {
             markButton.setVisible(false);
             deleteButton.setVisible(false);
             editButton.setVisible(false);

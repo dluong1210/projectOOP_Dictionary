@@ -14,7 +14,7 @@ public class MySQL {
     private static Connection connection;
     private static MySQL instance;
 
-    public MySQL() {
+    private MySQL() {
     }
 
     public static MySQL getInstance() {
@@ -29,7 +29,7 @@ public class MySQL {
         return instance;
     }
 
-    public static String selectFromDB(String word) {
+    public String selectFromDB(String word) {
         String text = null;
         try {
             getInstance();
@@ -51,7 +51,7 @@ public class MySQL {
         return text;
     }
 
-    public static String htmlSelectFromDB(String word) {
+    public String htmlSelectFromDB(String word) {
         String text;
         if (word.isEmpty()) text = "Search something!";
         else {
@@ -62,7 +62,7 @@ public class MySQL {
         return htmlization(text);
     }
 
-    public static String htmlization(String text) {
+    public String htmlization(String text) {
         return  "<!DOCTYPE html>\n" +
                 "<html>\n" +
                 "<head>\n" +
@@ -81,7 +81,7 @@ public class MySQL {
                 "</html>";
     }
 
-    public static List<String> searchFromDB(String word) {
+    public List<String> searchFromDB(String word) {
         List<String> wordFound = new ArrayList<>();
         try {
             getInstance();
@@ -99,7 +99,7 @@ public class MySQL {
         return wordFound;
     }
 
-    public static void deleteFromDB(String word) throws SQLException {
+    public void deleteFromDB(String word) throws SQLException {
         Statement statement = connection.createStatement();
         statement.executeUpdate("DELETE FROM dictionary WHERE target = \"" + word + "\"");
 
@@ -109,7 +109,7 @@ public class MySQL {
         deleteBookmark(word);
     }
 
-    public static void insertIntoDB(String word, String definition) throws SQLException {
+    public void insertIntoDB(String word, String definition) throws SQLException {
         Statement statement = connection.createStatement();
         statement.executeUpdate("INSERT INTO dictionary VALUES (\"" + word + "\", \"" + definition + "\")");
 
@@ -117,7 +117,7 @@ public class MySQL {
         System.out.println("Insert successfully word: " + word);
     }
 
-    public static void updateDB(String word, String newDefinition) throws SQLException {
+    public void updateDB(String word, String newDefinition) throws SQLException {
         Statement statement = connection.createStatement();
         statement.executeUpdate("UPDATE dictionary SET definition = \"" + newDefinition + "\" WHERE target = \"" + word + "\"");
 
@@ -125,7 +125,7 @@ public class MySQL {
         System.out.println("Update successfully word: " + word);
     }
 
-    public static boolean checkBookmark(String word) {
+    public boolean checkBookmark(String word) {
         boolean check = false;
         try {
             Statement statement = connection.createStatement();
@@ -140,7 +140,7 @@ public class MySQL {
         return check;
     }
 
-    public static void addBookmark(String word) throws SQLException {
+    public void addBookmark(String word) throws SQLException {
         Statement statement = connection.createStatement();
         statement.executeUpdate("INSERT INTO bookmark VALUES(\"" + word + "\")");
 
@@ -148,7 +148,7 @@ public class MySQL {
         System.out.println("Insert into bookmark successfully word: " + word);
     }
 
-    public static void deleteBookmark(String word) {
+    public void deleteBookmark(String word) {
         try {
             Statement statement = connection.createStatement();
             statement.executeUpdate("DELETE FROM bookmark WHERE word = \"" + word + "\"");
@@ -160,7 +160,7 @@ public class MySQL {
         }
     }
 
-    public static List<String> searchFromBookmark(String word) {
+    public List<String> searchFromBookmark(String word) {
         List<String> wordFound = new ArrayList<>();
         try {
             getInstance();
@@ -177,7 +177,7 @@ public class MySQL {
         return wordFound;
     }
 
-    public static String htmlSelectFromBookmark(String word) {
+    public String htmlSelectFromBookmark(String word) {
         String text;
         if (word == null || word.isEmpty()) {
             text = "Choose a Bookmark!";
@@ -195,20 +195,20 @@ public class MySQL {
         System.out.println("Connecting to database...");
         try {
             // Tạo kết nối
-            getInstance();
+            MySQL test = getInstance();
             System.out.println("Connected database successfully...");
 
             // Thực hiện các truy vấn SQL ở đây
-//            System.out.println(selectFromDB("inactive"));
+            System.out.println(test.selectFromDB("inactive"));
 //            System.out.println(selectFromDB("he"));
 
 //            for (String s : getAllFromBookmark()) {
 //                System.out.println(s);
 //            }
 //            deleteBookmark("abstract");
-            for (String s : searchFromBookmark("h")) {
-                System.out.println(s);
-            }
+//            for (String s : searchFromBookmark("h")) {
+//                System.out.println(s);
+//            }
 
             // Đóng kết nối khi hoàn thành
             connection.close();

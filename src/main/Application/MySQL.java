@@ -32,7 +32,6 @@ public class MySQL {
     public String selectFromDB(String word) {
         String text = null;
         try {
-            getInstance();
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery("SELECT definition FROM dictionary "
                                                     + "WHERE target = \"" + word + "\"");
@@ -188,6 +187,35 @@ public class MySQL {
         }
 
         return htmlization(text);
+    }
+
+    public boolean checkUser(String account, String password) {
+        boolean check = false;
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery("SELECT account FROM user "
+                     + "WHERE account = \"" + account + "\" and password = \"" + password + "\"");
+
+            check = rs.next();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return check;
+    }
+
+    public void addUser(String account, String password) {
+        try {
+            Statement statement = connection.createStatement();
+            statement.executeUpdate("INSERT INTO user VALUES(\"" + account + "\", \"" + password + "\")");
+
+            statement.close();
+            System.out.println("Add user success");
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
     }
 
     public static void main(String[] args) {

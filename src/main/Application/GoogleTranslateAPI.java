@@ -21,22 +21,22 @@ public class GoogleTranslateAPI {
         return "q=" + text + "&target=" + langueOut + "&source=" + langueIn;
     }
 
-    private static String getResponseJSON(String text, String langueIn, String langueOut)
-            throws IOException, InterruptedException {
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create("https://google-translate1.p.rapidapi.com/language/translate/v2"))
-                .header("content-type", "application/x-www-form-urlencoded")
-                .header("Accept-Encoding", "application/gzip")
-                .header("X-RapidAPI-Key", "a1eee83ba1msh94476e54672bd76p13321cjsn31948ee29ba1")
-                .header("X-RapidAPI-Host", "google-translate1.p.rapidapi.com")
-                .method("POST", HttpRequest.BodyPublishers.ofString(toRequest(text, langueIn, langueOut)))
-                .build();
-        HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
-        System.out.println(response.body());
-        return response.body();
-    }
+//    private static String getResponseJSON(String text, String langueIn, String langueOut)
+//            throws IOException, InterruptedException {
+//        HttpRequest request = HttpRequest.newBuilder()
+//                .uri(URI.create("https://google-translate1.p.rapidapi.com/language/translate/v2"))
+//                .header("content-type", "application/x-www-form-urlencoded")
+//                .header("Accept-Encoding", "application/gzip")
+//                .header("X-RapidAPI-Key", "a1eee83ba1msh94476e54672bd76p13321cjsn31948ee29ba1")
+//                .header("X-RapidAPI-Host", "google-translate1.p.rapidapi.com")
+//                .method("POST", HttpRequest.BodyPublishers.ofString(toRequest(text, langueIn, langueOut)))
+//                .build();
+//        HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
+//        System.out.println(response.body());
+//        return response.body();
+//    }
 
-    private static String getResponseJSON2 (String text, String langueIn, String langueOut)
+    private static String getResponseJSON(String text, String langueIn, String langueOut)
             throws IOException, InterruptedException {
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("https://google-translate113.p.rapidapi.com/api/v1/translator/text"))
@@ -53,7 +53,7 @@ public class GoogleTranslateAPI {
     public static String translate(String text, String langueIn, String langueOut)
             throws IOException, InterruptedException {
         if (langueIn.equals(langueOut)) return text;
-        JSONObject response = new JSONObject(getResponseJSON2(text, langueIn, langueOut));
+        JSONObject response = new JSONObject(getResponseJSON(text, langueIn, langueOut));
 
         return response.getString("trans");
 

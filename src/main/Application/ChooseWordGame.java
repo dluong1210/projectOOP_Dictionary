@@ -47,5 +47,4 @@ public class ChooseWordGame extends GameCommandLine {
         ChooseWordGame huy = new ChooseWordGame();
         huy.gameCommandline();
     }
-
 }

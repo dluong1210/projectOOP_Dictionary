@@ -42,5 +42,4 @@ public class ChooseMeaningGame extends GameCommandLine{
         ChooseMeaningGame huy = new ChooseMeaningGame();
         huy.gameCommandline();
     }
-
 }

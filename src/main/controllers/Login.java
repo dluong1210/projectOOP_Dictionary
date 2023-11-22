@@ -3,15 +3,19 @@ package controllers;
 import Application.MySQL;
 import javafx.animation.*;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -149,7 +153,21 @@ public class Login implements Initializable {
                 textResponse1.setVisible(true);
 
             } else {
-                System.out.println("Login success");
+//                textResponse1.setVisible(true);
+//                textResponse1.setText("Logged in successfully");
+//                textResponse1.setFill(Color.GREEN);
+                Stage newStage = new Stage();
+
+                try {
+                    loadMainAppWindow(newStage);
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
+
+                Stage stage = (Stage) loginButton.getScene().getWindow();
+                stage.close();
+                newStage.show();
+
             }
         });
     }
@@ -157,7 +175,6 @@ public class Login implements Initializable {
     public void controllerRegister() {
         registerButton.setOnAction(e -> {
             if (!textPassword2.getText().equals(textConfirmPassword.getText())) {
-                textResponse2.setVisible(true);
                 textResponse2.setText("Confirm Password is incorrect !");
                 textResponse2.setFill(Color.RED);
 
@@ -183,5 +200,23 @@ public class Login implements Initializable {
         translateTransition.play();
     }
 
+    public static void loginPage() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(Login.class.getResource("/views/loginPage.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 720, 480);
+        Stage stage = new Stage();
+        stage.setOnCloseRequest(e -> {
+            System.out.println("done");
+        });
+        stage.setTitle("my dictionary!");
+        stage.setScene(scene);
+        stage.show();
 
+    }
+
+    public void loadMainAppWindow(Stage stage) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/homeTab.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 1080, 720);
+        stage.setTitle("my dictionary!");
+        stage.setScene(scene);
+    }
 }

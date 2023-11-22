@@ -75,7 +75,7 @@
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Button>
-                        <Text fx:id="textResponse2" fill="RED" layoutX="53.0" layoutY="335.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Confirm Password is incorrect !" visible="false" />
+                        <Text fx:id="textResponse2" fill="RED" layoutX="53.0" layoutY="335.0" strokeType="OUTSIDE" strokeWidth="0.0" />
                      </children>
                   </Pane>
                   <Pane fx:id="windowPane" prefHeight="480.0" prefWidth="360.0" styleClass="right-window" stylesheets="@../css/style-login.css">

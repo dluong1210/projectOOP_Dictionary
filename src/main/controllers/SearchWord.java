@@ -75,7 +75,8 @@ public class SearchWord implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         tabSelected = homeButton;
-        webView.getEngine().loadContent(mySQL.htmlSelectFromDB(""));
+
+        Platform.runLater(() -> webView.getEngine().loadContent(mySQL.htmlSelectFromDB("")));
         check();
 
         controllerSearch();
@@ -327,7 +328,7 @@ public class SearchWord implements Initializable {
         listFound.setVisible(false);
         listFound.getSelectionModel().select(-1);
         result.setVisible(true);
-        webView.getEngine().loadContent(definition);
+        Platform.runLater(() -> webView.getEngine().loadContent(definition));
 
     }
 

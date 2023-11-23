@@ -37,6 +37,8 @@ public class Translate implements Initializable {
     private Button speakInput;
     @FXML
     private Button speakOutput;
+    @FXML
+    private Button swapButton;
 
     private String currentInputText;
     private String currentOutputText;
@@ -73,6 +75,7 @@ public class Translate implements Initializable {
         checkMouse(new ActionEvent());
         controllerTranslate(new ActionEvent());
         controllerSpeak(new ActionEvent());
+        controllerSwapLabel();
     }
 
     private void translate() {
@@ -119,6 +122,16 @@ public class Translate implements Initializable {
             speakText(textOutput, langueOutput.getValue(), false);
         });
 
+    }
+
+    public void controllerSwapLabel() {
+        swapButton.setOnAction(e -> {
+            String labelInput = langueInput.getValue();
+            String labelOutput = langueOutput.getValue();
+
+            langueInput.getSelectionModel().select(labelOutput);
+            langueOutput.getSelectionModel().select(labelInput);
+        });
     }
 
     private void speakText(TextArea text, String label, boolean isInput) {

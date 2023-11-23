@@ -13,7 +13,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="720.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.Login">
    <children>
-      <HBox prefHeight="480.0" prefWidth="720.0" style="-fx-background-radius: 30;">
+      <HBox prefHeight="480.0" prefWidth="720.0" style="-fx-background-radius: 30; -fx-background-color: #FFFFFF;">
          <children>
             <Pane prefHeight="480.0" prefWidth="180.0" style="-fx-background-radius: 30 0 0 30;" />
             <StackPane>

@@ -8,17 +8,23 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.Initializable;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.web.HTMLEditor;
 import javafx.scene.web.WebView;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -43,6 +49,8 @@ public class SearchWord implements Initializable {
     @FXML
     private Button gameButton;
     @FXML
+    private Button logoutButton;
+    @FXML
     private TabPane tabPane;
     @FXML
     private BorderPane scene;
@@ -57,6 +65,8 @@ public class SearchWord implements Initializable {
     @FXML
     private Button markButton;
     @FXML
+    private ImageView imgMark;
+    @FXML
     private Button deleteButton;
     @FXML
     private Button editButton;
@@ -69,7 +79,9 @@ public class SearchWord implements Initializable {
     @FXML
     private Rectangle rectangle;
     private Button tabSelected;
-    
+    private final Image imageMarked = new Image(getClass().getResourceAsStream("/icon/marked-icon.png"));
+    private final Image imageUnmarked = new Image(getClass().getResourceAsStream("/icon/notmarked-icon.png"));
+
     private MySQL mySQL = MySQL.getInstance();
 
     @Override
@@ -169,6 +181,21 @@ public class SearchWord implements Initializable {
             transition.setByY(272.5 - rectangle.localToScene(rectangle.getBoundsInLocal()).getMinY());
             transition.play();
         });
+
+        logoutButton.setOnAction(e -> {
+            Stage newStage = new Stage();
+
+            try {
+                loadLoginPage(newStage);
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+
+            Stage stage = (Stage) logoutButton.getScene().getWindow();
+            stage.close();
+            newStage.show();
+        });
+
     }
 
     /*---Check double click---*/
@@ -253,8 +280,15 @@ public class SearchWord implements Initializable {
             System.out.println(wordSelected);
 
             try {
-                if (!mySQL.checkBookmark(wordSelected)) mySQL.addBookmark(wordSelected);
-                else mySQL.deleteBookmark(wordSelected);
+                if (!mySQL.checkBookmark(wordSelected)) {
+                    mySQL.addBookmark(wordSelected);
+
+                    mark(true);
+                } else {
+                    mySQL.deleteBookmark(wordSelected);
+
+                    mark(false);
+                }
             } catch (SQLException exception) {
                 System.out.println(exception.getMessage());
             }
@@ -285,6 +319,11 @@ public class SearchWord implements Initializable {
             result.setVisible(false);
             editor.setVisible(true);
 
+            markButton.setVisible(false);
+            deleteButton.setVisible(false);
+            editButton.setVisible(false);
+            changeButton.setVisible(true);
+
             htmlEditor.setHtmlText(mySQL.htmlSelectFromDB(wordSelected));
             Platform.runLater(() -> {
                 Node[] nodes = htmlEditor.lookupAll(".tool-bar").toArray(new Node[0]);
@@ -299,15 +338,18 @@ public class SearchWord implements Initializable {
         changeButton.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> {
             editor.setVisible(false);
             result.setVisible(true);
+            changeButton.setVisible(false);
 
             Document doc = Jsoup.parse(htmlEditor.getHtmlText());
-            String htmlTextToDB = doc.body().html();
+            String htmlTextToDB = doc.body().html().replace("\"", "\\\"");
             System.out.println(doc.body().html());
             try {
                 mySQL.updateDB(wordSelected, htmlTextToDB);
             } catch (SQLException exception) {
                 System.out.println(exception.getMessage());
             }
+
+            lookup(wordSelected);
         });
     }
 
@@ -323,6 +365,9 @@ public class SearchWord implements Initializable {
             markButton.setVisible(true);
             deleteButton.setVisible(true);
             editButton.setVisible(true);
+
+            if(mySQL.checkBookmark(word)) mark(true);
+            else mark(false);
         }
 
         listFound.setVisible(false);
@@ -332,4 +377,26 @@ public class SearchWord implements Initializable {
 
     }
 
+    public void loadLoginPage(Stage stage) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(Login.class.getResource("/views/loginPage.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 720, 480);
+        scene.setFill(Color.TRANSPARENT);
+
+        stage.setTitle("Login Dictionary");
+        stage.initStyle(StageStyle.TRANSPARENT);
+        stage.setResizable(false);
+        stage.setScene(scene);
+        stage.show();
+
+    }
+
+    private void mark(boolean isMarked) {
+        if (isMarked) {
+            markButton.setText("Marked");
+            imgMark.setImage(imageMarked);
+        } else {
+            markButton.setText("Mark");
+            imgMark.setImage(imageUnmarked);
+        }
+    }
 }

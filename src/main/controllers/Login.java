@@ -2,6 +2,7 @@ package controllers;
 
 import Application.MySQL;
 import javafx.animation.*;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -13,6 +14,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 import java.io.IOException;
@@ -160,13 +162,16 @@ public class Login implements Initializable {
 
                 try {
                     loadMainAppWindow(newStage);
+
                 } catch (IOException ex) {
                     throw new RuntimeException(ex);
                 }
 
-                Stage stage = (Stage) loginButton.getScene().getWindow();
-                stage.close();
-                newStage.show();
+                Platform.runLater(() -> {
+                    Stage stage = (Stage) loginButton.getScene().getWindow();
+                    stage.close();
+                    newStage.show();
+                });
 
             }
         });
@@ -200,23 +205,14 @@ public class Login implements Initializable {
         translateTransition.play();
     }
 
-    public static void loginPage() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Login.class.getResource("/views/loginPage.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 720, 480);
-        Stage stage = new Stage();
-        stage.setOnCloseRequest(e -> {
-            System.out.println("done");
-        });
-        stage.setTitle("my dictionary!");
-        stage.setScene(scene);
-        stage.show();
-
-    }
-
     public void loadMainAppWindow(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/homeTab.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1080, 720);
-        stage.setTitle("my dictionary!");
+        scene.setFill(Color.TRANSPARENT);
+
+        stage.setTitle("Dictionary");
+        stage.initStyle(StageStyle.TRANSPARENT);
+        stage.setResizable(false);
         stage.setScene(scene);
     }
 }

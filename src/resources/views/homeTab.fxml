@@ -25,16 +25,16 @@
 <?import javafx.scene.web.HTMLEditor?>
 <?import javafx.scene.web.WebView?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.SearchWord">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" style="-fx-background-color: transparent; -fx-background-radius: 15; -fx-border-radius: 15;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.SearchWord">
    <children>
-      <BorderPane fx:id="scene" prefHeight="720.0" prefWidth="1080.0" style="-fx-background-radius: 15; -fx-background-color: #000000;">
+      <BorderPane fx:id="scene" prefHeight="720.0" prefWidth="1080.0" style="-fx-background-radius: 15; -fx-background-color: transparent; -fx-border-radius: 15;">
          <effect>
             <DropShadow />
          </effect>
          <center>
-            <Pane maxHeight="554.0" maxWidth="807.0" prefHeight="200.0" prefWidth="925.0" style="-fx-background-color: #0E0C17; -fx-background-radius: 10;" BorderPane.alignment="CENTER">
+            <Pane maxHeight="660.0" maxWidth="925.0" prefHeight="660.0" prefWidth="925.0" style="-fx-background-color: #0E0C17; -fx-background-radius: 0 0 15 0;" BorderPane.alignment="CENTER">
                <children>
-                  <TabPane fx:id="tabPane" layoutX="-58.0" layoutY="-53.0" prefHeight="665.0" prefWidth="925.0" side="BOTTOM" style="-fx-background-radius: 0 0 15 0;" tabMaxHeight="0.0" tabMaxWidth="0.0">
+                  <TabPane fx:id="tabPane" prefHeight="665.0" prefWidth="925.0" side="BOTTOM" style="-fx-background-radius: 0 0 15 0;" tabMaxHeight="0.0" tabMaxWidth="0.0">
                      <tabs>
                         <Tab closable="false">
                            <content>
@@ -53,13 +53,6 @@
                                                    </HBox.margin>
                                                 </Text>
                                                 <Pane prefHeight="35.0" prefWidth="370.0" />
-                                                <Button fx:id="editButton" mnemonicParsing="false" prefHeight="35.0" text="Edit" />
-                                                <Button fx:id="deleteButton" mnemonicParsing="false" prefHeight="35.0" prefWidth="35.0" text="Delete" />
-                                                <Button fx:id="markButton" mnemonicParsing="false" prefHeight="35.0" prefWidth="35.0" text="Mark">
-                                                   <HBox.margin>
-                                                      <Insets right="10.0" />
-                                                   </HBox.margin>
-                                                </Button>
                                              </children>
                                           </HBox>
                                        </top>
@@ -71,11 +64,11 @@
                                           </WebView>
                                        </center>
                                     </BorderPane>
-                                    <BorderPane fx:id="editor" layoutX="57.0" layoutY="32.0" prefHeight="445.0" prefWidth="600.0" style="-fx-background-color: #1C1A24; -fx-background-radius: 15;" visible="false">
+                                    <BorderPane fx:id="editor" layoutX="57.0" layoutY="80.0" prefHeight="445.0" prefWidth="600.0" style="-fx-background-color: #1C1A24; -fx-background-radius: 15;" visible="false">
                                        <center>
                                           <Pane BorderPane.alignment="CENTER">
                                              <children>
-                                                <HTMLEditor fx:id="htmlEditor" htmlText="&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable=&quot;true&quot;&gt;&lt;/body&gt;&lt;/html&gt;" layoutX="15.0" prefHeight="410.0" prefWidth="570.0" style="-fx-border-width: 0;" stylesheets="@../css/styles-html.css" />
+                                                <HTMLEditor fx:id="htmlEditor" cacheShape="false" centerShape="false" focusTraversable="false" htmlText="&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable=&quot;true&quot;&gt;&lt;/body&gt;&lt;/html&gt;" layoutX="15.0" prefHeight="410.0" prefWidth="570.0" scaleShape="false" style="-fx-border-width: 0;" stylesheets="@../css/styles-html.css" />
                                              </children>
                                           </Pane>
                                        </center>
@@ -91,11 +84,66 @@
                                                    </HBox.margin>
                                                 </Text>
                                                 <Pane prefHeight="35.0" prefWidth="422.0" />
-                                                <Button fx:id="changeButton" mnemonicParsing="false" prefHeight="26.0" prefWidth="62.0" text="Change" />
                                              </children>
                                           </HBox>
                                        </top>
                                     </BorderPane>
+                                    <Button fx:id="editButton" layoutX="383.0" layoutY="30.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="70.0" styleClass="button1" stylesheets="@../css/button.css" text="Edit" textFill="WHITE" visible="false">
+                                       <graphic>
+                                          <ImageView fitHeight="18.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../icon/edit-icon.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                       <effect>
+                                          <Glow level="0.5" />
+                                       </effect>
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                    </Button>
+                                    <Button fx:id="deleteButton" layoutX="463.0" layoutY="30.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="90.0" styleClass="button1" stylesheets="@../css/button.css" text="Delete" textFill="WHITE" visible="false">
+                                       <graphic>
+                                          <ImageView fitHeight="18.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../icon/delete-icon.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                       <effect>
+                                          <Glow level="0.5" />
+                                       </effect>
+                                    </Button>
+                                    <Button fx:id="markButton" layoutX="562.0" layoutY="30.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="95.0" styleClass="button1" stylesheets="@../css/button.css" text="Mark" textFill="WHITE" visible="false">
+                                       <graphic>
+                                          <ImageView fx:id="imgMark" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../icon/notmarked-icon.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                       <effect>
+                                          <Glow level="0.5" />
+                                       </effect>
+                                    </Button>
+                                    <Button fx:id="changeButton" layoutX="587.0" layoutY="30.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="70.0" styleClass="button1" stylesheets="@../css/button.css" text="Change" textFill="WHITE" visible="false">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                       <effect>
+                                          <Glow level="0.5" />
+                                       </effect>
+                                    </Button>
                                  </children>
                               </Pane>
                            </content>
@@ -119,8 +167,14 @@
                                                 </Pane>
                                                 <Pane prefHeight="42.0" prefWidth="40.0">
                                                    <children>
-                                                      <ImageView fitHeight="38.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true" />
-                                                      <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="38.0" style="-fx-background-radius: 30;" text="Swap" />
+                                                      <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="38.0" style="-fx-background-radius: 30;" styleClass="button1" stylesheets="@../css/button.css">
+                                                         <graphic>
+                                                            <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                                               <image>
+                                                                  <Image url="@../icon/swap-icon.png" />
+                                                               </image>
+                                                            </ImageView>
+                                                         </graphic></Button>
                                                    </children>
                                                    <HBox.margin>
                                                       <Insets top="2.0" />
@@ -306,7 +360,7 @@
             </Pane>
          </center>
          <top>
-            <HBox prefHeight="62.0" prefWidth="862.0" style="-fx-border-color: transparent transparent #484848 transparent;" BorderPane.alignment="CENTER">
+            <HBox prefHeight="62.0" prefWidth="862.0" style="-fx-border-color: transparent transparent #484848 transparent; -fx-background-radius: 15 15 0 0;" BorderPane.alignment="CENTER">
                <children>
                   <VBox prefHeight="62.0" prefWidth="155.0" style="-fx-background-color: #191919; -fx-background-radius: 15 0 0 0;" />
                   <Pane maxHeight="62.0" maxWidth="927.0" prefHeight="61.0" prefWidth="927.0" style="-fx-background-color: #0E0C17; -fx-background-radius: 0 15 0 0;">
@@ -343,7 +397,7 @@
             </HBox>
          </top>
          <left>
-            <VBox prefHeight="554.0" prefWidth="155.0" style="-fx-background-color: #191919;" BorderPane.alignment="CENTER">
+            <VBox prefHeight="554.0" prefWidth="155.0" style="-fx-background-color: #191919; -fx-background-radius: 0 0 0 15;" BorderPane.alignment="CENTER">
                <children>
                   <Pane prefHeight="30.0" prefWidth="86.0" />
                   <HBox>
@@ -431,6 +485,19 @@
                         </Button>
                      </children>
                   </HBox>
+                  <Pane prefHeight="295.0" prefWidth="155.0" />
+                  <Button fx:id="logoutButton" contentDisplay="RIGHT" mnemonicParsing="false" prefHeight="45.0" prefWidth="155.0" style="-fx-background-color: transparent;" text="Logout      " textFill="WHITE">
+                     <graphic>
+                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icon/logout-icon.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
                </children>
             </VBox>
          </left>

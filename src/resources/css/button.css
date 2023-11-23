@@ -4,6 +4,13 @@
     -fx-border-radius: 30;
 }
 
-.button: hover{
-    -fx-background-color: #ac73ff;
+.button:hover {
+    -fx-background-color: #825CE8;
+    -fx-border-color: transparent;
+}
+
+.button1 {
+    -fx-border-color: #FFFFFF;
+    -fx-border-radius: 20;
+    -fx-font-weight: bold;
 }

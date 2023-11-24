@@ -3,7 +3,7 @@ package Application;
 import java.util.Scanner;
 
 /**
- * Thís game can be play in commandline!
+ * This game can be play in commandline!
  */
 public interface GameCommandline {
     /**
@@ -17,12 +17,7 @@ public interface GameCommandline {
     void printRule();
 
     /**
-     * Run the game.
-     */
-    void gameCommandline();
-
-    /**
-     * Controller.
+     * Start next play turn.
      */
     void startGame();
 
@@ -30,6 +25,11 @@ public interface GameCommandline {
      * Print the points then end game.
      */
     void endGame();
+
+    /**
+     * Run the game.
+     */
+    void gameCommandline();
 
     /**
      * Get the input from the player until it is valid.

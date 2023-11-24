@@ -17,12 +17,39 @@ public abstract class MemoryGame extends MultipleChoiceGame{
      */
     protected int previousCorrectChoice = -1;
 
+    @Override
+    public void initGame() {
+        setPoints(0);
+        dictionaryManagement.insertFromFile();                          // tao database
+        setCorrectChoice((int) (Math.random() * 4));                    // chon 1 lua chon se la dap an dung
+        getValidWordChoices();                                          // chon ra 4 tu lam de bai
+    }
+
+    @Override
+    public void getPrepared() {
+        copyChoices();                                                    // luu lai
+        setCorrectChoice((int) (Math.random() * 4));                      // chon 1 lua chon se la dap an dung
+        getValidWordChoices();                                            // chon ra 4 tu lam de bai
+    }
+
+    /**
+     * Update the previous words, the previous correct options.
+     */
+    public void copyChoices() {
+        for (int i = 0; i < 4; i += 1) {
+            previousWordChoices[i] = words[i];
+        }
+        previousCorrectChoice = correctChoice;
+    }
+
     /**
      * Four words must be distinct and different from the nextWord.
      * Then overwritten the correct word by the nextWord.
      * Update the nextWord.
      */
+    @Override
     public void getValidWordChoices() {
+        // Tim 4 word phan biet khac nextWord
         for (int i = 0; i < 4; i++) {
             words[i] = getRandomWord();
             boolean pickAgain = true;
@@ -42,47 +69,22 @@ public abstract class MemoryGame extends MultipleChoiceGame{
             }
         }
 
+        // Ghi de dap an dung boi nextWord
         if (points > 0) {
             words[correctChoice] = nextWord;
         }
 
+        // Cap nhat nextWord tiep theo
         nextWord = words[(int) (Math.random() * 4)];
     }
 
-    /**
-     * Update the previous words, swap the previous correct options and the current correct options.
-     */
-    public void copyChoices() {
-        for (int i = 0; i < 4; i += 1) {
-            previousWordChoices[i] = words[i];
+    @Override
+    public boolean checkAnswer() {
+        if (playerChoice.equals(option[previousCorrectChoice])) {
+            setPoints(getPoints() + 1);
+            return true;
         }
-        int aux = previousCorrectChoice;
-        previousCorrectChoice = correctChoice;
-        correctChoice = aux;
-    }
-
-
-    public void gameCommandline() {
-        setPoints(0);
-        dictionaryManagement.insertFromFile();                          // tao database
-        setCorrectChoice((int) (Math.random() * 4));                    // chon 1 lua chon se la dap an dung
-        getValidWordChoices();                                          // chon ra 4 tu lam de bai
-        printRule();                                                    // in luat
-        copyChoices();                                                  // luu lai
-        startGame();
-    }
-
-    public void startGame() {
-        setCorrectChoice((int) (Math.random() * 4));                                                // chon 1 lua chon se la dap an dung
-        getValidWordChoices();                                                                      // chon ra 4 tu lam de bai
-        printQuestionAndChoices();                                                                  // in ra man hinh
-        setPlayerChoice(GameCommandline.getValidInput(option, "Your answer is: "));  // nhan input tu nguoi choi
-        copyChoices();                                                                              // luu lai
-        if (checkAnswer()) {
-            startGame();                                                                            // bat dau luot choi moi
-        } else {
-            endGame();                                                                              // bao diem ket thuc game
-        }
+        return false;
     }
 
 //////// Getter / setter

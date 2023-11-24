@@ -22,7 +22,11 @@
                      <children>
                         <ChoiceBox fx:id="langueInput" layoutX="14.0" layoutY="9.0" prefHeight="25.0" prefWidth="100.0" style="-fx-background-color: #825CE8;" stylesheets="@../css/style-choiceBox.css">
                            <effect>
-                              <DropShadow />
+                              <Glow>
+                                 <input>
+                                    <DropShadow />
+                                 </input>
+                              </Glow>
                            </effect>
                         </ChoiceBox>
                      </children>
@@ -32,7 +36,10 @@
                      <children>
                         <ChoiceBox fx:id="langueOutput" layoutX="14.0" layoutY="9.0" prefHeight="25.0" prefWidth="100.0" style="-fx-background-color: #825CE8;" stylesheets="@../css/style-choiceBox.css">
                            <effect>
-                              <DropShadow />
+                              <DropShadow>
+                                 <input>
+                                    <Glow />
+                                 </input></DropShadow>
                            </effect>
                         </ChoiceBox>
                      </children>
@@ -52,7 +59,7 @@
                         </TextArea>
                         <Button fx:id="speakInput" layoutX="14.0" layoutY="289.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="35.0" stylesheets="@../css/button.css">
                            <effect>
-                              <Glow />
+                              <Glow level="0.5" />
                            </effect></Button>
                         <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="22.0" layoutY="296.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -70,7 +77,7 @@
                         </TextArea>
                         <Button fx:id="speakOutput" layoutX="14.0" layoutY="289.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="35.0" stylesheets="@../css/button.css">
                            <effect>
-                              <Glow />
+                              <Glow level="0.5" />
                            </effect></Button>
                         <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="22.0" layoutY="297.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
                            <image>

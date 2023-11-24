@@ -3,6 +3,7 @@ package controllers;
 import Application.MySQL;
 import javafx.animation.*;
 import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -26,6 +27,8 @@ public class Login implements Initializable {
     private Button signUpButton;
     @FXML
     private Button signInButton;
+    @FXML
+    private Button exitButton;
     @FXML
     private Pane windowPane;
     @FXML
@@ -70,6 +73,7 @@ public class Login implements Initializable {
 
         controllerSignUp();
         controllerSignIn();
+        controllerExit();
 
         controllerLogin();
         controllerRegister();
@@ -149,44 +153,104 @@ public class Login implements Initializable {
         });
     }
 
+    public void controllerExit() {
+        exitButton.setOnAction(e -> {
+            Platform.exit();
+        });
+    }
+
     public void controllerLogin() {
         loginButton.setOnAction(e -> {
-            if (!mySQL.checkUser(textAccount1.getText(), textPassword1.getText())) {
-                textResponse1.setVisible(true);
+            try {
+                loadMainAppWindow(new Stage());
 
-            } else {
-//                textResponse1.setVisible(true);
-//                textResponse1.setText("Logged in successfully");
-//                textResponse1.setFill(Color.GREEN);
-                Stage newStage = new Stage();
-
-                try {
-                    loadMainAppWindow(newStage);
-
-                } catch (IOException ex) {
-                    throw new RuntimeException(ex);
-                }
-
-                Platform.runLater(() -> {
-                    Stage stage = (Stage) loginButton.getScene().getWindow();
-                    stage.close();
-                    newStage.show();
-                });
-
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
             }
+            textResponse1.setVisible(true);
+            textResponse1.setText("Loading...");
+
+            new Timeline(new KeyFrame(Duration.seconds(0.5), event1 -> {
+                    if (textAccount1.getText().isEmpty()) {
+                        textResponse1.setText("Account is empty !");
+
+                    } else if (textPassword1.getText().isEmpty()) {
+                        textResponse1.setText("Password is empty !");
+
+                    } else if (!mySQL.checkUser(textAccount1.getText(), textPassword1.getText())) {
+                        textResponse1.setText("Account or password is incorrect !");
+
+                    } else {
+                        textResponse1.setText("Logged in success");
+                        textResponse1.setFill(Color.GREEN);
+
+                        new Timeline(new KeyFrame(Duration.seconds(0.5), event2 -> login())).play();
+                    }
+                })).play();
+
         });
     }
 
     public void controllerRegister() {
         registerButton.setOnAction(e -> {
-            if (!textPassword2.getText().equals(textConfirmPassword.getText())) {
+            textResponse2.setFill(Color.RED)
+            ;
+            if (textAccount2.getText().isEmpty()) {
+                textResponse2.setText("Account is empty !");
+
+            } else if (textPassword2.getText().isEmpty()) {
+                textResponse2.setText("Password is empty !");
+
+            } else if (textConfirmPassword.getText().isEmpty()) {
+                textResponse2.setText("Please confirm your password !");
+
+            } else if (!textPassword2.getText().equals(textConfirmPassword.getText())) {
                 textResponse2.setText("Confirm Password is incorrect !");
-                textResponse2.setFill(Color.RED);
+
+            } else if (mySQL.checkExistUser(textAccount2.getText())) {
+                textResponse2.setText("Account name already exists");
 
             } else {
                 mySQL.addUser(textAccount2.getText(), textPassword2.getText());
                 textResponse2.setText("Register Successfully.");
                 textResponse2.setFill(Color.GREEN);
+
+                new Timeline(new KeyFrame(Duration.seconds(1), event -> {
+                    signInButton.setVisible(false);
+
+                    TranslateTransition translateTransition1 = new TranslateTransition(Duration.seconds(1), windowPane);
+                    TranslateTransition translateTransition2 = new TranslateTransition(Duration.seconds(1), loginPane);
+
+                    transitionRegisterPane(-1);
+                    translateTransition1.setByX(180);
+                    translateTransition1.play();
+
+                    translateTransition1.setOnFinished(event2 -> {
+                        loginPane.setVisible(true);
+                        registerPane.setVisible(false);
+
+                        windowPane.getStyleClass().clear();
+                        windowPane.getStyleClass().add("right-window");
+
+                        textLeft1.setVisible(false);
+                        textLeft2.setVisible(false);
+                        textRight1.setVisible(true);
+                        textRight2.setVisible(true);
+
+                        TranslateTransition translateTransition3 = new TranslateTransition(Duration.seconds(1), windowPane);
+                        translateTransition3.setByX(180);
+                        translateTransition3.play();
+
+                        translateTransition2.setByX(-180);
+                        translateTransition2.play();
+                    });
+
+                    translateTransition2.setOnFinished(event3 -> {
+                        signUpButton.setVisible(true);
+                        textAccount1.setText(textAccount2.getText());
+                        textPassword1.setText(textPassword2.getText());
+                    });
+                })).play();
             }
         });
     }
@@ -205,7 +269,7 @@ public class Login implements Initializable {
         translateTransition.play();
     }
 
-    public void loadMainAppWindow(Stage stage) throws IOException {
+    private void loadMainAppWindow(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/homeTab.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1080, 720);
         scene.setFill(Color.TRANSPARENT);
@@ -214,5 +278,24 @@ public class Login implements Initializable {
         stage.initStyle(StageStyle.TRANSPARENT);
         stage.setResizable(false);
         stage.setScene(scene);
+        stage.show();
+        System.out.println("Done");
+    }
+
+    private void login() {
+        Stage newStage = new Stage();
+
+        try {
+            loadMainAppWindow(newStage);
+
+        } catch (IOException ex) {
+            throw new RuntimeException(ex);
+        }
+
+        Platform.runLater(() -> {
+            Stage stage = (Stage) loginButton.getScene().getWindow();
+            stage.close();
+            newStage.show();
+        });
     }
 }

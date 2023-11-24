@@ -84,13 +84,15 @@ public class Translate implements Initializable {
             input.getStyleClass().add("inactive-pane");
 
             String textIn = textInput.getText();
-            String textOut;
-            try {
-                String src = convertLangueLabel(langueInput.getValue());
-                String target = convertLangueLabel(langueOutput.getValue());
-                textOut = GoogleTranslateAPI.translate(textIn, src, target);
-            } catch (Exception exception) {
-                textOut = textIn;
+            String textOut = "";
+            if (!textIn.isEmpty()) {
+                try {
+                    String src = convertLangueLabel(langueInput.getValue());
+                    String target = convertLangueLabel(langueOutput.getValue());
+                    textOut = GoogleTranslateAPI.translate(textIn, src, target);
+                } catch (Exception exception) {
+                    textOut = textIn;
+                }
             }
 
             textOutput.setText(textOut);
@@ -128,9 +130,13 @@ public class Translate implements Initializable {
         swapButton.setOnAction(e -> {
             String labelInput = langueInput.getValue();
             String labelOutput = langueOutput.getValue();
-
             langueInput.getSelectionModel().select(labelOutput);
             langueOutput.getSelectionModel().select(labelInput);
+
+//            String input = textInput.getText();
+            String output = textOutput.getText();
+            textInput.setText(output);
+            translate();
         });
     }
 

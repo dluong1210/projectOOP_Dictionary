@@ -393,9 +393,15 @@ public class SearchWord implements Initializable {
     private void mark(boolean isMarked) {
         if (isMarked) {
             markButton.setText("Marked");
+            markButton.getStyleClass().clear();
+            markButton.getStyleClass().add("button");
+            markButton.getStyleClass().add("button2");
             imgMark.setImage(imageMarked);
         } else {
             markButton.setText("Mark");
+            markButton.getStyleClass().clear();
+            markButton.getStyleClass().add("button");
+            markButton.getStyleClass().add("button1");
             imgMark.setImage(imageUnmarked);
         }
     }

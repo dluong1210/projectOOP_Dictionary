@@ -283,7 +283,7 @@
                                           </HBox>
                                        </top>
                                     </BorderPane>
-                                    <Button fx:id="checkButton" layoutX="468.0" layoutY="41.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="58.0" style="-fx-background-radius: 0 5 5 0;" text="Check" />
+                                    <Button fx:id="checkButton" layoutX="468.0" layoutY="41.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="58.0" style="-fx-background-radius: 0 5 5 0;" styleClass="button1" text="Check" />
                                     <Text fill="RED" layoutX="215.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Please enter a word in the box">
                                        <font>
                                           <Font size="13.0" />

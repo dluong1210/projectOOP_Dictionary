@@ -12,5 +12,9 @@
 .button1 {
     -fx-border-color: #FFFFFF;
     -fx-border-radius: 20;
-    -fx-font-weight: bold;
+}
+
+.button2 {
+    -fx-background-color: #825CE8;
+    -fx-border-color: transparent;
 }

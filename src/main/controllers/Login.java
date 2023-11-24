@@ -161,12 +161,6 @@ public class Login implements Initializable {
 
     public void controllerLogin() {
         loginButton.setOnAction(e -> {
-            try {
-                loadMainAppWindow(new Stage());
-
-            } catch (IOException ex) {
-                throw new RuntimeException(ex);
-            }
             textResponse1.setVisible(true);
             textResponse1.setText("Loading...");
 

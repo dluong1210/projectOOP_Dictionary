@@ -39,6 +39,8 @@ public class Translate implements Initializable {
     private Button speakOutput;
     @FXML
     private Button swapButton;
+    @FXML
+    private Button translateButton;
 
     private String currentInputText;
     private String currentOutputText;
@@ -112,6 +114,11 @@ public class Translate implements Initializable {
                     translate();
                 }
             }
+        });
+
+        translateButton.setOnAction(e -> {
+            System.out.println("Translate");
+            translate();
         });
     }
 

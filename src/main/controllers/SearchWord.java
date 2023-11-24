@@ -51,6 +51,8 @@ public class SearchWord implements Initializable {
     @FXML
     private Button logoutButton;
     @FXML
+    private Button exitButton;
+    @FXML
     private TabPane tabPane;
     @FXML
     private BorderPane scene;
@@ -194,6 +196,10 @@ public class SearchWord implements Initializable {
             Stage stage = (Stage) logoutButton.getScene().getWindow();
             stage.close();
             newStage.show();
+        });
+
+        exitButton.setOnAction(e -> {
+            Platform.exit();
         });
 
     }

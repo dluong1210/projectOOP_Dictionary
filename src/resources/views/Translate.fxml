@@ -84,6 +84,14 @@
                               <Image url="@../../../../../Downloads/speaker-256.png" />
                            </image>
                         </ImageView>
+                        <Button fx:id="translateButton" layoutX="239.0" layoutY="290.0" mnemonicParsing="false" prefHeight="35.0" styleClass="button1" stylesheets="@../css/button.css" text="Translate" textFill="WHITE">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                           <effect>
+                              <Glow level="0.5" />
+                           </effect>
+                        </Button>
                      </children>
                   </Pane>
                </children>

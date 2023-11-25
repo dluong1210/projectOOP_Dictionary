@@ -24,6 +24,15 @@ public class Word {
         this.word_explain = word_explain;
     }
 
+    public Word() {
+
+    }
+
+    public Word(Word other) {
+        this.word_explain = other.getWord_explain();
+        this.word_target = other.getWord_target();
+    }
+
     /**
      * Compares this word to the specified object.  The result is {@code
      * true} if and only if the argument is not {@code null} and is a {@code

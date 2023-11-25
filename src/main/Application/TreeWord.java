@@ -65,7 +65,7 @@ public class TreeWord {
      */
     public boolean delete(String word) {
         if (lookup(word) == null) {
-            System.out.println(word + "does not exist in dictionary");
+            System.out.println(word + " does not exist in dictionary");
             return false;
         }
 
@@ -202,14 +202,17 @@ public class TreeWord {
      */
     public static void main(String[] argv) {
         TreeWord test = new TreeWord();
-        Scanner scan = new Scanner(System.in);
+        /*Scanner scan = new Scanner(System.in);
         System.out.println("Nhập N");
         int n = scan.nextInt();
         for (int i = 0; i < n; i++) {
             System.out.println("Nhap chu thu " + i );
             String word = scan.next();
             test.addWord(new Word(word, "abc"));
-        }
+        }*/
+        Word u = test.getRandomWord(3,4);
+        System.out.println(u.getWord_explain());
+
 //        test.editWord("hello", "hi", "xinchao");
 //        String check = scan.next();
 //        System.out.println(test.delete(check));

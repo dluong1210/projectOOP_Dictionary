@@ -58,9 +58,47 @@ public class DictionaryManagement extends Dictionary {
                    repeat = true;
                    continue;
                } else repeat = false;
-               break;
+               if (choice.equals("1") || choice.equals("3")) break;
+               if (choice.equals("2")) {
+                   System.out.println("Do you want to correct any word?"
+                           + "\n1.Yes\t2.No");
+                   String choose = scan.next();
+                   if (choose.equals("2")) return;
+                   System.out.println("The numbers of the words to be corrected are:");
+                   scan.nextLine();
+                   String s = scan.nextLine();
+                   int i=0;
+                   int number = 0;
+                   while (i<s.length())
+                   {
+                       if (Character.isDigit(s.charAt(i)))
+                       {
+                           number = 0;
+                           while (Character.isDigit(s.charAt(i)))
+                           {
+                               number = number * 10 + Character.getNumericValue(s.charAt(i));
+                               i++;
+                               if (i >= s.length()) break;
+                           }
+                           while (number > target.size()) {
+                               System.out.println("Word[" + number + "] doesn't exist");
+                               System.out.print("New number: ");
+                               number = scan.nextInt();
+                               scan.nextLine();
+                           }
+                           System.out.print("Word " + number + ": ");
+                           String word_target = scan.nextLine();
+                           target.set(number - 1,word_target);
+                           System.out.print("Explanation of word " + number + ": ");
+                           String word_explain = scan.nextLine();
+                           explain.set(number - 1,word_explain);
+                           i--;
+                       }
+                       i++;
+                   }
+                   continue;
+               }
            }
-           if (choice.equals("2")) continue;
            if (choice.equals("3")) break;
 
            //kiem tra xem cac tu trong list da xuat hien chưa

@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Scanner;
 
 public class DictionaryCommandline extends DictionaryManagement {
+    private ArrayList<String> historic = new ArrayList<String>();
+
     public DictionaryCommandline() {
         super();
     }
@@ -45,11 +47,24 @@ public class DictionaryCommandline extends DictionaryManagement {
         }
     }
 
+    public void showHistoric() {
+        for (int i = 0; i < historic.size() - 1; i++) {
+            System.out.print(historic.get(i));
+        }
+        String u = historic.get(historic.size() - 1);
+        for (int i = 0; i < u.length(); i++)
+        {
+            if (u.charAt(i) == '-') return ;
+            System.out.print(u.charAt(i));
+        }
+    }
+
     /**
      * Rat la met hic.
      */
     public void dictionaryAdvanced() {
         boolean quit = false;
+       // boolean question_continue = true;
         String choice;
         Scanner scan = new Scanner(System.in);
 
@@ -74,30 +89,39 @@ public class DictionaryCommandline extends DictionaryManagement {
                     break;
                 case 1:
                     dictionaryAdd();
+                    historic.add("Add->");
                     break;
                 case 2:
                     dictionaryRemove();
+                    historic.add("Remove->");
                     break;
                 case 3:
                     dictionaryUpdate();
+                    historic.add("Update->");
                     break;
                 case 4:
                     showAllWords();
+                    historic.add("Display->");
                     break;
                 case 5:
                     dictionaryLookup();
+                    historic.add("Lookup->");
                     break;
                 case 6:
                     dictionarySearcher();
+                    historic.add("Search->");
                     break;
                 case 7:
+                    historic.add("Game->");
                     break;
                 case 8:
     //                dictionaryImportFromFile();
                     insertFromFile();
+                    historic.add("Import from file->");
                     break;
                 case 9:
                     dictionaryExportToFile();
+                    historic.add("Export to file->");
                     break;
                 default:
                     System.out.println("Action not supported"); // nen de xu li la String khong phai int, sua sau
@@ -105,11 +129,11 @@ public class DictionaryCommandline extends DictionaryManagement {
             }
             if (quit) break;
             while (true) {
-                System.out.println("Do you want continue ?:"    // nen them using dictionary
+                System.out.println("Do you want to continue using my app ?:"    // nen them using dictionary
                                     + "\n1.Yes\t2.No");
                 choice = scan.next();
                 if (!choice.equals("1") && !choice.equals("2")) {
-                    System.out.println("Chose 1 of 2 !!");
+                    System.out.println("Choose 1 or 2 !!");
                     continue;
                 }
                 break;
@@ -122,5 +146,6 @@ public class DictionaryCommandline extends DictionaryManagement {
     public static void main(String[] argv) {
         DictionaryCommandline test = new DictionaryCommandline();
         test.dictionaryAdvanced();
+       // test.showHistoric();
     }
 }

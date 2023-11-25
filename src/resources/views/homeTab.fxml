@@ -40,7 +40,7 @@
                            <content>
                               <Pane maxHeight="677.0" maxWidth="925.0" prefHeight="659.0" prefWidth="925.0" style="-fx-background-color: #0E0C17; -fx-background-radius: 0 0 15 0;">
                                  <children>
-                                    <BorderPane fx:id="result" layoutX="57.0" layoutY="80.0" prefHeight="445.0" prefWidth="600.0" style="-fx-background-color: #1C1A24; -fx-background-radius: 15;">
+                                    <BorderPane fx:id="result" layoutX="57.0" layoutY="120.0" prefHeight="445.0" prefWidth="600.0" style="-fx-background-color: #1C1A24; -fx-background-radius: 15;">
                                        <top>
                                           <HBox prefHeight="35.0" prefWidth="544.0" style="-fx-background-color: #2A2931; -fx-background-radius: 15 15 0 0;" BorderPane.alignment="CENTER">
                                              <children>
@@ -64,7 +64,7 @@
                                           </WebView>
                                        </center>
                                     </BorderPane>
-                                    <BorderPane fx:id="editor" layoutX="57.0" layoutY="80.0" prefHeight="445.0" prefWidth="600.0" style="-fx-background-color: #1C1A24; -fx-background-radius: 15;" visible="false">
+                                    <BorderPane fx:id="editor" layoutX="57.0" layoutY="120.0" prefHeight="445.0" prefWidth="600.0" style="-fx-background-color: #1C1A24; -fx-background-radius: 15;" visible="false">
                                        <center>
                                           <Pane BorderPane.alignment="CENTER">
                                              <children>
@@ -88,7 +88,7 @@
                                           </HBox>
                                        </top>
                                     </BorderPane>
-                                    <Button fx:id="editButton" layoutX="383.0" layoutY="30.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="70.0" styleClass="button1" stylesheets="@../css/button.css" text="Edit" textFill="WHITE" visible="false">
+                                    <Button fx:id="editButton" layoutX="383.0" layoutY="60.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="70.0" styleClass="button1" stylesheets="@../css/button.css" text="Edit" textFill="WHITE" visible="false">
                                        <graphic>
                                           <ImageView fitHeight="18.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
@@ -106,7 +106,7 @@
                                           <Insets />
                                        </opaqueInsets>
                                     </Button>
-                                    <Button fx:id="deleteButton" layoutX="463.0" layoutY="30.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="90.0" styleClass="button1" stylesheets="@../css/button.css" text="Delete" textFill="WHITE" visible="false">
+                                    <Button fx:id="deleteButton" layoutX="463.0" layoutY="60.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="90.0" styleClass="button1" stylesheets="@../css/button.css" text="Delete" textFill="WHITE" visible="false">
                                        <graphic>
                                           <ImageView fitHeight="18.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
@@ -121,7 +121,7 @@
                                           <Glow level="0.5" />
                                        </effect>
                                     </Button>
-                                    <Button fx:id="markButton" layoutX="562.0" layoutY="30.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="95.0" styleClass="button1" stylesheets="@../css/button.css" text="Mark" textFill="WHITE" visible="false">
+                                    <Button fx:id="markButton" layoutX="562.0" layoutY="60.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="95.0" styleClass="button1" stylesheets="@../css/button.css" text="Mark" textFill="WHITE" visible="false">
                                        <graphic>
                                           <ImageView fx:id="imgMark" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
@@ -136,7 +136,7 @@
                                           <Glow level="0.5" />
                                        </effect>
                                     </Button>
-                                    <Button fx:id="changeButton" layoutX="587.0" layoutY="30.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="70.0" styleClass="button1" stylesheets="@../css/button.css" text="Change" textFill="WHITE" visible="false">
+                                    <Button fx:id="changeButton" layoutX="587.0" layoutY="60.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="70.0" styleClass="button2" stylesheets="@../css/button.css" text="Change" textFill="WHITE" visible="false">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
@@ -144,6 +144,29 @@
                                           <Glow level="0.5" />
                                        </effect>
                                     </Button>
+                                    <Button fx:id="cancelChangeButton" layoutX="499.0" layoutY="60.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="70.0" styleClass="button1" stylesheets="@../css/button.css" text="Cancel" textFill="WHITE" visible="false">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                       <effect>
+                                          <Glow level="0.25" />
+                                       </effect>
+                                    </Button>
+                                    <Text fill="WHITE" layoutX="57.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="WELCOME BACK !">
+                                       <font>
+                                          <Font name="System Bold" size="20.0" />
+                                       </font>
+                                    </Text>
+                                    <Text fill="#909090" layoutX="57.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tối giản nhưng không đơn giản.">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Text>
+                                    <Text fill="#909090" layoutX="57.0" layoutY="99.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nạp lần đầu để mở các tính năng Premium.">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Text>
                                  </children>
                               </Pane>
                            </content>
@@ -423,7 +446,7 @@
                   </HBox>
                   <HBox>
                      <children>
-                        <Button fx:id="translateButton" mnemonicParsing="false" onAction="#check" opacity="0.5" prefHeight="45.0" prefWidth="155.0" style="-fx-background-color: transparent;" text="   Translate  " textFill="WHITE">
+                        <Button fx:id="translateButton" mnemonicParsing="false" onAction="#selectTab" opacity="0.5" prefHeight="45.0" prefWidth="155.0" style="-fx-background-color: transparent;" text="   Translate  " textFill="WHITE">
                            <graphic>
                               <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -439,7 +462,7 @@
                   </HBox>
                   <HBox>
                      <children>
-                        <Button fx:id="addWordButton" mnemonicParsing="false" onAction="#check" opacity="0.5" prefHeight="45.0" prefWidth="155.0" style="-fx-background-color: transparent;" text="   Add word" textFill="WHITE">
+                        <Button fx:id="addWordButton" mnemonicParsing="false" onAction="#selectTab" opacity="0.5" prefHeight="45.0" prefWidth="155.0" style="-fx-background-color: transparent;" text="   Add word" textFill="WHITE">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -455,7 +478,7 @@
                   </HBox>
                   <HBox>
                      <children>
-                        <Button fx:id="bookmarkButton" mnemonicParsing="false" onAction="#check" opacity="0.5" prefHeight="45.0" prefWidth="155.0" style="-fx-background-color: transparent;" text="   Bookmark" textFill="WHITE">
+                        <Button fx:id="bookmarkButton" mnemonicParsing="false" onAction="#selectTab" opacity="0.5" prefHeight="45.0" prefWidth="155.0" style="-fx-background-color: transparent;" text="   Bookmark" textFill="WHITE">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -471,7 +494,7 @@
                   </HBox>
                   <HBox>
                      <children>
-                        <Button fx:id="gameButton" mnemonicParsing="false" onAction="#check" opacity="0.5" prefHeight="45.0" prefWidth="155.0" style="-fx-background-color: transparent;" text="   Game      " textFill="WHITE">
+                        <Button fx:id="gameButton" mnemonicParsing="false" onAction="#selectTab" opacity="0.5" prefHeight="45.0" prefWidth="155.0" style="-fx-background-color: transparent;" text="   Game      " textFill="WHITE">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -486,7 +509,7 @@
                      </children>
                   </HBox>
                   <Pane prefHeight="295.0" prefWidth="155.0" />
-                  <Button fx:id="logoutButton" contentDisplay="RIGHT" mnemonicParsing="false" prefHeight="45.0" prefWidth="155.0" style="-fx-background-color: transparent;" text="Logout      " textFill="WHITE">
+                  <Button fx:id="logoutButton" contentDisplay="RIGHT" mnemonicParsing="false" prefHeight="45.0" prefWidth="155.0" styleClass="button3" stylesheets="@../css/button.css" text="Logout      " textFill="WHITE">
                      <graphic>
                         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -498,7 +521,7 @@
                         <Font size="14.0" />
                      </font>
                   </Button>
-                  <Button fx:id="exitButton" contentDisplay="RIGHT" mnemonicParsing="false" prefHeight="45.0" prefWidth="155.0" style="-fx-background-color: transparent;" text="Exit          " textFill="WHITE">
+                  <Button fx:id="exitButton" contentDisplay="RIGHT" mnemonicParsing="false" prefHeight="45.0" prefWidth="155.0" styleClass="button3" stylesheets="@../css/button.css" text="Exit          " textFill="WHITE">
                      <graphic>
                         <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                            <image>

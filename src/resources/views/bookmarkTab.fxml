@@ -19,7 +19,7 @@
 
 <Pane fx:id="sceneTrans" prefHeight="660.0" prefWidth="925.0" style="-fx-background-color: #0E0C17; -fx-background-radius: 0 0 15 0;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.Bookmark">
    <children>
-      <VBox layoutX="58.0" layoutY="87.0" prefHeight="400.0" prefWidth="176.0">
+      <VBox layoutX="58.0" layoutY="110.0" prefHeight="400.0" prefWidth="176.0">
          <children>
             <HBox prefHeight="34.0" prefWidth="176.0" style="-fx-background-color: #2A2931; -fx-background-radius: 15 15 0 0;">
                <children>
@@ -37,7 +37,7 @@
             <ListView fx:id="listBookmark" prefHeight="368.0" prefWidth="176.0" stylesheets="@../css/listView.css" />
          </children>
       </VBox>
-      <BorderPane fx:id="definitionPane" layoutX="278.0" layoutY="87.0" prefHeight="400.0" prefWidth="490.0" style="-fx-background-color: #1C1A24; -fx-background-radius: 15;">
+      <BorderPane fx:id="definitionPane" layoutX="278.0" layoutY="110.0" prefHeight="400.0" prefWidth="550.0" style="-fx-background-color: #1C1A24; -fx-background-radius: 15;">
          <top>
             <HBox prefHeight="35.0" prefWidth="600.0" style="-fx-background-color: #2A2931; -fx-background-radius: 15 15 0 0;" BorderPane.alignment="CENTER">
                <children>
@@ -61,7 +61,7 @@
             </WebView>
          </center>
       </BorderPane>
-      <TextField fx:id="textSearch" depthTest="ENABLE" layoutX="58.0" layoutY="32.0" onAction="#controllerSearch" prefHeight="31.0" prefWidth="220.0" promptText="Search Bookmark" style="-fx-background-radius: 5; -fx-background-color: #2A2931;">
+      <TextField fx:id="textSearch" depthTest="ENABLE" layoutX="578.0" layoutY="49.0" onAction="#controllerSearch" prefHeight="31.0" prefWidth="250.0" promptText="Search Bookmark" style="-fx-background-radius: 5; -fx-background-color: #2A2931;">
          <font>
             <Font size="14.0" />
          </font>
@@ -73,7 +73,7 @@
             <String fx:value="non-border" />
          </styleClass>
       </TextField>
-      <Button fx:id="deleteButton" layoutX="653.0" layoutY="32.0" mnemonicParsing="false" onAction="#controllerDelete" prefHeight="40.0" prefWidth="115.0" styleClass="button1" stylesheets="@../css/button.css" text="Unmarked" textFill="WHITE" visible="false">
+      <Button fx:id="deleteButton" layoutX="713.0" layoutY="525.0" mnemonicParsing="false" onAction="#controllerDelete" prefHeight="40.0" prefWidth="115.0" styleClass="button1" stylesheets="@../css/button.css" text="Unmarked" textFill="WHITE" visible="false">
          <font>
             <Font size="14.0" />
          </font>
@@ -87,5 +87,15 @@
          <effect>
             <Glow level="0.5" />
          </effect></Button>
+      <Text fill="WHITE" layoutX="57.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BOOKMARK">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Text>
+      <Text fill="#909090" layoutX="57.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Những từ đã được đánh dấu và ý nghĩa của chúng." wrappingWidth="315.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
    </children>
 </Pane>

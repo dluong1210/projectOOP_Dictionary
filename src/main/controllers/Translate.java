@@ -190,10 +190,10 @@ public class Translate implements Initializable {
             input.getStyleClass().clear();
             input.getStyleClass().add("active-pane");
         });
-        output.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> {
-            output.getStyleClass().clear();
-            output.getStyleClass().add("active-pane");
-        });
+//        output.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> {
+//            output.getStyleClass().clear();
+//            output.getStyleClass().add("active-pane");
+//        });
 
         sceneTrans.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> {
             if (!textInput.getBoundsInLocal().contains(e.getX(), e.getY())) {

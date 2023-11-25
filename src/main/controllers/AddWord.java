@@ -72,7 +72,7 @@ public class AddWord implements Initializable {
             reponseText.setFill(Color.RED);
 
         } else {
-            reponseText.setText("Wow!!! A new word. Please tell me it's definition");
+            reponseText.setText("It's new word. Please tell me it's definition");
             reponseText.setFill(Color.GREEN);
             textNewWord.setEditable(false);
             definitionPane.setVisible(true);
@@ -106,7 +106,7 @@ public class AddWord implements Initializable {
                 System.out.println(exception.getMessage());
             }
 
-            reponseText.setText("Add \"" + textNewWord.getText() + "\" successfully");
+            reponseText.setText("Add \"" + textNewWord.getText() + "\" successfully. Thanks for your contribution.");
             reponseText.setFill(Color.GREEN);
 
             definitionPane.setVisible(false);

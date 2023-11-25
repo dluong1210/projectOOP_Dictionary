@@ -36,7 +36,6 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Optional;
 
-
 public class SearchWord implements Initializable {
     @FXML
     private Button homeButton;
@@ -79,6 +78,8 @@ public class SearchWord implements Initializable {
     @FXML
     private Button changeButton;
     @FXML
+    private Button cancelChangeButton;
+    @FXML
     private Rectangle rectangle;
     private Button tabSelected;
     private final Image imageMarked = new Image(getClass().getResourceAsStream("/icon/marked-icon.png"));
@@ -91,7 +92,8 @@ public class SearchWord implements Initializable {
         tabSelected = homeButton;
 
         Platform.runLater(() -> webView.getEngine().loadContent(mySQL.htmlSelectFromDB("")));
-        check();
+        loadTab();
+        selectTab();
 
         controllerSearch();
         selectFromList();
@@ -101,7 +103,28 @@ public class SearchWord implements Initializable {
         controllerEdit();
     }
 
-    public void check() {
+    public void loadTab() {
+        try {
+            FXMLLoader loaderTranslateTab = new FXMLLoader(getClass().getResource("/views/Translate.fxml"));
+            FXMLLoader loaderAddwordTab = new FXMLLoader(getClass().getResource("/views/addWordTab.fxml"));
+            FXMLLoader loaderBookmarkTab = new FXMLLoader(getClass().getResource("/views/bookmarkTab.fxml"));
+
+            Parent translateTab = loaderTranslateTab.load();
+            Parent addWordTab = loaderAddwordTab.load();
+            Parent bookmarkTab = loaderBookmarkTab.load();
+
+            Tab tab2 = new Tab("Google Translate", translateTab);
+            Tab tab3 = new Tab("Add new word", addWordTab);
+            Tab tab4 = new Tab("Bookmark", bookmarkTab);
+
+            tabPane.getTabs().addAll(tab2, tab3, tab4);
+
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    public void selectTab() {
         TranslateTransition transition = new TranslateTransition(Duration.seconds(0.4), rectangle);
 
         homeButton.setOnAction(e -> {
@@ -123,16 +146,7 @@ public class SearchWord implements Initializable {
             transition.setByY(137.5 - rectangle.localToScene(rectangle.getBoundsInLocal()).getMinY());
             transition.play();
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/Translate.fxml"));
-            try {
-                Parent translateTab = loader.load();
-                Tab tab = new Tab("Google Translate", translateTab);
-                tabPane.getTabs().add(tab);
-                tabPane.getSelectionModel().select(tab);
-
-            } catch (IOException ex) {
-                System.out.println(ex.getMessage());
-            }
+            tabPane.getSelectionModel().select(4);
         });
 
         addWordButton.setOnAction(e -> {
@@ -143,16 +157,7 @@ public class SearchWord implements Initializable {
             transition.setByY(182.5 - rectangle.localToScene(rectangle.getBoundsInLocal()).getMinY());
             transition.play();
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/addWordTab.fxml"));
-            try {
-                Parent addWordTab = loader.load();
-                Tab tab = new Tab("Add new word", addWordTab);
-                tabPane.getTabs().add(tab);
-                tabPane.getSelectionModel().select(tab);
-
-            } catch (IOException exception) {
-                System.out.println(exception.getMessage());
-            }
+            tabPane.getSelectionModel().select(5);
         });
 
         bookmarkButton.setOnAction(e -> {
@@ -163,16 +168,16 @@ public class SearchWord implements Initializable {
             transition.setByY(227.5 - rectangle.localToScene(rectangle.getBoundsInLocal()).getMinY());
             transition.play();
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/bookmarkTab.fxml"));
             try {
-                Parent bookmarkTab = loader.load();
-                Tab tab = new Tab("Bookmark", bookmarkTab);
-                tabPane.getTabs().add(tab);
-                tabPane.getSelectionModel().select(tab);
+                FXMLLoader loaderBookmarkTab = new FXMLLoader(getClass().getResource("/views/bookmarkTab.fxml"));
+                Parent bookmarkTab = loaderBookmarkTab.load();
+                tabPane.getTabs().set(6, new Tab("Bookmark", bookmarkTab));
 
-            } catch (IOException exception) {
-                System.out.println(exception.getMessage());
+            } catch (IOException ex) {
+                System.out.println("faild bookmark tab");
             }
+
+            tabPane.getSelectionModel().select(6);
         });
 
         gameButton.setOnAction(e -> {
@@ -329,6 +334,7 @@ public class SearchWord implements Initializable {
             deleteButton.setVisible(false);
             editButton.setVisible(false);
             changeButton.setVisible(true);
+            cancelChangeButton.setVisible(true);
 
             htmlEditor.setHtmlText(mySQL.htmlSelectFromDB(wordSelected));
             Platform.runLater(() -> {
@@ -345,6 +351,7 @@ public class SearchWord implements Initializable {
             editor.setVisible(false);
             result.setVisible(true);
             changeButton.setVisible(false);
+            cancelChangeButton.setVisible(false);
 
             Document doc = Jsoup.parse(htmlEditor.getHtmlText());
             String htmlTextToDB = doc.body().html().replace("\"", "\\\"");
@@ -354,6 +361,16 @@ public class SearchWord implements Initializable {
             } catch (SQLException exception) {
                 System.out.println(exception.getMessage());
             }
+
+            lookup(wordSelected);
+        });
+
+        cancelChangeButton.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> {
+            editor.setVisible(false);
+            result.setVisible(true);
+
+            changeButton.setVisible(false);
+            cancelChangeButton.setVisible(false);
 
             lookup(wordSelected);
         });

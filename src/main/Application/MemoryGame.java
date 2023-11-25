@@ -87,7 +87,7 @@ public abstract class MemoryGame extends MultipleChoiceGame{
         return false;
     }
 
-//////// Getter / setter
+    //////// Getter / setter
 
     public Word getNextWord() {
         return nextWord;

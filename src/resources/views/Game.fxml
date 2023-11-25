@@ -7,16 +7,19 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.GameController">
    <children>
-      <Button fx:id="A" layoutX="53.0" layoutY="135.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="336.0" text="AAA" visible="false" />
-      <Button fx:id="C" layoutX="53.0" layoutY="278.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="336.0" text="CCC" visible="false" />
-      <Button fx:id="B" layoutX="53.0" layoutY="209.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="336.0" text="BBB" visible="false" />
-      <Button fx:id="D" layoutX="53.0" layoutY="341.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="336.0" text="DDD" visible="false" />
+      <Button fx:id="A" layoutX="53.0" layoutY="118.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="336.0" text="AAA" />
+      <Button fx:id="B" layoutX="53.0" layoutY="192.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="336.0" text="BBB" />
+      <Button fx:id="C" layoutX="53.0" layoutY="252.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="336.0" text="CCC" />
+      <Button fx:id="D" layoutX="61.0" layoutY="329.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="336.0" text="DDD" />
       <Button fx:id="Play" layoutX="214.0" layoutY="303.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="183.0" text="Start/End" />
-      <Text fx:id="Introduce" disable="true" layoutX="119.0" layoutY="118.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Multiple Choice" wrappingWidth="361.60002441406255">
+      <Text fx:id="Introduce" disable="true" layoutX="119.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Multiple Choice" wrappingWidth="361.60002441406255">
          <font>
             <Font size="15.0" />
          </font>
       </Text>
-      <Text fx:id="Question" disable="true" layoutX="68.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" visible="false" wrappingWidth="468.53668212890625" />
+      <Text fx:id="Question" disable="true" layoutX="68.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="468.53668212890625" />
+      <Button fx:id="FiftyFifty" layoutX="493.0" layoutY="124.0" mnemonicParsing="false" text="50-50" />
+      <Button fx:id="EliminateOne" layoutX="491.0" layoutY="180.0" mnemonicParsing="false" text="Erase" />
+      <Button fx:id="SecondChance" layoutX="487.0" layoutY="230.0" mnemonicParsing="false" text="Second chance" />
    </children>
 </AnchorPane>

@@ -1,7 +1,5 @@
 package Application;
 
-import java.util.Scanner;
-
 /**
  * Learning English with multiple-choice game choosing A B C D.
  */
@@ -141,6 +139,18 @@ public abstract class MultipleChoiceGame implements GameCommandline {
 
     public void setDictionaryManagement(DictionaryManagement dictionaryManagement) {
         this.dictionaryManagement = dictionaryManagement;
+    }
+
+    public static String[] getOption() {
+        return option;
+    }
+
+    public Word[] getWords() {
+        return words;
+    }
+
+    public void setWords(Word[] words) {
+        this.words = words;
     }
 
     public String getPlayerChoice() {

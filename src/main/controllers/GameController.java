@@ -25,40 +25,22 @@ public class GameController implements Initializable {
     private Text Question = new Text();
     @FXML
     private Text Introduce = new Text();
+    @FXML
+    private Button FiftyFifty = new Button();
+    @FXML
+    private Button EliminateOne = new Button();
+    @FXML
+    private Button SecondChance = new Button();
     private MultipleChoiceGame game;
-
+    private FiftyFiftyGameItem fiftyFifty = new FiftyFiftyGameItem();
+    private EliminateOneGameItem eliminateOne = new EliminateOneGameItem();
+    private SecondChanceGameItem secondChance = new SecondChanceGameItem();
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         printChooseGame();
-    }
-
-    /**
-     * Swich screen to question and choices screen.
-     *
-     * <p> Question and choices screen includes: </p>
-     * <p> Question </p>
-     * <p> Choice A </p>
-     * <p> Choice B </p>
-     * <p> Choice C </p>
-     * <p> Choice D </p>
-     *
-     * <p> Introduce and Play screen includes: </p>
-     * <p> Introduce </p>
-     * <p> Choice Play </p>
-     * @param b is true if you want to change to screen QaC,
-     *          false if you want change to screen IaP
-     */
-    private void setQuestionAndChoicesVisible(boolean b) {
-        // Introduce and Play screen
-        Introduce.setVisible(!b);
-        Play.setVisible(!b);
-
-        // Question and choices screen
-        Question.setVisible(b);
-        A.setVisible(b);
-        B.setVisible(b);
-        C.setVisible(b);
-        D.setVisible(b);
+        FiftyFifty.setVisible(false);
+        EliminateOne.setVisible(false);
+        SecondChance.setVisible(false);
     }
 
     /**
@@ -66,6 +48,10 @@ public class GameController implements Initializable {
      */
     public void printChooseGame() {
         setQuestionAndChoicesVisible(true);
+
+        FiftyFifty.setVisible(false);
+        EliminateOne.setVisible(false);
+        SecondChance.setVisible(false);
 
         Question.setText("Which game would you like to play?");
         A.setText("Easy Word Learning");
@@ -77,6 +63,46 @@ public class GameController implements Initializable {
         B.setOnAction(e -> initGame("B"));
         C.setOnAction(e -> initGame("C"));
         D.setOnAction(e -> initGame("D"));
+    }
+
+    /**
+     * Swich screen to question and choices screen.
+     *
+     * <p> Question and choices screen includes: </p>
+     * <p> Question </p>
+     * <p> Choice A </p> <p> Choice B </p>
+     * <p> Choice C </p> <p> Choice D </p>
+     *
+     * <p> Introduce and Play screen includes: </p>
+     * <p> Introduce </p> <p> Choice Play </p>
+     * @param b is true if you want to change to screen QaC,
+     *          false if you want change to screen IaP
+     */
+    public void setQuestionAndChoicesVisible(boolean b) {
+        // Introduce and Play screen
+        Introduce.setVisible(!b);
+        Play.setVisible(!b);
+
+        // Question and choices screen
+        Question.setVisible(b);
+        A.setVisible(b);
+        B.setVisible(b);
+        C.setVisible(b);
+        D.setVisible(b);
+
+        A.setDisable(!b);
+        B.setDisable(!b);
+        C.setDisable(!b);
+        D.setDisable(!b);
+
+        // Game item
+        FiftyFifty.setVisible(fiftyFifty.isUsable() && b);
+        EliminateOne.setVisible(eliminateOne.isUsable() && b);
+        SecondChance.setVisible(secondChance.isUsable() && b);
+
+        FiftyFifty.setDisable(!fiftyFifty.isUsable() && b);
+        EliminateOne.setDisable(!eliminateOne.isUsable() && b);
+        SecondChance.setDisable(!secondChance.isUsable() && b);
     }
 
     /**
@@ -98,16 +124,24 @@ public class GameController implements Initializable {
                 game = new MeaningMemoryGame();
                 break;
         }
+        // So lan su dung item
+        fiftyFifty.setNumber(1);
+        eliminateOne.setNumber(1);
+        secondChance.setNumber(1);
+
+        // San sang
         game.initGame();
         printIntroduceAndPlay();                                          // in luat
     }
 
     /**
-     * Introduce and play.
+     * Introduction and play.
      */
     public void printIntroduceAndPlay() {
         setQuestionAndChoicesVisible(false);
         Introduce.setText(game.giveRule());
+        // Them chi tiet cach su dung item
+
         Play.setText("Play!");
         Play.setOnAction(e -> startGame());
     }
@@ -116,6 +150,18 @@ public class GameController implements Initializable {
      * Start game.
      */
     public void startGame() {
+        // Bonus item
+        if (game.getPoints() > 0) {
+            if (game.getPoints() % 3 == 0) {
+                eliminateOne.setNumber(eliminateOne.getNumber() + 1);
+            }
+            if (game.getPoints() % 6 == 0) {
+                secondChance.setNumber(secondChance.getNumber() + 1);
+            }
+            if (game.getPoints() % 9 == 0) {
+                fiftyFifty.setNumber(fiftyFifty.getNumber() + 1);
+            }
+        }
         game.getPrepared();
         printQuestionAndChoices();                          // in ra man hinh
     }
@@ -126,17 +172,40 @@ public class GameController implements Initializable {
     public void printQuestionAndChoices() {
         setQuestionAndChoicesVisible(true);
 
+        // Noi dung
         Question.setText(game.giveQuestion());
         A.setText(game.giveChoice(0));
         B.setText(game.giveChoice(1));
         C.setText(game.giveChoice(2));
         D.setText(game.giveChoice(3));
 
+        // Neu su dung item
+        FiftyFifty.setOnAction(e -> setIncorrectChoicesInvisible(fiftyFifty.used(game)));
+        EliminateOne.setOnAction(e -> setIncorrectChoicesInvisible(eliminateOne.used(game)));
+        SecondChance.setOnAction(e -> setIncorrectChoicesInvisible(secondChance.used(game)));
+
+        // Cac lua chon
         A.setOnAction(e -> getClickInput("A"));
         B.setOnAction(e -> getClickInput("B"));
         C.setOnAction(e -> getClickInput("C"));
         D.setOnAction(e -> getClickInput("D"));
     }
+
+    /**
+     * Eliminate incorrect choice given by the item.
+     * @param eliminate an array of choice need to be eliminated
+     */
+    public void setIncorrectChoicesInvisible(boolean[] eliminate) {
+        FiftyFifty.setDisable(true);
+        EliminateOne.setDisable(true);
+        SecondChance.setDisable(true);
+
+        A.setDisable(eliminate[0]);
+        B.setDisable(eliminate[1]);
+        C.setDisable(eliminate[2]);
+        D.setDisable(eliminate[3]);
+    }
+
 
     /**
      * Get player's choice.
@@ -145,9 +214,19 @@ public class GameController implements Initializable {
     public void getClickInput(String playerChoice) {
         game.setPlayerChoice(playerChoice);
         if (game.checkAnswer()) {
+            if (secondChance.isInvincible()) {             // dang su dung item second chance
+                secondChance.setNumber(secondChance.getNumber() - 1);
+                secondChance.setInvincible(false);
+            }
             startGame();                                    // bat dau luot choi moi
         } else {
-            endGame();                                      // bao diem ket thuc game
+            if (secondChance.isInvincible()) {             // dang su dung item second chance
+                printQuestionAndChoices();
+                setIncorrectChoicesInvisible(secondChance.used(game));
+                secondChance.setInvincible(false);
+            } else {
+                endGame();                                      // bao diem ket thuc game
+            }
         }
     }
 

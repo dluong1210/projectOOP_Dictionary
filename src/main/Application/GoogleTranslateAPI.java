@@ -7,6 +7,8 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import org.json.JSONObject;
 
+import javax.net.ssl.SSLHandshakeException;
+
 public class GoogleTranslateAPI {
 //    private static GoogleTranslateAPI instance;
 //
@@ -45,7 +47,15 @@ public class GoogleTranslateAPI {
                 .header("X-RapidAPI-Host", "google-translate113.p.rapidapi.com")
                 .method("POST", HttpRequest.BodyPublishers.ofString("from=" + langueIn + "&to=" + langueOut + "&text=" + text))
                 .build();
-        HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
+
+        HttpResponse<String> response;
+        try {
+            response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
+
+        } catch(SSLHandshakeException ex) {
+//            System.out.println("Disconnect");
+            return "{trans: You are offline}";
+        }
 //        System.out.println(response.body());
         return response.body();
     }

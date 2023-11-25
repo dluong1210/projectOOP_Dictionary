@@ -1,6 +1,7 @@
 //package main.Application;
 package Application;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -136,11 +137,24 @@ public class DictionaryCommandline extends DictionaryManagement {
                     System.out.println("Choose 1 or 2 !!");
                     continue;
                 }
+                clearScreen();
                 break;
             }
             if (choice.equals("2")) break;
         }
         System.out.println("Byeee");
+    }
+
+    public final static void clearScreen() {
+        try {
+            if (System.getProperty("os.name").contains("Windows")) {
+                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+            } else {
+                Runtime.getRuntime().exec("clear");
+            }
+        } catch (IOException | InterruptedException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public static void main(String[] argv) {

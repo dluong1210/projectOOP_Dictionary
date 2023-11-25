@@ -1,4 +1,4 @@
-/*package Application;
+package Application;
 
 import java.io.FileOutputStream;
 import com.voicerss.tts.AudioCodec;
@@ -55,4 +55,4 @@ public class VoiceRSS {
                     + " books and lunch for Lucas.";
         setAudio(test, Languages.English_UnitedStates, "test");
     }
-}*/
+}

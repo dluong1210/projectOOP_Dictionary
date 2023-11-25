@@ -204,6 +204,21 @@ public class MySQL {
         return check;
     }
 
+    public boolean checkExistUser(String account) {
+        boolean check = false;
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery("SELECT account FROM user "
+                    + "WHERE account = \"" + account + "\"");
+
+            check = rs.next();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return check;
+    }
+
     public void addUser(String account, String password) {
         try {
             Statement statement = connection.createStatement();

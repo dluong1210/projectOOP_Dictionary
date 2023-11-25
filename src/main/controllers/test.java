@@ -5,7 +5,9 @@ import Application.MySQL;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.IOException;
 
@@ -17,15 +19,16 @@ public class test extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        Thread databaseThread = new Thread(() -> {
-            MySQL.getInstance(); // Đảm bảo bạn đã có phương thức kết nối cơ sở dữ liệu
-        });
-        databaseThread.start();
 
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/homeTab.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 1080, 720);
-        stage.setTitle("my dictionary!");
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/loginPage.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 720, 480);
+        scene.setFill(Color.TRANSPARENT);
+
+        stage.setTitle("Login Dictionary");
+        stage.initStyle(StageStyle.TRANSPARENT);
+        stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
+//        Login.loginPage();
     }
 }

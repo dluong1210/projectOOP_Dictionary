@@ -37,6 +37,10 @@ public class Translate implements Initializable {
     private Button speakInput;
     @FXML
     private Button speakOutput;
+    @FXML
+    private Button swapButton;
+    @FXML
+    private Button translateButton;
 
     private String currentInputText;
     private String currentOutputText;
@@ -73,6 +77,7 @@ public class Translate implements Initializable {
         checkMouse(new ActionEvent());
         controllerTranslate(new ActionEvent());
         controllerSpeak(new ActionEvent());
+        controllerSwapLabel();
     }
 
     private void translate() {
@@ -81,13 +86,15 @@ public class Translate implements Initializable {
             input.getStyleClass().add("inactive-pane");
 
             String textIn = textInput.getText();
-            String textOut;
-            try {
-                String src = convertLangueLabel(langueInput.getValue());
-                String target = convertLangueLabel(langueOutput.getValue());
-                textOut = GoogleTranslateAPI.translate(textIn, src, target);
-            } catch (Exception exception) {
-                textOut = textIn;
+            String textOut = "";
+            if (!textIn.isEmpty()) {
+                try {
+                    String src = convertLangueLabel(langueInput.getValue());
+                    String target = convertLangueLabel(langueOutput.getValue());
+                    textOut = GoogleTranslateAPI.translate(textIn, src, target);
+                } catch (Exception exception) {
+                    textOut = textIn;
+                }
             }
 
             textOutput.setText(textOut);
@@ -108,6 +115,11 @@ public class Translate implements Initializable {
                 }
             }
         });
+
+        translateButton.setOnAction(e -> {
+            System.out.println("Translate");
+            translate();
+        });
     }
 
     private void controllerSpeak(ActionEvent event) {
@@ -119,6 +131,20 @@ public class Translate implements Initializable {
             speakText(textOutput, langueOutput.getValue(), false);
         });
 
+    }
+
+    public void controllerSwapLabel() {
+        swapButton.setOnAction(e -> {
+            String labelInput = langueInput.getValue();
+            String labelOutput = langueOutput.getValue();
+            langueInput.getSelectionModel().select(labelOutput);
+            langueOutput.getSelectionModel().select(labelInput);
+
+//            String input = textInput.getText();
+            String output = textOutput.getText();
+            textInput.setText(output);
+            translate();
+        });
     }
 
     private void speakText(TextArea text, String label, boolean isInput) {
@@ -164,10 +190,10 @@ public class Translate implements Initializable {
             input.getStyleClass().clear();
             input.getStyleClass().add("active-pane");
         });
-        output.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> {
-            output.getStyleClass().clear();
-            output.getStyleClass().add("active-pane");
-        });
+//        output.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> {
+//            output.getStyleClass().clear();
+//            output.getStyleClass().add("active-pane");
+//        });
 
         sceneTrans.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> {
             if (!textInput.getBoundsInLocal().contains(e.getX(), e.getY())) {

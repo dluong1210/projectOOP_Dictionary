@@ -11,32 +11,36 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<Pane fx:id="sceneTrans" maxHeight="554.0" maxWidth="807.0" prefHeight="534.0" prefWidth="807.0" style="-fx-background-color: #0E0C17; -fx-background-radius: 0 0 15 0;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.Translate">
+<Pane fx:id="sceneTrans" prefHeight="660.0" prefWidth="925.0" style="-fx-background-color: #0E0C17; -fx-background-radius: 0 0 15 0;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.Translate">
    <children>
-      <BorderPane layoutX="77.0" layoutY="93.0" prefHeight="342.0" prefWidth="660.0" style="-fx-background-color: #1C1A24; -fx-background-radius: 15;">
+      <BorderPane layoutX="57.0" layoutY="119.0" prefHeight="409.0" prefWidth="770.0" style="-fx-background-color: #1C1A24; -fx-background-radius: 15;">
          <top>
             <HBox prefHeight="42.0" prefWidth="540.0" style="-fx-background-color: #2A2931; -fx-background-radius: 15 15 0 0;" BorderPane.alignment="CENTER">
                <children>
-                  <Pane prefHeight="42.0" prefWidth="310.0">
+                  <Pane prefHeight="42.0" prefWidth="365.0">
                      <children>
                         <ChoiceBox fx:id="langueInput" layoutX="14.0" layoutY="9.0" prefHeight="25.0" prefWidth="100.0" style="-fx-background-color: #825CE8;" stylesheets="@../css/style-choiceBox.css">
                            <effect>
-                              <DropShadow />
+                              <Glow>
+                                 <input>
+                                    <DropShadow />
+                                 </input>
+                              </Glow>
                            </effect>
                         </ChoiceBox>
                      </children>
                   </Pane>
-                  <Pane prefHeight="42.0" prefWidth="40.0">
-                     <children>
-                        <ImageView fitHeight="42.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" />
-                     </children>
-                  </Pane>
+                  <Pane prefHeight="42.0" prefWidth="40.0" />
                   <Pane prefHeight="42.0" prefWidth="310.0">
                      <children>
                         <ChoiceBox fx:id="langueOutput" layoutX="14.0" layoutY="9.0" prefHeight="25.0" prefWidth="100.0" style="-fx-background-color: #825CE8;" stylesheets="@../css/style-choiceBox.css">
                            <effect>
-                              <DropShadow />
+                              <DropShadow>
+                                 <input>
+                                    <Glow />
+                                 </input></DropShadow>
                            </effect>
                         </ChoiceBox>
                      </children>
@@ -47,45 +51,82 @@
          <center>
             <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
-                  <Pane fx:id="input" prefHeight="200.0" prefWidth="330.0" style="-fx-border-radius: 0 0 0 15;" styleClass="inactive-pane" stylesheets="@../css/styles-pane.css">
+                  <Pane fx:id="input" prefHeight="200.0" prefWidth="385.0" style="-fx-border-radius: 0 0 0 15;" styleClass="inactive-pane" stylesheets="@../css/styles-pane.css">
                      <children>
                         <TextArea fx:id="textInput" layoutX="14.0" layoutY="14.0" prefHeight="230.0" prefWidth="280.0" styleClass="text-area" stylesheets="@../css/textArea.css" wrapText="true">
                            <font>
-                              <Font size="16.0" />
+                              <Font size="14.0" />
                            </font>
                         </TextArea>
-                        <Button fx:id="speakInput" layoutX="14.0" layoutY="254.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="35.0" stylesheets="@../css/button.css">
+                        <Button fx:id="speakInput" layoutX="14.0" layoutY="318.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="35.0" stylesheets="@../css/button.css">
                            <effect>
-                              <Glow />
+                              <Glow level="0.5" />
                            </effect></Button>
-                        <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="22.0" layoutY="261.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="22.0" layoutY="326.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../../../../../Downloads/speaker-256.png" />
                            </image>
                         </ImageView>
                      </children>
                   </Pane>
-                  <Pane fx:id="output" prefHeight="200.0" prefWidth="330.0" style="-fx-border-radius: 0 0 15 0;" styleClass="inactive-pane" stylesheets="@../css/styles-pane.css">
+                  <Pane fx:id="output" prefHeight="200.0" prefWidth="385.0" style="-fx-border-radius: 0 0 15 0;" styleClass="inactive-pane" stylesheets="@../css/styles-pane.css">
                      <children>
-                        <TextArea fx:id="textOutput" editable="false" layoutX="14.0" layoutY="14.0" prefHeight="230.0" prefWidth="280.0" promptText="Bản dịch" styleClass="text-area" stylesheets="@../css/textArea.css" wrapText="true">
+                        <TextArea fx:id="textOutput" editable="false" focusTraversable="false" layoutX="14.0" layoutY="14.0" prefHeight="230.0" prefWidth="280.0" promptText="Bản dịch" styleClass="text-area" stylesheets="@../css/textArea.css" wrapText="true">
                            <font>
-                              <Font size="16.0" />
+                              <Font size="14.0" />
                            </font>
                         </TextArea>
-                        <Button fx:id="speakOutput" layoutX="14.0" layoutY="254.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="35.0" stylesheets="@../css/button.css">
+                        <Button fx:id="speakOutput" layoutX="14.0" layoutY="317.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="35.0" stylesheets="@../css/button.css">
                            <effect>
-                              <Glow />
+                              <Glow level="0.5" />
                            </effect></Button>
-                        <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="22.0" layoutY="262.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="22.0" layoutY="325.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../../../../../Downloads/speaker-256.png" />
                            </image>
                         </ImageView>
+                        <Button fx:id="translateButton" layoutX="294.0" layoutY="317.0" mnemonicParsing="false" prefHeight="35.0" styleClass="button1" stylesheets="@../css/button.css" text="Translate" textFill="WHITE">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                           <effect>
+                              <Glow level="0.5" />
+                           </effect>
+                        </Button>
                      </children>
                   </Pane>
                </children>
             </HBox>
          </center>
       </BorderPane>
+      <Button fx:id="swapButton" contentDisplay="CENTER" layoutX="401.0" layoutY="64.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="70.0" style="-fx-background-radius: 30;" styleClass="button1" stylesheets="@../css/button.css">
+         <graphic>
+            <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../icon/swap-icon.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <effect>
+            <Glow level="0.5" />
+         </effect>
+      </Button>
+      <Text fill="WHITE" layoutX="57.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TRANSLATE">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Text>
+      <Text fill="#909090" layoutX="647.0" layoutY="556.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Shift + Enter để xuống dòng mới." wrappingWidth="180.0" />
+      <Text fill="#909090" layoutX="647.0" layoutY="576.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter hoặc click Translate để dịch." wrappingWidth="180.0" />
+      <Text fill="#909090" layoutX="55.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dịch văn bản online đa ngôn ngữ." wrappingWidth="296.49993896484375">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <Text fill="#909090" layoutX="55.0" layoutY="99.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Đảm bảo thiết bị của bạn đã kết nối Internet !" wrappingWidth="296.49993896484375">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
    </children>
 </Pane>

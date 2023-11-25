@@ -1,0 +1,8 @@
+.left-window {
+    -fx-background-color: linear-gradient(to left, #5c6bc0, #512da8);
+    -fx-background-radius: 20 120 80 20;
+}
+.right-window {
+    -fx-background-color:  linear-gradient(to right, #5c6bc0, #512da8);
+    -fx-background-radius:  120 20 20 80;
+}

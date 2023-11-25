@@ -4,6 +4,25 @@
     -fx-border-radius: 30;
 }
 
-.button: hover{
-    -fx-background-color: #ac73ff;
+.button1:hover {
+    -fx-background-color: #825CE8;
+    -fx-border-color: transparent;
+}
+
+.button1 {
+    -fx-border-color: #FFFFFF;
+    -fx-border-radius: 20;
+}
+
+.button2 {
+    -fx-background-color: #825CE8;
+    -fx-border-color: transparent;
+}
+
+.button3 {
+    -fx-opacity: 0.5;
+    -fx-text-fill: #FFFFFF;
+}
+.button3:hover {
+    -fx-opacity: 1;
 }

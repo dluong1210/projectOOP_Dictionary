@@ -37,10 +37,12 @@ public class AddWord implements Initializable {
     @FXML
     private Button cancelButton;
 
+    private MySQL mySQL = MySQL.getInstance();
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         controllerCheck();
-        controllerDefine();
+        controllerAdd();
     }
 
     public void controllerCheck() {
@@ -64,27 +66,33 @@ public class AddWord implements Initializable {
         if (textNewWord.getText().isEmpty()) {
             reponseText.setText("Please enter a word in the box");
             reponseText.setFill(Color.RED);
+
         } else if (checkExist(textNewWord.getText())) {
             reponseText.setText("Word exist. If you want edit that, search and edit it !");
             reponseText.setFill(Color.RED);
+
         } else {
-            reponseText.setText("Wow!!! A new word. Please tell me it's definition");
+            reponseText.setText("It's new word. Please tell me it's definition");
             reponseText.setFill(Color.GREEN);
             textNewWord.setEditable(false);
             definitionPane.setVisible(true);
+            cancelButton.setVisible(true);
+            addButton.setVisible(true);
+
+            Platform.runLater(() -> {
+                Node[] nodes = htmlEditor.lookupAll(".tool-bar").toArray(new Node[0]);
+                for (Node node : nodes) {
+                    node.setVisible(false);
+                    node.setManaged(false);
+                }
+                htmlEditor.setVisible(true);
+            });
+            htmlEditor.setHtmlText(mySQL.htmlization(""));
+
         }
     }
 
-    public void controllerDefine() {
-        Platform.runLater(() -> {
-            Node[] nodes = htmlEditor.lookupAll(".tool-bar").toArray(new Node[0]);
-            for (Node node : nodes) {
-                node.setVisible(false);
-                node.setManaged(false);
-            }
-            htmlEditor.setVisible(true);
-        });
-        htmlEditor.setHtmlText(MySQL.htmlization(""));
+    public void controllerAdd() {
 
         addButton.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> {
             Document doc = Jsoup.parse(htmlEditor.getHtmlText());
@@ -92,15 +100,18 @@ public class AddWord implements Initializable {
             System.out.println(doc.body().html());
 
             try {
-                MySQL.insertIntoDB(textNewWord.getText(), htmlTextToDB);
+                mySQL.insertIntoDB(textNewWord.getText(), htmlTextToDB);
+
             } catch (SQLException exception) {
                 System.out.println(exception.getMessage());
             }
 
-            reponseText.setText("Add \"" + textNewWord.getText() + "\" successfully");
+            reponseText.setText("Add \"" + textNewWord.getText() + "\" successfully. Thanks for your contribution.");
             reponseText.setFill(Color.GREEN);
 
             definitionPane.setVisible(false);
+            cancelButton.setVisible(false);
+            addButton.setVisible(false);
             textNewWord.clear();
             textNewWord.setEditable(true);
         });
@@ -111,11 +122,13 @@ public class AddWord implements Initializable {
 
             definitionPane.setVisible(false);
             textNewWord.clear();
+            cancelButton.setVisible(false);
+            addButton.setVisible(false);
             textNewWord.setEditable(true);
         });
     }
 
     private boolean checkExist(String word) {
-        return MySQL.selectFromDB(word) != null;
+        return mySQL.selectFromDB(word) != null;
     }
 }

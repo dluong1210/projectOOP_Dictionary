@@ -2,21 +2,30 @@ package controllers;
 
 import Application.MySQL;
 
+import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.Initializable;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.web.HTMLEditor;
 import javafx.scene.web.WebView;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import javafx.util.Duration;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
@@ -37,6 +46,12 @@ public class SearchWord implements Initializable {
     @FXML
     private Button bookmarkButton;
     @FXML
+    private Button gameButton;
+    @FXML
+    private Button logoutButton;
+    @FXML
+    private Button exitButton;
+    @FXML
     private TabPane tabPane;
     @FXML
     private BorderPane scene;
@@ -51,6 +66,8 @@ public class SearchWord implements Initializable {
     @FXML
     private Button markButton;
     @FXML
+    private ImageView imgMark;
+    @FXML
     private Button deleteButton;
     @FXML
     private Button editButton;
@@ -60,12 +77,23 @@ public class SearchWord implements Initializable {
     private HTMLEditor htmlEditor;
     @FXML
     private Button changeButton;
+    @FXML
+    private Button cancelChangeButton;
+    @FXML
+    private Rectangle rectangle;
+    private Button tabSelected;
+    private final Image imageMarked = new Image(getClass().getResourceAsStream("/icon/marked-icon.png"));
+    private final Image imageUnmarked = new Image(getClass().getResourceAsStream("/icon/notmarked-icon.png"));
+
+    private MySQL mySQL = MySQL.getInstance();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        homeButton.setOnAction(e -> tabPane.getSelectionModel().select(0));
-        webView.getEngine().loadContent(MySQL.htmlSelectFromDB(""));
-        check();
+        tabSelected = homeButton;
+
+        Platform.runLater(() -> webView.getEngine().loadContent(mySQL.htmlSelectFromDB("")));
+        loadTab();
+        selectTab();
 
         controllerSearch();
         selectFromList();
@@ -75,45 +103,110 @@ public class SearchWord implements Initializable {
         controllerEdit();
     }
 
-    public void check() {
-        translateButton.setOnAction(e -> {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/Translate.fxml"));
-            try {
-                Parent translateTab = loader.load();
-                Tab tab = new Tab("Google Translate", translateTab);
-                tabPane.getTabs().add(tab);
-                tabPane.getSelectionModel().select(tab);
+    public void loadTab() {
+        try {
+            FXMLLoader loaderTranslateTab = new FXMLLoader(getClass().getResource("/views/Translate.fxml"));
+            FXMLLoader loaderAddwordTab = new FXMLLoader(getClass().getResource("/views/addWordTab.fxml"));
+            FXMLLoader loaderBookmarkTab = new FXMLLoader(getClass().getResource("/views/bookmarkTab.fxml"));
 
-            } catch (IOException ex) {
-                System.out.println(ex.getMessage());
-            }
+            Parent translateTab = loaderTranslateTab.load();
+            Parent addWordTab = loaderAddwordTab.load();
+            Parent bookmarkTab = loaderBookmarkTab.load();
+
+            Tab tab2 = new Tab("Google Translate", translateTab);
+            Tab tab3 = new Tab("Add new word", addWordTab);
+            Tab tab4 = new Tab("Bookmark", bookmarkTab);
+
+            tabPane.getTabs().addAll(tab2, tab3, tab4);
+
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    public void selectTab() {
+        TranslateTransition transition = new TranslateTransition(Duration.seconds(0.4), rectangle);
+
+        homeButton.setOnAction(e -> {
+            tabSelected.setOpacity(0.5);
+            tabSelected = homeButton;
+
+            homeButton.setOpacity(1);
+            transition.setByY(92.5 - rectangle.localToScene(rectangle.getBoundsInLocal()).getMinY());
+            transition.play();
+
+            tabPane.getSelectionModel().select(0);
+        });
+
+        translateButton.setOnAction(e -> {
+            tabSelected.setOpacity(0.5);
+            tabSelected = translateButton;
+
+            translateButton.setOpacity(1);
+            transition.setByY(137.5 - rectangle.localToScene(rectangle.getBoundsInLocal()).getMinY());
+            transition.play();
+
+            tabPane.getSelectionModel().select(4);
         });
 
         addWordButton.setOnAction(e -> {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/addWordTab.fxml"));
-            try {
-                Parent addWordTab = loader.load();
-                Tab tab = new Tab("Add new word", addWordTab);
-                tabPane.getTabs().add(tab);
-                tabPane.getSelectionModel().select(tab);
+            tabSelected.setOpacity(0.5);
+            tabSelected = addWordButton;
 
-            } catch (IOException exception) {
-                System.out.println(exception.getMessage());
-            }
+            addWordButton.setOpacity(1);
+            transition.setByY(182.5 - rectangle.localToScene(rectangle.getBoundsInLocal()).getMinY());
+            transition.play();
+
+            tabPane.getSelectionModel().select(5);
         });
 
         bookmarkButton.setOnAction(e -> {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/bookmarkTab.fxml"));
-            try {
-                Parent bookmarkTab = loader.load();
-                Tab tab = new Tab("Bookmark", bookmarkTab);
-                tabPane.getTabs().add(tab);
-                tabPane.getSelectionModel().select(tab);
+            tabSelected.setOpacity(0.5);
+            tabSelected = bookmarkButton;
 
-            } catch (IOException exception) {
-                System.out.println(exception.getMessage());
+            bookmarkButton.setOpacity(1);
+            transition.setByY(227.5 - rectangle.localToScene(rectangle.getBoundsInLocal()).getMinY());
+            transition.play();
+
+            try {
+                FXMLLoader loaderBookmarkTab = new FXMLLoader(getClass().getResource("/views/bookmarkTab.fxml"));
+                Parent bookmarkTab = loaderBookmarkTab.load();
+                tabPane.getTabs().set(6, new Tab("Bookmark", bookmarkTab));
+
+            } catch (IOException ex) {
+                System.out.println("faild bookmark tab");
             }
+
+            tabPane.getSelectionModel().select(6);
         });
+
+        gameButton.setOnAction(e -> {
+            tabSelected.setOpacity(0.5);
+            tabSelected = gameButton;
+
+            gameButton.setOpacity(1);
+            transition.setByY(272.5 - rectangle.localToScene(rectangle.getBoundsInLocal()).getMinY());
+            transition.play();
+        });
+
+        logoutButton.setOnAction(e -> {
+            Stage newStage = new Stage();
+
+            try {
+                loadLoginPage(newStage);
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+
+            Stage stage = (Stage) logoutButton.getScene().getWindow();
+            stage.close();
+            newStage.show();
+        });
+
+        exitButton.setOnAction(e -> {
+            Platform.exit();
+        });
+
     }
 
     /*---Check double click---*/
@@ -159,6 +252,17 @@ public class SearchWord implements Initializable {
         textSearch.addEventFilter(KeyEvent.ANY, e -> {
             if (e.getCode().equals(KeyCode.ENTER)) {
                 textSearch.setEditable(false);
+                if (tabSelected != homeButton) {
+                    tabSelected.setOpacity(0.5);
+                    tabSelected = homeButton;
+
+                    homeButton.setOpacity(1);
+                    TranslateTransition transition = new TranslateTransition(Duration.seconds(0.3), rectangle);
+                    transition.setByY(92.5 - rectangle.localToScene(rectangle.getBoundsInLocal()).getMinY());
+                    transition.play();
+
+                    tabPane.getSelectionModel().select(0);
+                }
                 lookup(textSearch.getText());
 
             } else {
@@ -171,7 +275,7 @@ public class SearchWord implements Initializable {
 
                 } else {
                     listFound.setVisible(true);
-                    List<String> listWord = MySQL.searchFromDB(textSearch.getText());
+                    List<String> listWord = mySQL.searchFromDB(textSearch.getText());
                     ObservableList<String> observableList = FXCollections.observableArrayList(listWord);
 
                     listFound.setPrefHeight(Math.min(24 * listWord.size(), 235));
@@ -187,8 +291,15 @@ public class SearchWord implements Initializable {
             System.out.println(wordSelected);
 
             try {
-                if (!MySQL.checkBookmark(wordSelected)) MySQL.addBookmark(wordSelected);
-                else MySQL.deleteBookmark(wordSelected);
+                if (!mySQL.checkBookmark(wordSelected)) {
+                    mySQL.addBookmark(wordSelected);
+
+                    mark(true);
+                } else {
+                    mySQL.deleteBookmark(wordSelected);
+
+                    mark(false);
+                }
             } catch (SQLException exception) {
                 System.out.println(exception.getMessage());
             }
@@ -204,7 +315,7 @@ public class SearchWord implements Initializable {
             Optional<ButtonType> result = alert.showAndWait();
             if (result.isPresent() && result.get() == ButtonType.OK){
                 try {
-                    MySQL.deleteFromDB(wordSelected);
+                    mySQL.deleteFromDB(wordSelected);
                     lookup(wordSelected);
 
                 } catch (SQLException exception) {
@@ -219,7 +330,13 @@ public class SearchWord implements Initializable {
             result.setVisible(false);
             editor.setVisible(true);
 
-            htmlEditor.setHtmlText(MySQL.htmlSelectFromDB(wordSelected));
+            markButton.setVisible(false);
+            deleteButton.setVisible(false);
+            editButton.setVisible(false);
+            changeButton.setVisible(true);
+            cancelChangeButton.setVisible(true);
+
+            htmlEditor.setHtmlText(mySQL.htmlSelectFromDB(wordSelected));
             Platform.runLater(() -> {
                 Node[] nodes = htmlEditor.lookupAll(".tool-bar").toArray(new Node[0]);
                 for (Node node : nodes) {
@@ -233,22 +350,36 @@ public class SearchWord implements Initializable {
         changeButton.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> {
             editor.setVisible(false);
             result.setVisible(true);
+            changeButton.setVisible(false);
+            cancelChangeButton.setVisible(false);
 
             Document doc = Jsoup.parse(htmlEditor.getHtmlText());
-            String htmlTextToDB = doc.body().html();
+            String htmlTextToDB = doc.body().html().replace("\"", "\\\"");
             System.out.println(doc.body().html());
             try {
-                MySQL.updateDB(wordSelected, htmlTextToDB);
+                mySQL.updateDB(wordSelected, htmlTextToDB);
             } catch (SQLException exception) {
                 System.out.println(exception.getMessage());
             }
+
+            lookup(wordSelected);
+        });
+
+        cancelChangeButton.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> {
+            editor.setVisible(false);
+            result.setVisible(true);
+
+            changeButton.setVisible(false);
+            cancelChangeButton.setVisible(false);
+
+            lookup(wordSelected);
         });
     }
 
     private void lookup(String word) {
-        String definition = MySQL.htmlSelectFromDB(word);
+        String definition = mySQL.htmlSelectFromDB(word);
 //        System.out.println(definition);
-        if (MySQL.selectFromDB(word) == null) {
+        if (mySQL.selectFromDB(word) == null) {
             markButton.setVisible(false);
             deleteButton.setVisible(false);
             editButton.setVisible(false);
@@ -257,16 +388,44 @@ public class SearchWord implements Initializable {
             markButton.setVisible(true);
             deleteButton.setVisible(true);
             editButton.setVisible(true);
+
+            if(mySQL.checkBookmark(word)) mark(true);
+            else mark(false);
         }
 
         listFound.setVisible(false);
         listFound.getSelectionModel().select(-1);
-        tabPane.getSelectionModel().select(0);
         result.setVisible(true);
-        webView.getEngine().loadContent(definition);
+        Platform.runLater(() -> webView.getEngine().loadContent(definition));
 
     }
 
+    public void loadLoginPage(Stage stage) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(Login.class.getResource("/views/loginPage.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 720, 480);
+        scene.setFill(Color.TRANSPARENT);
 
+        stage.setTitle("Login Dictionary");
+        stage.initStyle(StageStyle.TRANSPARENT);
+        stage.setResizable(false);
+        stage.setScene(scene);
+        stage.show();
 
+    }
+
+    private void mark(boolean isMarked) {
+        if (isMarked) {
+            markButton.setText("Marked");
+            markButton.getStyleClass().clear();
+            markButton.getStyleClass().add("button");
+            markButton.getStyleClass().add("button2");
+            imgMark.setImage(imageMarked);
+        } else {
+            markButton.setText("Mark");
+            markButton.getStyleClass().clear();
+            markButton.getStyleClass().add("button");
+            markButton.getStyleClass().add("button1");
+            imgMark.setImage(imageUnmarked);
+        }
+    }
 }

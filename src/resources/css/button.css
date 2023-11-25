@@ -4,7 +4,7 @@
     -fx-border-radius: 30;
 }
 
-.button1:hover {
+.button:hover {
     -fx-background-color: #825CE8;
     -fx-border-color: transparent;
 }
@@ -24,5 +24,6 @@
     -fx-text-fill: #FFFFFF;
 }
 .button3:hover {
+    -fx-background-color: transparent;
     -fx-opacity: 1;
 }

@@ -4,6 +4,8 @@ import Application.MySQL;
 
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -86,6 +88,7 @@ public class SearchWord implements Initializable {
     private final Image imageUnmarked = new Image(getClass().getResourceAsStream("/icon/notmarked-icon.png"));
 
     private MySQL mySQL = MySQL.getInstance();
+    private boolean needReloadBookmark = false;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -96,11 +99,10 @@ public class SearchWord implements Initializable {
         selectTab();
 
         controllerSearch();
-        selectFromList();
 
-        controllerMark();
-        controllerDelete();
-        controllerEdit();
+//        controllerMark();
+//        controllerDelete();
+//        controllerEdit();
     }
 
     public void loadTab() {
@@ -146,7 +148,7 @@ public class SearchWord implements Initializable {
             transition.setByY(137.5 - rectangle.localToScene(rectangle.getBoundsInLocal()).getMinY());
             transition.play();
 
-            tabPane.getSelectionModel().select(4);
+            tabPane.getSelectionModel().select(1);
         });
 
         addWordButton.setOnAction(e -> {
@@ -157,7 +159,7 @@ public class SearchWord implements Initializable {
             transition.setByY(182.5 - rectangle.localToScene(rectangle.getBoundsInLocal()).getMinY());
             transition.play();
 
-            tabPane.getSelectionModel().select(5);
+            tabPane.getSelectionModel().select(2);
         });
 
         bookmarkButton.setOnAction(e -> {
@@ -168,16 +170,20 @@ public class SearchWord implements Initializable {
             transition.setByY(227.5 - rectangle.localToScene(rectangle.getBoundsInLocal()).getMinY());
             transition.play();
 
-            try {
-                FXMLLoader loaderBookmarkTab = new FXMLLoader(getClass().getResource("/views/bookmarkTab.fxml"));
-                Parent bookmarkTab = loaderBookmarkTab.load();
-                tabPane.getTabs().set(6, new Tab("Bookmark", bookmarkTab));
+            if (needReloadBookmark) {
+                try {
+                    FXMLLoader loaderBookmarkTab = new FXMLLoader(getClass().getResource("/views/bookmarkTab.fxml"));
+                    Parent bookmarkTab = loaderBookmarkTab.load();
+                    tabPane.getTabs().set(3, new Tab("Bookmark", bookmarkTab));
 
-            } catch (IOException ex) {
-                System.out.println("faild bookmark tab");
+                } catch (IOException ex) {
+                    System.out.println("faild bookmark tab");
+                }
+
+                needReloadBookmark = false;
             }
 
-            tabPane.getSelectionModel().select(6);
+            tabPane.getSelectionModel().select(3);
         });
 
         gameButton.setOnAction(e -> {
@@ -218,6 +224,7 @@ public class SearchWord implements Initializable {
         listFound.setOnMouseClicked(e -> {
 //                if (e.getClickCount() == 1) {
                 String wordClicked = listFound.getSelectionModel().getSelectedItem();
+                if (wordClicked == null) return;
 
                 if (!isSelected) {
                     listFound.getSelectionModel().select(listFound.getSelectionModel().getSelectedIndex());
@@ -288,6 +295,7 @@ public class SearchWord implements Initializable {
 
     public void controllerMark() {
         markButton.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> {
+            needReloadBookmark = true;
             System.out.println(wordSelected);
 
             try {

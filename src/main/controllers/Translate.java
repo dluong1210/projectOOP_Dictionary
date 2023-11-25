@@ -1,7 +1,7 @@
-/*package controllers;
+package controllers;
 
 import Application.GoogleTranslateAPI;
-//import Application.VoiceRSS;
+import Application.VoiceRSS;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -208,4 +208,3 @@ public class Translate implements Initializable {
         });
     }
 }
-*/

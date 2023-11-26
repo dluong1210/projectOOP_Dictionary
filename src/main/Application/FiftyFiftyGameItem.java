@@ -1,6 +1,11 @@
 package Application;
 
 public class FiftyFiftyGameItem extends GameItem{
+
+    public FiftyFiftyGameItem() {
+        name = "Fifty-Fifty";
+    }
+
     /**
      * Give two incorrect choices.
      * @param game contains the choices and correct choice
@@ -40,5 +45,11 @@ public class FiftyFiftyGameItem extends GameItem{
         }
 
         return eliminate;
+    }
+
+    @Override
+    public String getInstruction() {
+        return "   - " + name + " removes half of the wrong choice. "
+                + "You will get an additional use after 6 correct choices.\n";
     }
 }

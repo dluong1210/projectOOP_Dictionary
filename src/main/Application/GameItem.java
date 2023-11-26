@@ -4,7 +4,12 @@ public abstract class GameItem {
     /**
      * Number of times can be used left.
      */
-    protected int number;
+    protected int number = 0;
+
+    /**
+     * Item's name.
+     */
+    protected String name;
 
     /**
      * Use item to know some incorrect choices.
@@ -21,6 +26,26 @@ public abstract class GameItem {
         return number > 0;
     }
 
+    /**
+     * Increase one more time to use item.
+     * @param point the point player has just earned
+     * @param time frequency of adding
+     */
+    public void increaseUsage(int point, int time) {
+        if (point % time == 0) {
+            number += 1;
+        }
+    }
+
+    public String getText() {
+        return name + " [" + number + "]";
+    }
+
+    /**
+     * How to use this item?
+     * @return thing this item can do
+     */
+    public abstract String getInstruction();
 
 //////// Getter / setter
 
@@ -30,5 +55,13 @@ public abstract class GameItem {
 
     public void setNumber(int number) {
         this.number = number;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

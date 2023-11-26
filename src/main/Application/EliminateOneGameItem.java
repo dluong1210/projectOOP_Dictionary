@@ -1,6 +1,14 @@
 package Application;
 
 public class EliminateOneGameItem extends GameItem{
+
+    /**
+     * Constructor.
+     */
+    public EliminateOneGameItem() {
+        name = "Eliminate";
+    }
+
     /**
      * Give one incorrect choice.
      * @param game contains the choices and correct choice
@@ -30,5 +38,11 @@ public class EliminateOneGameItem extends GameItem{
             eliminate[first] = true;
         }
         return eliminate;
+    }
+
+    @Override
+    public String getInstruction() {
+        return "   - " + name + " removes an incorrect choice. "
+                + "You will get an additional use after 2 correct choices.\n";
     }
 }

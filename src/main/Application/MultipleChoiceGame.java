@@ -44,11 +44,15 @@ public abstract class MultipleChoiceGame implements GameCommandline {
 
     /**
      * A random word with chosen length.
-     * @return a random word with length from 4 to 10 characters
+     * @return a random word with length from 4 to 16 characters
      */
     protected Word getRandomWord() {
-        int wordLength = (int) (Math.random() * 6) + 4;
-        return dictionaryManagement.listWord.getRandomWord(wordLength,wordLength);                     // tra ve Word random lay trong database
+        int wordLength = (int) (Math.random() * 12) + 4;
+        Word word = dictionaryManagement.listWord.getRandomWord(wordLength,wordLength);  // dam bao xac suat phan bo deu
+        while (word.getWord_target().charAt(1) <= 'Z') {
+            word = dictionaryManagement.listWord.getRandomWord(wordLength,wordLength); // loai tru ten nhom to chuc viet tat
+        }
+        return word;                     // tra ve Word random lay trong database
     }
 
     /**

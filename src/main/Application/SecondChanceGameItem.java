@@ -7,6 +7,13 @@ public class SecondChanceGameItem extends GameItem{
     private boolean isInvincible = false;
 
     /**
+     * Constructor.
+     */
+    public SecondChanceGameItem() {
+        name = "Invincible";
+    }
+
+    /**
      * Give one incorrect choice.
      * @param game contains the choices and correct choice
      * @return an array with an incorrect choice from the player
@@ -18,20 +25,31 @@ public class SecondChanceGameItem extends GameItem{
             eliminate[i] = false;
         }
 
-        if (isUsable() && isInvincible) {
-            number -= 1;
+        // Su dung
+        if (isInvincible) {
             for (int i = 0; i < 4; i += 1) {
                 if (game.playerChoice.equals(game.option[i])) {
                     eliminate[i] = true;
                 }
             }
+            isInvincible = false;
+        } else {
+            // Bat dau su dung
+            if (isUsable()) {
+                number -= 1;
+                isInvincible = true;
+            }
         }
-
-        isInvincible = true;
         return eliminate;
     }
 
-//////// Getter / setter
+    @Override
+    public String getInstruction() {
+        return "   - " + name + " allows to choose another choice for the second time in case the first choice is incorrect. "
+                + "You will get an additional use after 4 correct choices.\n";
+    }
+
+    //////// Getter / setter
 
     public boolean isInvincible() {
         return isInvincible;

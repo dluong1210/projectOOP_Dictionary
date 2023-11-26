@@ -7,12 +7,15 @@ public class WordChoiceGame extends ChoiceGame {
 
     @Override
     public String giveRule() {
-        return "Choose the option contains the word has the meaning given by the question.";
+        return " + Choosing Word Game's rule:\n"
+                + "   - Choose an option which contains the word has the meaning given by the question.";
     }
 
     @Override
     public String giveQuestion() {
-        return "Question " + (points + 1) + ": \nWhich word has the following meaning?: " + words[correctChoice].getWord_explain();
+        return "Question " + (points + 1) + ": " + words[correctChoice].getWord_explain();
+        //return "Question " + (points + 1) + ": " + words[correctChoice].getWord_explain();
+
     }
 
     @Override

@@ -94,15 +94,14 @@ public class SearchWord implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         tabSelected = homeButton;
 
-        Platform.runLater(() -> webView.getEngine().loadContent(mySQL.htmlSelectFromDB("")));
         loadTab();
         selectTab();
 
         controllerSearch();
 
-//        controllerMark();
-//        controllerDelete();
-//        controllerEdit();
+        controllerMark();
+        controllerDelete();
+        controllerEdit();
     }
 
     public void loadTab() {
@@ -254,6 +253,12 @@ public class SearchWord implements Initializable {
         textSearch.setOnMouseClicked(e -> {
             textSearch.setEditable(true);
             if (!textSearch.getText().isEmpty()) listFound.setVisible(true);
+
+            if (editor.isVisible()) {
+                editor.setVisible(false);
+                cancelChangeButton.setVisible(false);
+                changeButton.setVisible(false);
+            }
         });
 
         textSearch.addEventFilter(KeyEvent.ANY, e -> {
@@ -385,8 +390,6 @@ public class SearchWord implements Initializable {
     }
 
     private void lookup(String word) {
-        String definition = mySQL.htmlSelectFromDB(word);
-//        System.out.println(definition);
         if (mySQL.selectFromDB(word) == null) {
             markButton.setVisible(false);
             deleteButton.setVisible(false);
@@ -403,6 +406,14 @@ public class SearchWord implements Initializable {
 
         listFound.setVisible(false);
         listFound.getSelectionModel().select(-1);
+
+        if (textSearch.getText().isEmpty()) {
+            result.setVisible(false);
+            return;
+        }
+
+        String definition = mySQL.htmlSelectFromDB(word);
+//        System.out.println(definition);
         result.setVisible(true);
         Platform.runLater(() -> webView.getEngine().loadContent(definition));
 

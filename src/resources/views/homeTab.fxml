@@ -116,7 +116,7 @@
                                           </HBox>
                                        </top>
                                     </BorderPane>
-                                    <Button fx:id="editButton" layoutX="383.0" layoutY="60.0" mnemonicParsing="false" onAction="#controllerEdit" prefHeight="40.0" prefWidth="70.0" styleClass="button1" stylesheets="@../css/button.css" text="Edit" textFill="WHITE" visible="false">
+                                    <Button fx:id="editButton" layoutX="383.0" layoutY="60.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="70.0" styleClass="button1" stylesheets="@../css/button.css" text="Edit" textFill="WHITE" visible="false">
                                        <graphic>
                                           <ImageView fitHeight="18.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
@@ -134,7 +134,7 @@
                                           <Insets />
                                        </opaqueInsets>
                                     </Button>
-                                    <Button fx:id="deleteButton" layoutX="463.0" layoutY="60.0" mnemonicParsing="false" onAction="#controllerDelete" prefHeight="40.0" prefWidth="90.0" styleClass="button1" stylesheets="@../css/button.css" text="Delete" textFill="WHITE" visible="false">
+                                    <Button fx:id="deleteButton" layoutX="463.0" layoutY="60.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="90.0" styleClass="button1" stylesheets="@../css/button.css" text="Delete" textFill="WHITE" visible="false">
                                        <graphic>
                                           <ImageView fitHeight="18.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
@@ -149,7 +149,7 @@
                                           <Glow level="0.5" />
                                        </effect>
                                     </Button>
-                                    <Button fx:id="markButton" layoutX="562.0" layoutY="60.0" mnemonicParsing="false" onMouseClicked="#controllerMark" prefHeight="40.0" prefWidth="95.0" styleClass="button1" stylesheets="@../css/button.css" text="Mark" textFill="WHITE" visible="false">
+                                    <Button fx:id="markButton" layoutX="562.0" layoutY="60.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="95.0" styleClass="button1" stylesheets="@../css/button.css" text="Mark" textFill="WHITE" visible="false">
                                        <graphic>
                                           <ImageView fx:id="imgMark" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                              <image>

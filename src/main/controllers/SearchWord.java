@@ -104,19 +104,22 @@ public class SearchWord implements Initializable {
 
     public void loadTab() {
         try {
-            FXMLLoader loaderTranslateTab = new FXMLLoader(getClass().getResource("/views/Translate.fxml"));
+            FXMLLoader loaderTranslateTab = new FXMLLoader(getClass().getResource("/views/translateTab.fxml"));
             FXMLLoader loaderAddwordTab = new FXMLLoader(getClass().getResource("/views/addWordTab.fxml"));
             FXMLLoader loaderBookmarkTab = new FXMLLoader(getClass().getResource("/views/bookmarkTab.fxml"));
+            FXMLLoader loaderGameTab = new FXMLLoader(getClass().getResource("/views/gameTab.fxml"));
 
             Parent translateTab = loaderTranslateTab.load();
             Parent addWordTab = loaderAddwordTab.load();
             Parent bookmarkTab = loaderBookmarkTab.load();
+            Parent gameTab = loaderGameTab.load();
 
             Tab tab2 = new Tab("Google Translate", translateTab);
             Tab tab3 = new Tab("Add new word", addWordTab);
             Tab tab4 = new Tab("Bookmark", bookmarkTab);
+            Tab tab5 = new Tab("Game", gameTab);
 
-            tabPane.getTabs().addAll(tab2, tab3, tab4);
+            tabPane.getTabs().addAll(tab2, tab3, tab4, tab5);
 
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
@@ -190,6 +193,8 @@ public class SearchWord implements Initializable {
             gameButton.setOpacity(1);
             transition.setByY(272.5 - rectangle.localToScene(rectangle.getBoundsInLocal()).getMinY());
             transition.play();
+
+            tabPane.getSelectionModel().select(4);
         });
 
         logoutButton.setOnAction(e -> {

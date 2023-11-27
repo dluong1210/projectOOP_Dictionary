@@ -1,10 +1,9 @@
 
 package controllers;
-/*
-import Application.GoogleTranslateAPI;
-import Application.VoiceRSS;
 
-import javafx.event.ActionEvent;
+import application.GoogleTranslateAPI;
+import application.VoiceRSS;
+
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -38,6 +37,10 @@ public class Translate implements Initializable {
     private Button speakInput;
     @FXML
     private Button speakOutput;
+    @FXML
+    private Button swapButton;
+    @FXML
+    private Button translateButton;
 
     private String currentInputText;
     private String currentOutputText;
@@ -61,7 +64,7 @@ public class Translate implements Initializable {
             case "Chinese" -> "zh-cn";
             case "Japanese" -> "ja-jp";
             default -> null;
-            };
+        };
     }
 
     @Override
@@ -71,18 +74,20 @@ public class Translate implements Initializable {
         langueOutput.getItems().addAll("Vietnamese", "English", "Japanese", "Chinese", "French");
         langueOutput.getSelectionModel().select("English");
 
-        checkMouse(new ActionEvent());
-        controllerTranslate(new ActionEvent());
-        controllerSpeak(new ActionEvent());
+        checkMouse();
+        controllerTranslate();
+        controllerSpeak();
+        controllerSwapLabel();
     }
 
     private void translate() {
-            textInput.setEditable(false);
-            input.getStyleClass().clear();
-            input.getStyleClass().add("inactive-pane");
+        textInput.setEditable(false);
+        input.getStyleClass().clear();
+        input.getStyleClass().add("inactive-pane");
 
-            String textIn = textInput.getText();
-            String textOut;
+        String textIn = textInput.getText();
+        String textOut = "";
+        if (!textIn.isEmpty()) {
             try {
                 String src = convertLangueLabel(langueInput.getValue());
                 String target = convertLangueLabel(langueOutput.getValue());
@@ -90,13 +95,14 @@ public class Translate implements Initializable {
             } catch (Exception exception) {
                 textOut = textIn;
             }
+        }
 
-            textOutput.setText(textOut);
-            output.getStyleClass().clear();
-            output.getStyleClass().add("active-pane");
+        textOutput.setText(textOut);
+        output.getStyleClass().clear();
+        output.getStyleClass().add("active-pane");
     }
 
-    private void controllerTranslate(ActionEvent event) {
+    private void controllerTranslate() {
         KeyCombination nextLine = new KeyCodeCombination(KeyCode.ENTER, KeyCombination.SHIFT_DOWN);
         textInput.addEventFilter(KeyEvent.KEY_PRESSED, e -> {
             if (e.getCode().equals(KeyCode.ENTER)) {
@@ -109,9 +115,14 @@ public class Translate implements Initializable {
                 }
             }
         });
+
+        translateButton.setOnAction(e -> {
+            System.out.println("Translate");
+            translate();
+        });
     }
 
-    private void controllerSpeak(ActionEvent event) {
+    private void controllerSpeak() {
         speakInput.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> {
             speakText(textInput, langueInput.getValue(), true);
         });
@@ -122,22 +133,21 @@ public class Translate implements Initializable {
 
     }
 
-    private void speakText(TextArea text, String label, boolean isInput) {
-        if (text.getText().isEmpty()) return;
-        String check = isInput ? currentInputText : currentOutputText;
-        String labelSpeech = convertSpeechLabel(label);
+    public void controllerSwapLabel() {
+        swapButton.setOnAction(e -> {
+            String labelInput = langueInput.getValue();
+            String labelOutput = langueOutput.getValue();
+            langueInput.getSelectionModel().select(labelOutput);
+            langueOutput.getSelectionModel().select(labelInput);
 
-        if (!text.getText().equals(check) && !text.getText().isEmpty()) {
-            if (isInput) {
-                VoiceRSS.setAudio(text.getText(), labelSpeech, "translateInput");
-                currentInputText = text.getText();
-            } else {
-                VoiceRSS.setAudio(text.getText(), labelSpeech, "translateOutput");
-                currentOutputText = text.getText();
-            }
+//            String input = textInput.getText();
+            String output = textOutput.getText();
+            textInput.setText(output);
+            translate();
+        });
+    }
 
-        }
-
+    private void playAudio(boolean isInput) {
         Media media = null;
         try {
             String path;
@@ -148,7 +158,6 @@ public class Translate implements Initializable {
             }
 
             media = new Media(path);
-            System.out.println(path);
 
         } catch (Exception exception) {
             System.out.println(exception.getMessage());
@@ -156,19 +165,45 @@ public class Translate implements Initializable {
 
         MediaPlayer player = new MediaPlayer(media);
         player.play();
-
     }
 
-    private void checkMouse(ActionEvent event) {
+    private void speakText(TextArea text, String label, boolean isInput) {
+        if (text.getText().isEmpty()) return;
+        String check = isInput ? currentInputText : currentOutputText;
+        String labelSpeech = convertSpeechLabel(label);
+
+        if (!text.getText().equals(check)) {
+            if (isInput) {
+                try {
+                    VoiceRSS.setAudio(text.getText(), labelSpeech, "translateInput");
+                } catch (Exception ex) {
+                    System.out.println(ex.getMessage());
+                }
+                currentInputText = text.getText();
+            } else {
+                try {
+                    VoiceRSS.setAudio(text.getText(), labelSpeech, "translateOutput");
+                } catch (Exception ex) {
+                    System.out.println(ex.getMessage());
+                }
+                currentOutputText = text.getText();
+            }
+        }
+
+        playAudio(isInput);
+    }
+
+
+    private void checkMouse() {
         textInput.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> {
             textInput.setEditable(true);
             input.getStyleClass().clear();
             input.getStyleClass().add("active-pane");
         });
-        output.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> {
-            output.getStyleClass().clear();
-            output.getStyleClass().add("active-pane");
-        });
+//        output.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> {
+//            output.getStyleClass().clear();
+//            output.getStyleClass().add("active-pane");
+//        });
 
         sceneTrans.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> {
             if (!textInput.getBoundsInLocal().contains(e.getX(), e.getY())) {
@@ -183,5 +218,3 @@ public class Translate implements Initializable {
         });
     }
 }
-
- */

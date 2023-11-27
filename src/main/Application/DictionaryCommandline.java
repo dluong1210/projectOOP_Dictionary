@@ -16,7 +16,7 @@ public class DictionaryCommandline extends DictionaryManagement {
 
         for (int i = 0; i < listWordToShow.size(); ++i) {
             Word word = listWordToShow.get(i);
-            System.out.printf("%-20s | %-20s | %-20s\n", i + 1, word.getWord_target(), word.getWord_explain());
+                System.out.printf("%-20s | %-20s | %-20s\n", i + 1, word.getWord_target(), word.getWord_explain());
         }
     }
 
@@ -67,37 +67,37 @@ public class DictionaryCommandline extends DictionaryManagement {
             System.out.println("[8] Import from file");
             System.out.println("[9] Export to file");
             System.out.println("Your action: ");
-            int action = scan.nextInt();
+            String action = scan.next();
             switch (action) {
-                case 0:
+                case "0":
                     quit = true;
                     break;
-                case 1:
+                case "1":
                     dictionaryAdd();
                     break;
-                case 2:
+                case "2":
                     dictionaryRemove();
                     break;
-                case 3:
+                case "3":
                     dictionaryUpdate();
                     break;
-                case 4:
+                case "4":
                     showAllWords();
                     break;
-                case 5:
+                case "5":
                     dictionaryLookup();
                     break;
-                case 6:
+                case "6":
                     dictionarySearcher();
                     break;
-                case 7:
+                case "7":
                     dictionaryGame();
                     break;
-                case 8:
+                case "8":
     //                dictionaryImportFromFile();
                     insertFromFile();
                     break;
-                case 9:
+                case "9":
                     dictionaryExportToFile();
                     break;
                 default:
@@ -123,7 +123,42 @@ public class DictionaryCommandline extends DictionaryManagement {
     public static void main(String[] argv) {
         DictionaryCommandline test = new DictionaryCommandline();
         test.dictionaryAdvanced();
+        /*
+        test.insertFromFile();
+        test.deleteHoa();
+        int length = 2;
+        for (int i = 0; i < 100; i += 1) {
+            Word word = test.listWord.getRandomWord(length,length);
+            System.out.println(word.getWord_target() + "\t" + word.getWord_explain());
+        }
+        test.showAllWords(length);
+
+         */
     }
+/* Fix bug
+    public void deleteHoa() {
+        List<Word> listWordToShow = listWord.searchFrom("");
+        for (int i = 0; i < listWordToShow.size(); ++i) {
+            Word word = listWordToShow.get(i);
+            if (word.getWord_target().length() > 0 && word.getWord_target().charAt(0) >= 'A' && word.getWord_target().charAt(0) <= 'Z') {
+                listWord.delete(word.getWord_target());
+            }
+        }
+    }
+
+    public void showAllWords(int length) {
+        System.out.printf("%-20s | %-20s | %-20s\n", "No", "English", "Vietnamese");
+        List<Word> listWordToShow = listWord.searchFrom("");
+        for (int i = 0; i < listWordToShow.size(); ++i) {
+            Word word = listWordToShow.get(i);
+            if (word.getWord_target().length() == length) {
+                System.out.printf("%-20s | %-20s | %-20s\n", i + 1, word.getWord_target(), word.getWord_explain());
+            }
+        }
+    }
+
+ */
+
 
     /**
      * Four cute games.

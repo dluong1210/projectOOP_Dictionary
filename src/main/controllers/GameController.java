@@ -116,6 +116,7 @@ public class GameController implements Initializable {
                 break;
         }
         // San sang
+        initItem();
         game.initGame();
         printIntroduceAndPlay();                                          // in luat
     }
@@ -265,5 +266,14 @@ public class GameController implements Initializable {
                 + eliminateOne.getInstruction()
                 + secondChance.getInstruction()
                 + fiftyFifty.getInstruction();
+    }
+
+    /**
+     * Set number of uses back to 0.
+     */
+    public void initItem() {
+        eliminateOne.setNumber(0);
+        secondChance.setNumber(0);
+        fiftyFifty.setNumber(0);
     }
 }

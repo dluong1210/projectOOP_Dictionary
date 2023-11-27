@@ -1,4 +1,4 @@
-package application;
+package game;
 
 /**
  * Choose the word has the given meaning.

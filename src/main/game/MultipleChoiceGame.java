@@ -1,4 +1,6 @@
-package application;
+package game;
+
+import application.Word;
 
 import java.io.File;
 import java.io.FileNotFoundException;

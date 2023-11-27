@@ -1,4 +1,6 @@
-package application;
+package game;
+
+import application.Word;
 
 /**
  * Hard game using memory.

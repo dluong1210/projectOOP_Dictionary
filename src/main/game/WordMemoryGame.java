@@ -1,4 +1,4 @@
-package application;
+package game;
 public class WordMemoryGame extends MemoryGame {
 
     public String giveRule() {

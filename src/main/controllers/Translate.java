@@ -1,5 +1,5 @@
 package controllers;
-/*
+
 import application.GoogleTranslateAPI;
 import application.VoiceRSS;
 
@@ -217,5 +217,3 @@ public class Translate implements Initializable {
         });
     }
 }
-
- */

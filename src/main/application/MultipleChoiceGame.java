@@ -40,6 +40,22 @@ public abstract class MultipleChoiceGame implements GameCommandline {
     public abstract void initGame();
 
     /**
+     * Insert the Word Database into a list.
+     */
+    public void getWordDatabase() {
+        try {
+            File input = new File("src/resources/data/wordDatabaseForGame.txt");
+            Scanner scan = new Scanner(input);
+            while (scan.hasNextLine()) {
+                String[] word = scan.nextLine().split("\t");
+                wordDatabase.add(new Word(word[0], word[1]));
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
      * How to play.
      * @return the game's rule
      */
@@ -96,22 +112,6 @@ public abstract class MultipleChoiceGame implements GameCommandline {
      */
     public String giveResult() {
         return "Congratulation! Your points is: " + points;
-    }
-
-    /**
-     * Insert the Word Database into a list.
-     */
-    public void getWordDatabase() {
-        try {
-            File input = new File("src/resources/data/wordDatabaseForGame.txt");
-            Scanner scan = new Scanner(input);
-            while (scan.hasNextLine()) {
-                String[] word = scan.nextLine().split("\t");
-                wordDatabase.add(new Word(word[0], word[1]));
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
     }
 
 //////// Game Commandline method.

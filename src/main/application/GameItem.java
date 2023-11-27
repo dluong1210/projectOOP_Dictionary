@@ -1,4 +1,4 @@
-package Application;
+package application;
 
 public abstract class GameItem {
     /**

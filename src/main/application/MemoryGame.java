@@ -1,4 +1,4 @@
-package Application;
+package application;
 
 /**
  * Hard game using memory.

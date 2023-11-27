@@ -3,6 +3,10 @@ package controllers;
 import Application.GoogleTranslateAPI;
 import Application.VoiceRSS;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -13,10 +17,12 @@ import javafx.scene.input.*;
 import javafx.scene.layout.Pane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.util.Duration;
 
 import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.concurrent.CountDownLatch;
 
 public class Translate implements Initializable {
     @FXML
@@ -76,7 +82,7 @@ public class Translate implements Initializable {
 
         checkMouse(new ActionEvent());
         controllerTranslate(new ActionEvent());
-        controllerSpeak(new ActionEvent());
+        controllerSpeak();
         controllerSwapLabel();
     }
 
@@ -122,7 +128,7 @@ public class Translate implements Initializable {
         });
     }
 
-    private void controllerSpeak(ActionEvent event) {
+    private void controllerSpeak() {
         speakInput.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> {
             speakText(textInput, langueInput.getValue(), true);
         });
@@ -147,22 +153,7 @@ public class Translate implements Initializable {
         });
     }
 
-    private void speakText(TextArea text, String label, boolean isInput) {
-        if (text.getText().isEmpty()) return;
-        String check = isInput ? currentInputText : currentOutputText;
-        String labelSpeech = convertSpeechLabel(label);
-
-        if (!text.getText().equals(check) && !text.getText().isEmpty()) {
-            if (isInput) {
-                VoiceRSS.setAudio(text.getText(), labelSpeech, "translateInput");
-                currentInputText = text.getText();
-            } else {
-                VoiceRSS.setAudio(text.getText(), labelSpeech, "translateOutput");
-                currentOutputText = text.getText();
-            }
-
-        }
-
+    private void playAudio(boolean isInput) {
         Media media = null;
         try {
             String path;
@@ -181,8 +172,36 @@ public class Translate implements Initializable {
 
         MediaPlayer player = new MediaPlayer(media);
         player.play();
-
     }
+
+    private void speakText(TextArea text, String label, boolean isInput) {
+        if (text.getText().isEmpty()) return;
+        String check = isInput ? currentInputText : currentOutputText;
+        String labelSpeech = convertSpeechLabel(label);
+
+        Task<Void> task = new Task<Void>() {
+            @Override
+            protected Void call() throws Exception {
+                if (!text.getText().equals(check)) {
+                    if (isInput) {
+                        VoiceRSS.setAudio(text.getText(), labelSpeech, "translateInput");
+                        currentInputText = text.getText();
+                    } else {
+                        VoiceRSS.setAudio(text.getText(), labelSpeech, "translateOutput");
+                        currentOutputText = text.getText();
+                    }
+                }
+                return null;
+            }
+        };
+
+        task.setOnSucceeded(e -> {
+            playAudio(isInput);
+        });
+
+        new Thread(task).start();
+    }
+
 
     private void checkMouse(ActionEvent event) {
         textInput.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> {

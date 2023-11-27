@@ -56,23 +56,4 @@ public interface GameCommandline {
             System.out.print(validInput[validInput.length - 1] + "] \n");
         }
     }
-
-//// Old method.
-    //    void getValidPlayerInput();
-
-    /*
-    static void waitingToReady() {
-        Scanner scan = new Scanner(System.in);
-        String inputChoice;
-        while (true) {
-            System.out.println("Are you ready?\n[1] YES");
-            inputChoice = scan.nextLine();
-            if (!inputChoice.equals("1")) {
-                System.out.println("Please choose 1 if you are ready");
-                continue;
-            }
-            break;
-        }
-    }
-*/
 }

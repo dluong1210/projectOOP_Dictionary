@@ -1,10 +1,18 @@
 package Application;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
 /**
  * Learning English with multiple-choice game choosing A B C D.
  */
 public abstract class MultipleChoiceGame implements GameCommandline {
-    protected DictionaryManagement dictionaryManagement = new DictionaryManagement();
+    //protected DictionaryManagement dictionaryManagement = new DictionaryManagement();
+
+    protected List<Word> wordDatabase = new ArrayList<>();
     /**
      * Four options A B C D.
      */
@@ -47,12 +55,9 @@ public abstract class MultipleChoiceGame implements GameCommandline {
      * @return a random word with length from 4 to 16 characters
      */
     protected Word getRandomWord() {
-        int wordLength = (int) (Math.random() * 12) + 4;
-        Word word = dictionaryManagement.listWord.getRandomWord(wordLength,wordLength);  // dam bao xac suat phan bo deu
-        while (word.getWord_target().charAt(1) <= 'Z') {
-            word = dictionaryManagement.listWord.getRandomWord(wordLength,wordLength); // loai tru ten nhom to chuc viet tat
-        }
-        return word;                     // tra ve Word random lay trong database
+        int sizeOfDatabase = wordDatabase.size();
+        int random = (int) (Math.random() * sizeOfDatabase);
+        return wordDatabase.get(random);
     }
 
     /**
@@ -91,6 +96,22 @@ public abstract class MultipleChoiceGame implements GameCommandline {
      */
     public String giveResult() {
         return "Congratulation! Your points is: " + points;
+    }
+
+    /**
+     * Insert the Word Database into a list.
+     */
+    public void getWordDatabase() {
+        try {
+            File input = new File("src/resources/data/wordDatabaseForGame.txt");
+            Scanner scan = new Scanner(input);
+            while (scan.hasNextLine()) {
+                String[] word = scan.nextLine().split("\t");
+                wordDatabase.add(new Word(word[0], word[1]));
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
 //////// Game Commandline method.
@@ -137,12 +158,9 @@ public abstract class MultipleChoiceGame implements GameCommandline {
 
 //////// Getter / setter
 
-    public DictionaryManagement getDictionaryManagement() {
-        return dictionaryManagement;
-    }
 
-    public void setDictionaryManagement(DictionaryManagement dictionaryManagement) {
-        this.dictionaryManagement = dictionaryManagement;
+    public void setWordDatabase(List<Word> wordDatabase) {
+        this.wordDatabase = wordDatabase;
     }
 
     public static String[] getOption() {
@@ -180,21 +198,4 @@ public abstract class MultipleChoiceGame implements GameCommandline {
     public void setPoints(int points) {
         this.points = points;
     }
-
-//// Old method.
-
-/*
-    public void getValidPlayerInput() {
-        Scanner scan = new Scanner(System.in);
-        while (true) {
-            System.out.println("Your answer is: ");
-            playerChoice = scan.nextLine();
-            if (!(playerChoice.equals("A") || playerChoice.equals("B") || playerChoice.equals("C") || playerChoice.equals("D"))) {
-                System.out.println("Please choose A, B, C or D");
-                continue;
-            }
-            break;
-        }
-    }
-*/
 }

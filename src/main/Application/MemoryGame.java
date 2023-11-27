@@ -20,7 +20,8 @@ public abstract class MemoryGame extends MultipleChoiceGame{
     @Override
     public void initGame() {
         setPoints(0);
-        dictionaryManagement.insertFromFile();                          // tao database
+        getWordDatabase();
+        //dictionaryManagement.insertFromFile();                          // tao database
         setCorrectChoice((int) (Math.random() * 4));                    // chon 1 lua chon se la dap an dung
         getValidWordChoices();                                          // chon ra 4 tu lam de bai
     }
@@ -112,42 +113,4 @@ public abstract class MemoryGame extends MultipleChoiceGame{
     public void setPreviousCorrectChoice(int previousCorrectChoice) {
         this.previousCorrectChoice = previousCorrectChoice;
     }
-
-//// Old method.
-
-
-    /**
-     * Copy words from another array to this array.
-     * @param paste this array
-     * @param copy the another array
-     */
-    /*
-    public void copyChoices(Word[] paste, Word[] copy) {
-        for (int i = 0; i < 4; i += 1) {
-            paste[i] = copy[i];
-        }
-    }
-*/
-
-    /**
-     * Switch the previous words and the current words.
-     */
-    /*
-    public void switchChoices() {
-        Word[] auxChoices = new Word[4];
-        int auxCorrectChoice;
-
-        copyChoices(auxChoices, previousWordChoices);
-        auxCorrectChoice = previousCorrectChoice;
-
-        copyChoices(previousWordChoices, words);
-        previousCorrectChoice = correctChoice;
-
-        copyChoices(words, auxChoices);
-        correctChoice = auxCorrectChoice;
-    }
-
-
-     */
-
 }

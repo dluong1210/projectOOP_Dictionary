@@ -11,21 +11,11 @@ public class MeaningMemoryGame extends MemoryGame {
 
     @Override
     public String giveQuestion() {
-        return "Question " + (points + 1) + ": " + words[correctChoice].getWord_target();
+        return "QUESTION " + (points + 1) + ": \t" + words[correctChoice].getWord_target();
     }
 
     @Override
     public String giveChoice(int i) {
         return option[i] + ". " + previousWordChoices[i].getWord_explain();
     }
-
-//// Old method.
-
-/*
-    public static void main(String[] args) {
-        MeaningMemoryGame huy = new MeaningMemoryGame();
-        huy.gameCommandline();
-    }
- */
-
 }

@@ -1,6 +1,8 @@
 //package main.Application;
 package Application;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -123,42 +125,7 @@ public class DictionaryCommandline extends DictionaryManagement {
     public static void main(String[] argv) {
         DictionaryCommandline test = new DictionaryCommandline();
         test.dictionaryAdvanced();
-        /*
-        test.insertFromFile();
-        test.deleteHoa();
-        int length = 2;
-        for (int i = 0; i < 100; i += 1) {
-            Word word = test.listWord.getRandomWord(length,length);
-            System.out.println(word.getWord_target() + "\t" + word.getWord_explain());
-        }
-        test.showAllWords(length);
-
-         */
     }
-/* Fix bug
-    public void deleteHoa() {
-        List<Word> listWordToShow = listWord.searchFrom("");
-        for (int i = 0; i < listWordToShow.size(); ++i) {
-            Word word = listWordToShow.get(i);
-            if (word.getWord_target().length() > 0 && word.getWord_target().charAt(0) >= 'A' && word.getWord_target().charAt(0) <= 'Z') {
-                listWord.delete(word.getWord_target());
-            }
-        }
-    }
-
-    public void showAllWords(int length) {
-        System.out.printf("%-20s | %-20s | %-20s\n", "No", "English", "Vietnamese");
-        List<Word> listWordToShow = listWord.searchFrom("");
-        for (int i = 0; i < listWordToShow.size(); ++i) {
-            Word word = listWordToShow.get(i);
-            if (word.getWord_target().length() == length) {
-                System.out.printf("%-20s | %-20s | %-20s\n", i + 1, word.getWord_target(), word.getWord_explain());
-            }
-        }
-    }
-
- */
-
 
     /**
      * Four cute games.

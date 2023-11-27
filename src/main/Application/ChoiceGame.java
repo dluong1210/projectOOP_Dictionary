@@ -8,7 +8,8 @@ public abstract class ChoiceGame extends MultipleChoiceGame{
     @Override
     public void initGame() {
         setPoints(0);
-        dictionaryManagement.insertFromFile();                // tao database
+        getWordDatabase();
+        //dictionaryManagement.insertFromFile();                // tao database
     }
 
     @Override

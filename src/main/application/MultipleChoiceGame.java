@@ -158,34 +158,33 @@ public abstract class MultipleChoiceGame implements GameCommandline {
 
 //////// Getter / setter
 
-
-    public void setWordDatabase(List<Word> wordDatabase) {
-        this.wordDatabase = wordDatabase;
-    }
-
-    public static String[] getOption() {
-        return option;
-    }
-
-    public Word[] getWords() {
-        return words;
-    }
-
-    public void setWords(Word[] words) {
-        this.words = words;
-    }
-
-    public String getPlayerChoice() {
-        return playerChoice;
-    }
+//    public void setWordDatabase(List<Word> wordDatabase) {
+//        this.wordDatabase = wordDatabase;
+//    }
+//
+//    public static String[] getOption() {
+//        return option;
+//    }
+//
+//    public Word[] getWords() {
+//        return words;
+//    }
+//
+//    public void setWords(Word[] words) {
+//        this.words = words;
+//    }
+//
+//    public String getPlayerChoice() {
+//        return playerChoice;
+//    }
 
     public void setPlayerChoice(String playerChoice) {
         this.playerChoice = playerChoice;
     }
 
-    public int getCorrectChoice() {
-        return correctChoice;
-    }
+//    public int getCorrectChoice() {
+//        return correctChoice;
+//    }
 
     public void setCorrectChoice(int correctChoice) {
         this.correctChoice = correctChoice;

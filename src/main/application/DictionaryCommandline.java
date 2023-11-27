@@ -179,25 +179,24 @@ public class DictionaryCommandline extends DictionaryManagement {
 
         String inputType;
         String inputVersion;
+        MultipleChoiceGame game = null;
 
         inputType = GameCommandline.getValidInput(gameType, "Type of game: \n[0] Word Game \n[1] Meaning Game");
         inputVersion = GameCommandline.getValidInput(gameType, "Version of game: \n[0] Choice Game \n[1] Memory Game");
 
         if(inputType.equals(gameType[0]) && inputVersion.equals(gameVersion[0])) {
-            WordChoiceGame wordChoiceGame = new WordChoiceGame();
-            wordChoiceGame.gameCommandline();
+            game = new WordChoiceGame();
         }
         if(inputType.equals(gameType[0]) && inputVersion.equals(gameVersion[1])) {
-            WordMemoryGame wordMemoryGame = new WordMemoryGame();
-            wordMemoryGame.gameCommandline();
+            game = new WordMemoryGame();
         }
         if(inputType.equals(gameType[1]) && inputVersion.equals(gameVersion[0])) {
-            MeaningChoiceGame meaningChoiceGame = new MeaningChoiceGame();
-            meaningChoiceGame.gameCommandline();
+            game = new MeaningChoiceGame();
         }
         if(inputType.equals(gameType[1]) && inputVersion.equals(gameVersion[1])) {
-            MeaningMemoryGame meaningMemoryGame = new MeaningMemoryGame();
-            meaningMemoryGame.gameCommandline();
+            game = new MeaningMemoryGame();
         }
+
+        game.gameCommandline();
     }
 }

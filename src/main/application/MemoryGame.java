@@ -90,27 +90,27 @@ public abstract class MemoryGame extends MultipleChoiceGame{
 
     //////// Getter / setter
 
-    public Word getNextWord() {
-        return nextWord;
-    }
-
-    public void setNextWord(Word nextWord) {
-        this.nextWord = nextWord;
-    }
-
-    public Word[] getPreviousWordChoices() {
-        return previousWordChoices;
-    }
-
-    public void setPreviousWordChoices(Word[] previousWordChoices) {
-        this.previousWordChoices = previousWordChoices;
-    }
-
-    public int getPreviousCorrectChoice() {
-        return previousCorrectChoice;
-    }
-
-    public void setPreviousCorrectChoice(int previousCorrectChoice) {
-        this.previousCorrectChoice = previousCorrectChoice;
-    }
+//    public Word getNextWord() {
+//        return nextWord;
+//    }
+//
+//    public void setNextWord(Word nextWord) {
+//        this.nextWord = nextWord;
+//    }
+//
+//    public Word[] getPreviousWordChoices() {
+//        return previousWordChoices;
+//    }
+//
+//    public void setPreviousWordChoices(Word[] previousWordChoices) {
+//        this.previousWordChoices = previousWordChoices;
+//    }
+//
+//    public int getPreviousCorrectChoice() {
+//        return previousCorrectChoice;
+//    }
+//
+//    public void setPreviousCorrectChoice(int previousCorrectChoice) {
+//        this.previousCorrectChoice = previousCorrectChoice;
+//    }
 }

@@ -1,8 +1,4 @@
-package Application;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+package application;
 
 /**
  * Game chon dap an dung.

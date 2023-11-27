@@ -1,6 +1,6 @@
 package controllers;
 
-import Application.MySQL;
+import application.MySQL;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;

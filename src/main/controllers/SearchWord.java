@@ -1,11 +1,9 @@
 package controllers;
 
-import Application.MySQL;
+import application.MySQL;
 
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;

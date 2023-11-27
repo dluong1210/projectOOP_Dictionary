@@ -1,6 +1,6 @@
 package controllers;
 
-import Application.MySQL;
+import application.MySQL;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

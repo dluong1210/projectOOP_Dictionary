@@ -1,5 +1,5 @@
 //package main.Application;
-package Application;
+package application;
 
 /**
  * Contains an English word with it's meaning and definition in Vietnamese.

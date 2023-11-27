@@ -1,7 +1,5 @@
-package Application;
+package application;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public abstract class GameCommandLine extends MultipleChoiceGame{

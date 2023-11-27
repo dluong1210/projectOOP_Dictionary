@@ -1,6 +1,4 @@
-package Application;
-
-import java.util.Scanner;
+package application;
 
 /**
  * Game chon tu mang nghia trong cau hoi.

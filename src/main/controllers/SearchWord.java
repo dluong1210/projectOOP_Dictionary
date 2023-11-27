@@ -1,6 +1,6 @@
 package controllers;
 
-import Application.MySQL;
+import application.MySQL;
 
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;

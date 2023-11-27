@@ -1,13 +1,8 @@
 package controllers;
 
-import Application.GoogleTranslateAPI;
-import Application.VoiceRSS;
+import application.GoogleTranslateAPI;
+import application.VoiceRSS;
 
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
-import javafx.application.Platform;
-import javafx.concurrent.Task;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -17,12 +12,10 @@ import javafx.scene.input.*;
 import javafx.scene.layout.Pane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import javafx.util.Duration;
 
 import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.concurrent.CountDownLatch;
 
 public class Translate implements Initializable {
     @FXML
@@ -80,8 +73,8 @@ public class Translate implements Initializable {
         langueOutput.getItems().addAll("Vietnamese", "English", "Japanese", "Chinese", "French");
         langueOutput.getSelectionModel().select("English");
 
-        checkMouse(new ActionEvent());
-        controllerTranslate(new ActionEvent());
+        checkMouse();
+        controllerTranslate();
         controllerSpeak();
         controllerSwapLabel();
     }
@@ -108,7 +101,7 @@ public class Translate implements Initializable {
             output.getStyleClass().add("active-pane");
     }
 
-    private void controllerTranslate(ActionEvent event) {
+    private void controllerTranslate() {
         KeyCombination nextLine = new KeyCodeCombination(KeyCode.ENTER, KeyCombination.SHIFT_DOWN);
         textInput.addEventFilter(KeyEvent.KEY_PRESSED, e -> {
             if (e.getCode().equals(KeyCode.ENTER)) {
@@ -164,7 +157,6 @@ public class Translate implements Initializable {
             }
 
             media = new Media(path);
-            System.out.println(path);
 
         } catch (Exception exception) {
             System.out.println(exception.getMessage());
@@ -179,31 +171,29 @@ public class Translate implements Initializable {
         String check = isInput ? currentInputText : currentOutputText;
         String labelSpeech = convertSpeechLabel(label);
 
-        Task<Void> task = new Task<Void>() {
-            @Override
-            protected Void call() throws Exception {
-                if (!text.getText().equals(check)) {
-                    if (isInput) {
-                        VoiceRSS.setAudio(text.getText(), labelSpeech, "translateInput");
-                        currentInputText = text.getText();
-                    } else {
-                        VoiceRSS.setAudio(text.getText(), labelSpeech, "translateOutput");
-                        currentOutputText = text.getText();
-                    }
+        if (!text.getText().equals(check)) {
+            if (isInput) {
+                try {
+                    VoiceRSS.setAudio(text.getText(), labelSpeech, "translateInput");
+                } catch (Exception ex) {
+                    System.out.println(ex.getMessage());
                 }
-                return null;
+                currentInputText = text.getText();
+            } else {
+                try {
+                    VoiceRSS.setAudio(text.getText(), labelSpeech, "translateOutput");
+                } catch (Exception ex) {
+                    System.out.println(ex.getMessage());
+                }
+                currentOutputText = text.getText();
             }
-        };
+        }
 
-        task.setOnSucceeded(e -> {
-            playAudio(isInput);
-        });
-
-        new Thread(task).start();
+        playAudio(isInput);
     }
 
 
-    private void checkMouse(ActionEvent event) {
+    private void checkMouse() {
         textInput.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> {
             textInput.setEditable(true);
             input.getStyleClass().clear();

@@ -1,5 +1,5 @@
 //package main.Application;
-package Application;
+package application;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;

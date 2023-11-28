@@ -17,8 +17,8 @@ public class test extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/loginPage.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 720, 480);
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/gametest.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 925, 660);
         scene.setFill(Color.TRANSPARENT);
 
         stage.setTitle("Login Dictionary");

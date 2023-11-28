@@ -9,11 +9,11 @@ public class WordMemoryGame extends MemoryGame {
     }
 
     public String giveQuestion() {
-        return "QUESTION " + (points + 1) + ": \t" + words[correctChoice].getWord_explain();
+        return "QUESTION " + (points + 1) + ":   " + words[correctChoice].getWord_explain();
     }
 
     public String giveChoice(int i) {
-        return option[i] + ". " + previousWordChoices[i].getWord_target();
+        return option[i] + ".   " + previousWordChoices[i].getWord_target();
     }
 }
 

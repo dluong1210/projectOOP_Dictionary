@@ -1,5 +1,6 @@
 package controllers;
 
+import game.*;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -16,11 +17,15 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import static game.MultipleChoiceGame.option;
+
 public class gameTest implements Initializable {
     @FXML
     private ImageView player;
     @FXML
     private AnchorPane scene;
+
+    private WordChoiceGame game = new WordChoiceGame();     // Su dung game nay by TVDH
 
     private ArrayList<ImageView> listBox = new ArrayList<>();
     private final Image boxImage = new Image(getClass().getResourceAsStream("/icon/box.png"));
@@ -53,6 +58,10 @@ public class gameTest implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        game.initGame();            // Chuan bi choi game
+
+
         scene.requestFocus();
         for (int i = 1; i < map.length - 1; i++) {
             for (int j = 1; j < map[0].length - 1; j++) {
@@ -155,7 +164,25 @@ public class gameTest implements Initializable {
     public void openQuest() {
         // Hiện câu hỏi lên
         //
+        game.getPrepared();  // tao cau hoi va cac lua chon moi
+        String question = game.giveQuestion();
+        String choiceA = game.giveChoice(0);
+        String choiceB = game.giveChoice(1);
+        String choiceC = game.giveChoice(2);
+        String choiceD = game.giveChoice(3);
+
+        // SetText dong nay
     }
+
+    public void getResult() {
+        String playerInput = "";   // can 1 method lay input tra ve duoi dang "A" / "B" / "C" / "D"
+
+        boolean result = playerInput.equals(option[game.getCorrectChoice()]);
+
+        // Co result thi xu li controller tiep
+    }
+
+
 
     public void changeBox() {
         for (int i = 0; i < listBox.size(); i++) {

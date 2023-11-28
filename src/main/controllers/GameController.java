@@ -4,6 +4,7 @@ import game.*;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.text.Text;
 
 import java.net.URL;
@@ -50,10 +51,10 @@ public class GameController implements Initializable {
         setVisibleItem(false);
 
         Question.setText("\t  Which game do you want to play?");
-        A.setText("\t\t   Choosing Word Game");
-        B.setText("\t\t   Memory Word Game");
-        C.setText("\t\t   Choosing Meaning Game");
-        D.setText("\t\t   Memory Meaning Game");
+        A.setText("\t\t Choosing Word Game");
+        B.setText("\t\t Memory Word Game");
+        C.setText("\t\t Choosing Meaning Game");
+        D.setText("\t\t Memory Meaning Game");
 
         A.setOnAction(e -> initGame("A"));
         B.setOnAction(e -> initGame("B"));
@@ -146,11 +147,11 @@ public class GameController implements Initializable {
         setQuestionAndChoicesVisible(true);
 
         // Noi dung cac lua chon
-        Question.setText(game.giveQuestion());
-        A.setText(game.giveChoice(0));
-        B.setText(game.giveChoice(1));
-        C.setText(game.giveChoice(2));
-        D.setText(game.giveChoice(3));
+        Question.setText("   " + game.giveQuestion());
+        A.setText("   " + game.giveChoice(0));
+        B.setText("   " + game.giveChoice(1));
+        C.setText("   " + game.giveChoice(2));
+        D.setText("   " + game.giveChoice(3));
 
         // Cac lua chon
         A.setOnAction(e -> getClickInput("A"));
@@ -209,7 +210,7 @@ public class GameController implements Initializable {
         setQuestionAndChoicesVisible(false);
         Question.setVisible(true);
         Introduce.setVisible(false);
-        Question.setText("\n\n\n\t\t" + game.giveResult());
+        Question.setText("\n\n\n\t" + game.giveResult());
         Play.setText("Play again!");
         Play.setOnAction(e -> printChooseGame());
     }

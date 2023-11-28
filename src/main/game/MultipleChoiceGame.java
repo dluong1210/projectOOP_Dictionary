@@ -18,7 +18,7 @@ public abstract class MultipleChoiceGame implements GameCommandline {
     /**
      * Four options A B C D.
      */
-    protected static final String[] option = {"A", "B", "C", "D"};
+    public static final String[] option = {"A", "B", "C", "D"};
     /**
      * Four words using to generate question and choices.
      */
@@ -46,7 +46,7 @@ public abstract class MultipleChoiceGame implements GameCommandline {
      */
     public void getWordDatabase() {
         try {
-            File input = new File("src/resources/data/wordDatabaseForGame.txt");
+            File input = new File("src/resources/data/gameDatabase.txt");
             Scanner scan = new Scanner(input);
             while (scan.hasNextLine()) {
                 String[] word = scan.nextLine().split("\t");
@@ -184,9 +184,9 @@ public abstract class MultipleChoiceGame implements GameCommandline {
         this.playerChoice = playerChoice;
     }
 
-//    public int getCorrectChoice() {
-//        return correctChoice;
-//    }
+    public int getCorrectChoice() {
+        return correctChoice;
+    }
 
     public void setCorrectChoice(int correctChoice) {
         this.correctChoice = correctChoice;

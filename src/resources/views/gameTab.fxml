@@ -7,36 +7,36 @@
 
 <AnchorPane prefHeight="660.0" prefWidth="925.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.GameController">
    <children>
-      <Text fx:id="Question" disable="true" layoutX="80.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="QUESTION TEXT" wrappingWidth="748.5366821289062">
+      <Text fx:id="Question" disable="true" fill="WHITE" layoutX="80.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="QUESTION TEXT" wrappingWidth="748.5366821289062">
          <font>
             <Font size="35.0" />
          </font></Text>
-      <Button fx:id="A" alignment="BASELINE_LEFT" layoutX="120.0" layoutY="170.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="450.0" text="Choice A text">
+      <Button fx:id="A" alignment="BASELINE_LEFT" layoutX="120.0" layoutY="170.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="450.0" styleClass="button2" stylesheets="@../css/button.css" text="Choice A text" textFill="WHITE">
          <font>
             <Font size="20.0" />
          </font></Button>
-      <Button fx:id="B" alignment="BASELINE_LEFT" layoutX="120.0" layoutY="290.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="450.0" text="Choice B text">
+      <Button fx:id="B" alignment="BASELINE_LEFT" layoutX="120.0" layoutY="290.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="450.0" styleClass="button2" stylesheets="@../css/button.css" text="Choice B text" textFill="WHITE">
          <font>
             <Font size="20.0" />
          </font>
       </Button>
-      <Button fx:id="C" alignment="BASELINE_LEFT" layoutX="120.0" layoutY="410.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="450.0" text="Choice C text">
+      <Button fx:id="C" alignment="BASELINE_LEFT" layoutX="120.0" layoutY="410.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="450.0" styleClass="button2" stylesheets="@../css/button.css" text="Choice C text" textFill="WHITE">
          <font>
             <Font size="20.0" />
          </font></Button>
-      <Button fx:id="D" alignment="BASELINE_LEFT" layoutX="120.0" layoutY="530.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="450.0" text="Choice D text">
+      <Button fx:id="D" alignment="BASELINE_LEFT" layoutX="120.0" layoutY="530.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="450.0" styleClass="button2" stylesheets="@../css/button.css" text="Choice D text" textFill="WHITE">
          <font>
             <Font size="20.0" />
          </font></Button>
-      <Button fx:id="EliminateOne" layoutX="700.0" layoutY="240.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" text="-1 Item" />
-      <Button fx:id="SecondChance" layoutX="700.0" layoutY="360.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" text="x2 Item" />
-      <Button fx:id="FiftyFifty" layoutX="700.0" layoutY="480.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" text="50/50 Item" />
-      <Text fx:id="Introduce" disable="true" layoutX="70.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Print the game's rule / Show the result" wrappingWidth="791.9998657226563">
+      <Button fx:id="EliminateOne" layoutX="700.0" layoutY="240.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" styleClass="button1" stylesheets="@../css/button.css" text="-1 Item" textFill="WHITE" />
+      <Button fx:id="SecondChance" layoutX="700.0" layoutY="360.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" styleClass="button1" stylesheets="@../css/button.css" text="x2 Item" textFill="WHITE" />
+      <Button fx:id="FiftyFifty" layoutX="700.0" layoutY="480.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" styleClass="button1" stylesheets="@../css/button.css" text="50/50 Item" textFill="WHITE" />
+      <Text fx:id="Introduce" disable="true" fill="WHITE" layoutX="70.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Print the game's rule / Show the result" wrappingWidth="791.9998657226563">
          <font>
             <Font size="20.0" />
          </font>
       </Text>
-      <Button fx:id="Play" layoutX="360.0" layoutY="504.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="200.0" text="Play">
+      <Button fx:id="Play" layoutX="360.0" layoutY="504.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="200.0" styleClass="button1" stylesheets="@../css/button.css" text="Play" textFill="WHITE">
          <font>
             <Font size="25.0" />
          </font></Button>

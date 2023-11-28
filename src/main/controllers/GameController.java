@@ -10,7 +10,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class GameController implements Initializable {
-
     @FXML
     private Button A = new Button();
     @FXML

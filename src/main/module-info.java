@@ -1,4 +1,6 @@
+
 module controllers {
+
     requires javafx.controls;
     requires javafx.fxml;
 
@@ -13,4 +15,6 @@ module controllers {
 
     opens controllers to javafx.fxml;
     exports controllers;
+
 }
+

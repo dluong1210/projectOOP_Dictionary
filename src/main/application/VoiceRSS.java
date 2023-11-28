@@ -29,8 +29,8 @@ public class VoiceRSS {
     }
     public static void main (String args[]) throws Exception {
         String test = "Lucas goes to school every day of the week. He has many subjects to go to each school day: "
-                    + "English, art, science, mathematics, gym, and history. His mother packs a big backpack full of"
-                    + " books and lunch for Lucas.";
+                + "English, art, science, mathematics, gym, and history. His mother packs a big backpack full of"
+                + " books and lunch for Lucas.";
         setAudio(test, Languages.English_UnitedStates, "test");
     }
 }

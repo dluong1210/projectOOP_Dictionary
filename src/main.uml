@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>C:/Users/7420/IdeaProjects/Dictionary_OOP/src/main</OriginalElement>
+  <nodes>
+    <node x="2218.7865824476653" y="645.5864">controllers.Login</node>
+    <node x="121.14999999999986" y="1443.8">game.MeaningChoiceGame</node>
+    <node x="2550.5373913043472" y="1760.528695652174">application.VoiceRSS</node>
+    <node x="-64.60000000000014" y="393.29999999999995">game.FiftyFiftyGameItem</node>
+    <node x="2161.5373913043472" y="1760.528695652174">application.GoogleTranslateAPI</node>
+    <node x="995.3999999999999" y="729.6111999999999">application.TreeWord</node>
+    <node x="815.1499999999999" y="1443.8">game.WordMemoryGame</node>
+    <node x="2868.5373913043472" y="1760.528695652174">controllers.GameApplication</node>
+    <node x="2516.7865824476653" y="645.5864">controllers.Bookmark</node>
+    <node x="1654.8548652979066" y="-240.91359999999997">application.Dictionary</node>
+    <node x="673.8444444444442" y="1073.8">game.MemoryGame</node>
+    <node x="2810.7865824476653" y="645.5864">controllers.SearchWord</node>
+    <node x="-666.6000000000001" y="357.79999999999995">game.SecondChanceGameItem</node>
+    <node x="1613.8548652979066" y="-80.91359999999997">application.DictionaryManagement</node>
+    <node x="259.25879629629605" y="1073.8">game.ChoiceGame</node>
+    <node x="731.9115740740738" y="-149.20000000000005">application.Word</node>
+    <node x="3095.5373913043472" y="1760.528695652174">controllers.test</node>
+    <node x="2348.2865824476653" y="-240.91359999999997">application.MySQL</node>
+    <node x="357.14999999999986" y="1443.8">game.WordChoiceGame</node>
+    <node x="-262.3268518518521" y="820.8">controllers.GameController</node>
+    <node x="-365.60000000000014" y="393.29999999999995">game.EliminateOneGameItem</node>
+    <node x="1618.3548652979066" y="217.08640000000025">application.DictionaryCommandline</node>
+    <node x="-365.60000000000014" y="-240.95040000000006">game.GameItem</node>
+    <node x="412.9231481481479" y="127.79999999999995">game.MultipleChoiceGame</node>
+    <node x="569.1499999999999" y="1443.8">game.MeaningMemoryGame</node>
+    <node x="322.6083333333331" y="-240.95040000000006">game.GameCommandline</node>
+    <node x="1029.8999999999999" y="300.29999999999995">application.TreeNode</node>
+    <node x="3139.990390821257" y="645.5864">controllers.Translate</node>
+    <node x="1924.7865824476653" y="645.5864">controllers.AddWord</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="game.MultipleChoiceGame" target="game.GameCommandline" relationship="REALIZATION">
+      <point x="-77.25027040170517" y="-321.58878103347206" />
+      <point x="460.67287774644274" y="101.79999999999995" />
+      <point x="460.6083333333331" y="101.79999999999995" />
+      <point x="0.0" y="88.5" />
+    </edge>
+    <edge source="controllers.Login" target="application.MySQL" relationship="TO_ONE">
+      <point x="0.0" y="-378.0" />
+      <point x="2357.7865824476653" y="433.4885509565217" />
+      <point x="2505.7865824476653" y="433.4885509565217" />
+      <point x="0.0" y="263.0" />
+    </edge>
+    <edge source="game.EliminateOneGameItem" target="game.GameItem" relationship="GENERALIZATION">
+      <point x="0.0" y="-55.0" />
+      <point x="0.0" y="125.0" />
+    </edge>
+    <edge source="game.WordChoiceGame" target="game.ChoiceGame" relationship="GENERALIZATION">
+      <point x="0.0" y="-66.5" />
+      <point x="453.14999999999986" y="1418.8" />
+      <point x="371.25879629629605" y="1418.8" />
+      <point x="0.0" y="66.5" />
+    </edge>
+    <edge source="game.MultipleChoiceGame" target="application.Word" relationship="TO_MANY">
+      <point x="62.5" y="-320.5" />
+      <point x="600.4231481481479" y="101.79999999999995" />
+      <point x="846.4115740740738" y="101.79999999999995" />
+      <point x="0.0" y="136.5" />
+    </edge>
+    <edge source="application.Dictionary" target="application.TreeWord" relationship="TO_ONE">
+      <point x="-79.07694574928587" y="20.39216102399996" />
+      <point x="1657.7779195486207" y="-170.578988032" />
+      <point x="1510.6752896606208" y="-170.578988032" />
+      <point x="1510.6752896606208" y="745.2223477759999" />
+      <point x="181.12273433599967" y="-155.38885222400006" />
+    </edge>
+    <edge source="game.WordMemoryGame" target="game.MemoryGame" relationship="GENERALIZATION">
+      <point x="0.0" y="-66.5" />
+      <point x="916.1499999999999" y="1418.8" />
+      <point x="789.8444444444442" y="1418.8" />
+      <point x="0.0" y="125.0" />
+    </edge>
+    <edge source="controllers.AddWord" target="application.MySQL" relationship="TO_ONE">
+      <point x="0.0" y="-182.5" />
+      <point x="2061.7865824476653" y="352.7581718260869" />
+      <point x="2505.7865824476653" y="352.7581718260869" />
+      <point x="0.0" y="263.0" />
+    </edge>
+    <edge source="controllers.GameController" target="game.SecondChanceGameItem" relationship="TO_ONE">
+      <point x="0.0" y="-378.0" />
+      <point x="-96.8268518518521" y="789.8" />
+      <point x="-526.1000000000001" y="789.8" />
+      <point x="0.0" y="90.5" />
+    </edge>
+    <edge source="application.DictionaryManagement" target="application.Dictionary" relationship="GENERALIZATION">
+      <point x="0.0" y="-124.0" />
+      <point x="0.0" y="43.5" />
+    </edge>
+    <edge source="controllers.GameController" target="game.EliminateOneGameItem" relationship="TO_ONE">
+      <point x="0.0" y="-378.0" />
+      <point x="-96.8268518518521" y="789.8" />
+      <point x="-225.10000000000014" y="789.8" />
+      <point x="0.0" y="55.0" />
+    </edge>
+    <edge source="game.ChoiceGame" target="game.MultipleChoiceGame" relationship="GENERALIZATION">
+      <point x="0.0" y="-66.5" />
+      <point x="371.25879629629605" y="799.8" />
+      <point x="542.9231481481479" y="799.8" />
+      <point x="542.9231481481479" y="789.8" />
+      <point x="542.6968692287448" y="789.8" />
+      <point x="4.773721080596943" y="311.5572514393044" />
+    </edge>
+    <edge source="controllers.GameController" target="game.MultipleChoiceGame" relationship="TO_ONE">
+      <point x="0.0" y="-378.0" />
+      <point x="-96.8268518518521" y="789.8" />
+      <point x="475.4231481481479" y="789.8" />
+      <point x="-62.5" y="320.5" />
+    </edge>
+    <edge source="controllers.Bookmark" target="application.MySQL" relationship="TO_ONE">
+      <point x="0.0" y="-159.5" />
+      <point x="2653.7865824476653" y="433.4885509565217" />
+      <point x="2505.7865824476653" y="433.4885509565217" />
+      <point x="0.0" y="263.0" />
+    </edge>
+    <edge source="controllers.SearchWord" target="application.MySQL" relationship="TO_ONE">
+      <point x="0.0" y="-493.0" />
+      <point x="2947.7865824476653" y="352.7581718260869" />
+      <point x="2505.7865824476653" y="352.7581718260869" />
+      <point x="0.0" y="263.0" />
+    </edge>
+    <edge source="game.MeaningMemoryGame" target="game.MemoryGame" relationship="GENERALIZATION">
+      <point x="0.0" y="-66.5" />
+      <point x="682.1499999999999" y="1418.8" />
+      <point x="789.8444444444442" y="1418.8" />
+      <point x="0.0" y="125.0" />
+    </edge>
+    <edge source="game.FiftyFiftyGameItem" target="game.GameItem" relationship="GENERALIZATION">
+      <point x="0.0" y="-55.0" />
+      <point x="75.89999999999986" y="101.79999999999995" />
+      <point x="-225.10000000000014" y="101.79999999999995" />
+      <point x="0.0" y="125.0" />
+    </edge>
+    <edge source="game.SecondChanceGameItem" target="game.GameItem" relationship="GENERALIZATION">
+      <point x="0.0" y="-90.5" />
+      <point x="-526.1000000000001" y="101.79999999999995" />
+      <point x="-225.10000000000014" y="101.79999999999995" />
+      <point x="0.0" y="125.0" />
+    </edge>
+    <edge source="application.DictionaryCommandline" target="application.DictionaryManagement" relationship="GENERALIZATION">
+      <point x="0.0" y="-136.5" />
+      <point x="0.0" y="124.0" />
+    </edge>
+    <edge source="controllers.GameController" target="game.FiftyFiftyGameItem" relationship="TO_ONE">
+      <point x="0.0" y="-378.0" />
+      <point x="-96.8268518518521" y="789.8" />
+      <point x="75.89999999999986" y="789.8" />
+      <point x="0.0" y="55.0" />
+    </edge>
+    <edge source="game.MeaningChoiceGame" target="game.ChoiceGame" relationship="GENERALIZATION">
+      <point x="5.6843418860808015E-14" y="-66.5" />
+      <point x="229.14999999999992" y="1418.8" />
+      <point x="371.25879629629605" y="1418.8" />
+      <point x="0.0" y="66.5" />
+    </edge>
+    <edge source="game.MemoryGame" target="application.Word" relationship="TO_MANY">
+      <point x="55.88913079033773" y="-123.40449947826096" />
+      <point x="845.7335752347819" y="799.8" />
+      <point x="846.4115740740738" y="799.8" />
+      <point x="0.0" y="136.5" />
+    </edge>
+    <edge source="application.TreeWord" target="application.TreeNode" relationship="TO_ONE">
+      <point x="0.0" y="-171.0" />
+      <point x="1175.8999999999999" y="812.05" />
+      <point x="1175.8999999999999" y="812.05" />
+      <point x="0.0" y="148.0" />
+    </edge>
+    <edge source="application.TreeNode" target="application.Word" relationship="TO_ONE">
+      <point x="0.0" y="-148.0" />
+      <point x="1175.8999999999999" y="101.79999999999995" />
+      <point x="846.4115740740738" y="101.79999999999995" />
+      <point x="0.0" y="136.5" />
+    </edge>
+    <edge source="game.MemoryGame" target="game.MultipleChoiceGame" relationship="GENERALIZATION">
+      <point x="-58.0" y="-125.0" />
+      <point x="731.8444444444442" y="799.8" />
+      <point x="600.4231481481479" y="799.8" />
+      <point x="62.5" y="320.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic" zoom="0.30517578125" showDependencies="true" x="1276.8526079999997" y="371.429888" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Constructors</Category>
+    <Category>Fields</Category>
+    <Category>Inner Classes</Category>
+    <Category>Methods</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

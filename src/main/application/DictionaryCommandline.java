@@ -1,6 +1,8 @@
 //package main.Application;
 package application;
 
+import game.*;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +21,7 @@ public class DictionaryCommandline extends DictionaryManagement {
 
         for (int i = 0; i < listWordToShow.size(); ++i) {
             Word word = listWordToShow.get(i);
-            System.out.printf("%-20s | %-20s | %-20s\n", i + 1, word.getWord_target(), word.getWord_explain());
+                System.out.printf("%-20s | %-20s | %-20s\n", i + 1, word.getWord_target(), word.getWord_explain());
         }
     }
 
@@ -83,44 +85,45 @@ public class DictionaryCommandline extends DictionaryManagement {
             System.out.println("[8] Import from file");
             System.out.println("[9] Export to file");
             System.out.println("Your action: ");
-            int action = scan.nextInt();
+            String action = scan.next();
             switch (action) {
-                case 0:
+                case "0":
                     quit = true;
                     break;
-                case 1:
+                case "1":
                     dictionaryAdd();
                     historic.add("Add->");
                     break;
-                case 2:
+                case "2":
                     dictionaryRemove();
                     historic.add("Remove->");
                     break;
-                case 3:
+                case "3":
                     dictionaryUpdate();
                     historic.add("Update->");
                     break;
-                case 4:
+                case "4":
                     showAllWords();
                     historic.add("Display->");
                     break;
-                case 5:
+                case "5":
                     dictionaryLookup();
                     historic.add("Lookup->");
                     break;
-                case 6:
+                case "6":
                     dictionarySearcher();
                     historic.add("Search->");
                     break;
-                case 7:
+                case "7":
+                    dictionaryGame();
                     historic.add("Game->");
                     break;
-                case 8:
+                case "8":
     //                dictionaryImportFromFile();
                     insertFromFile();
                     historic.add("Import from file->");
                     break;
-                case 9:
+                case "9":
                     dictionaryExportToFile();
                     historic.add("Export to file->");
                     break;
@@ -161,5 +164,39 @@ public class DictionaryCommandline extends DictionaryManagement {
         DictionaryCommandline test = new DictionaryCommandline();
         test.dictionaryAdvanced();
        // test.showHistoric();
+    }
+
+    /**
+     * Four cute games.
+     */
+    public void dictionaryGame() {
+        String[] gameType = new String[2];
+        gameType[0] = "0";
+        gameType[1] = "1";
+        String[] gameVersion = new String[2];
+        gameVersion[0] = "0";
+        gameVersion[1] = "1";
+
+        String inputType;
+        String inputVersion;
+        MultipleChoiceGame game = null;
+
+        inputType = GameCommandline.getValidInput(gameType, "Type of game: \n[0] Word Game \n[1] Meaning Game");
+        inputVersion = GameCommandline.getValidInput(gameType, "Version of game: \n[0] Choice Game \n[1] Memory Game");
+
+        if(inputType.equals(gameType[0]) && inputVersion.equals(gameVersion[0])) {
+            game = new WordChoiceGame();
+        }
+        if(inputType.equals(gameType[0]) && inputVersion.equals(gameVersion[1])) {
+            game = new WordMemoryGame();
+        }
+        if(inputType.equals(gameType[1]) && inputVersion.equals(gameVersion[0])) {
+            game = new MeaningChoiceGame();
+        }
+        if(inputType.equals(gameType[1]) && inputVersion.equals(gameVersion[1])) {
+            game = new MeaningMemoryGame();
+        }
+
+        game.gameCommandline();
     }
 }

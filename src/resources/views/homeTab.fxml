@@ -23,20 +23,20 @@
 <?import javafx.scene.web.HTMLEditor?>
 <?import javafx.scene.web.WebView?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" style="-fx-background-color: transparent; -fx-background-radius: 15; -fx-border-radius: 15;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.SearchWord">
+<AnchorPane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" style="-fx-background-color: transparent; -fx-background-radius: 15; -fx-border-radius: 15;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.SearchWord">
    <children>
-      <BorderPane fx:id="scene" prefHeight="720.0" prefWidth="1080.0" style="-fx-background-radius: 15; -fx-background-color: transparent; -fx-border-radius: 15;">
+      <BorderPane fx:id="scene" focusTraversable="true" prefHeight="720.0" prefWidth="1080.0" style="-fx-background-radius: 15; -fx-background-color: transparent; -fx-border-radius: 15;">
          <effect>
             <DropShadow />
          </effect>
          <center>
-            <Pane maxHeight="660.0" maxWidth="925.0" prefHeight="660.0" prefWidth="925.0" style="-fx-background-color: #0E0C17; -fx-background-radius: 0 0 15 0;" BorderPane.alignment="CENTER">
+            <Pane focusTraversable="true" maxHeight="660.0" maxWidth="925.0" prefHeight="660.0" prefWidth="925.0" style="-fx-background-color: #0E0C17; -fx-background-radius: 0 0 15 0;" BorderPane.alignment="CENTER">
                <children>
                   <TabPane fx:id="tabPane" prefHeight="665.0" prefWidth="925.0" side="BOTTOM" style="-fx-background-radius: 0 0 15 0;" tabMaxHeight="0.0" tabMaxWidth="0.0">
                      <tabs>
-                        <Tab closable="false">
+                        <Tab>
                            <content>
-                              <Pane maxHeight="677.0" maxWidth="925.0" prefHeight="659.0" prefWidth="925.0" style="-fx-background-color: #0E0C17; -fx-background-radius: 0 0 15 0;">
+                              <Pane focusTraversable="true" maxHeight="677.0" maxWidth="925.0" prefHeight="659.0" prefWidth="925.0" style="-fx-background-color: #0E0C17; -fx-background-radius: 0 0 15 0;">
                                  <children>
                                     <Text fill="WHITE" layoutX="57.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="WELCOME BACK !">
                                        <font>
@@ -190,7 +190,7 @@
             </Pane>
          </center>
          <top>
-            <HBox prefHeight="62.0" prefWidth="862.0" style="-fx-border-color: transparent transparent #484848 transparent; -fx-background-radius: 15 15 0 0;" BorderPane.alignment="CENTER">
+            <HBox focusTraversable="true" prefHeight="62.0" prefWidth="862.0" style="-fx-border-color: transparent transparent #484848 transparent; -fx-background-radius: 15 15 0 0;" BorderPane.alignment="CENTER">
                <children>
                   <VBox prefHeight="62.0" prefWidth="155.0" style="-fx-background-color: #191919; -fx-background-radius: 15 0 0 0;">
                      <children>
@@ -237,12 +237,12 @@
             </HBox>
          </top>
          <left>
-            <VBox prefHeight="554.0" prefWidth="155.0" style="-fx-background-color: #191919; -fx-background-radius: 0 0 0 15;" BorderPane.alignment="CENTER">
+            <VBox focusTraversable="true" prefHeight="554.0" prefWidth="155.0" style="-fx-background-color: #191919; -fx-background-radius: 0 0 0 15;" BorderPane.alignment="CENTER">
                <children>
                   <Pane prefHeight="30.0" prefWidth="86.0" />
                   <HBox>
                      <children>
-                        <Button fx:id="homeButton" mnemonicParsing="false" prefHeight="45.0" prefWidth="155.0" style="-fx-background-color: transparent;" text="   Home     " textAlignment="CENTER" textFill="WHITE">
+                        <Button fx:id="homeButton" focusTraversable="false" mnemonicParsing="false" prefHeight="45.0" prefWidth="155.0" style="-fx-background-color: transparent;" text="   Home     " textAlignment="CENTER" textFill="WHITE">
                            <graphic>
                               <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -263,7 +263,7 @@
                   </HBox>
                   <HBox>
                      <children>
-                        <Button fx:id="translateButton" mnemonicParsing="false" onAction="#selectTab" opacity="0.5" prefHeight="45.0" prefWidth="155.0" style="-fx-background-color: transparent;" text="   Translate  " textFill="WHITE">
+                        <Button fx:id="translateButton" focusTraversable="false" mnemonicParsing="false" onAction="#selectTab" opacity="0.5" prefHeight="45.0" prefWidth="155.0" style="-fx-background-color: transparent;" text="   Translate  " textFill="WHITE">
                            <graphic>
                               <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -279,7 +279,7 @@
                   </HBox>
                   <HBox>
                      <children>
-                        <Button fx:id="addWordButton" mnemonicParsing="false" onAction="#selectTab" opacity="0.5" prefHeight="45.0" prefWidth="155.0" style="-fx-background-color: transparent;" text="   Add word" textFill="WHITE">
+                        <Button fx:id="addWordButton" focusTraversable="false" mnemonicParsing="false" onAction="#selectTab" opacity="0.5" prefHeight="45.0" prefWidth="155.0" style="-fx-background-color: transparent;" text="   Add word" textFill="WHITE">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -295,7 +295,7 @@
                   </HBox>
                   <HBox>
                      <children>
-                        <Button fx:id="bookmarkButton" mnemonicParsing="false" onAction="#selectTab" opacity="0.5" prefHeight="45.0" prefWidth="155.0" style="-fx-background-color: transparent;" text="   Bookmark" textFill="WHITE">
+                        <Button fx:id="bookmarkButton" focusTraversable="false" mnemonicParsing="false" onAction="#selectTab" opacity="0.5" prefHeight="45.0" prefWidth="155.0" style="-fx-background-color: transparent;" text="   Bookmark" textFill="WHITE">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -311,7 +311,7 @@
                   </HBox>
                   <HBox>
                      <children>
-                        <Button fx:id="gameButton" mnemonicParsing="false" onAction="#selectTab" opacity="0.5" prefHeight="45.0" prefWidth="155.0" style="-fx-background-color: transparent;" text="   Game      " textFill="WHITE">
+                        <Button fx:id="gameButton" focusTraversable="false" mnemonicParsing="false" onAction="#selectTab" opacity="0.5" prefHeight="45.0" prefWidth="155.0" style="-fx-background-color: transparent;" text="   Game      " textFill="WHITE">
                            <font>
                               <Font size="14.0" />
                            </font>

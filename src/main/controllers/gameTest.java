@@ -23,7 +23,12 @@ public class gameTest implements Initializable {
     private AnchorPane scene;
 
     private ArrayList<ImageView> listBox = new ArrayList<>();
-    private final Image image = new Image(getClass().getResourceAsStream("/icon/box.png"));
+    private final Image boxImage = new Image(getClass().getResourceAsStream("/icon/box.png"));
+    private final Image idleImage = new Image(getClass().getResourceAsStream("/icon/Pink_Monster_Idle_4.png"));
+    private final Image hurtImage = new Image(getClass().getResourceAsStream("/icon/Pink_Monster_Hurt_4.png"));
+    private final Image dieImage = new Image(getClass().getResourceAsStream("/icon/Pink_Monster_Death_8.png"));
+    private boolean isHurt = false;
+    private boolean isDie = false;
 
     private int[][] map = {
         {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -44,6 +49,7 @@ public class gameTest implements Initializable {
     private int index = 0;
 
     private int HP = 3;
+    private int point = 0;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -52,14 +58,14 @@ public class gameTest implements Initializable {
             for (int j = 1; j < map[0].length - 1; j++) {
                 if (map[i][j] < 2) continue;
 
-                ImageView box = new ImageView(image);
+                ImageView box = new ImageView(boxImage);
                 if (map[i][j] == 2) {
                     box.setViewport(new Rectangle2D(0, 0, 48, 48));
                 } else {
                     box.setViewport(new Rectangle2D(48, 0, 48, 48));
                 }
-                box.setX(272 + 64 * j);
-                box.setY(20 + 64 * i);
+                box.setX(436 + 64 * j);
+                box.setY(40 + 64 * i);
                 box.setFitWidth(64);
                 box.setFitHeight(64);
                 listBox.add(box);
@@ -68,9 +74,18 @@ public class gameTest implements Initializable {
         }
 
         player.toFront();
-        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(150), e -> {
+        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(200), e -> {
             player.setViewport(new Rectangle2D(index * 32, 0, 32, 32));
-            index = (index + 1) % 4;
+            index++;
+            if (index >= 4 && !isDie) {
+                if (isHurt) {
+                    isHurt = false;
+                    player.setImage(idleImage);
+                }
+                index = 0;
+            } else if (index >= 8) {
+                player.setVisible(false);
+            }
         }));
         timeline.setCycleCount(Animation.INDEFINITE);
         timeline.play();
@@ -83,11 +98,15 @@ public class gameTest implements Initializable {
             System.out.println(e.getCode());
             if (isQuest) {
                 if (e.getCode().equals(KeyCode.A)) {
-                    //
+                    isHurt = true;
+                    index = 0;
+                    player.setImage(hurtImage); // Hiệu ứng khi trả lời sai
                     isQuest = false;
                 }
                 else if (e.getCode().equals(KeyCode.B)) {
-                    //
+                    isDie = true;
+                    index = 0;
+                    player.setImage(dieImage); // Hiệu ứng khi chết
                     isQuest = false;
                 }
                 if (e.getCode().equals(KeyCode.C)) {
@@ -101,11 +120,13 @@ public class gameTest implements Initializable {
             }
             if (isQuest) return;
             if (e.getCode().equals(KeyCode.RIGHT)) {
+                player.setScaleX(1);
                 if (map[currentY][currentX + 1] != 0) {
                     player.setX(player.getX() + 64);
                     currentX++;
                 }
             } else if (e.getCode().equals(KeyCode.LEFT)) {
+                player.setScaleX(-1);
                 if (map[currentY][currentX - 1] != 0) {
                     player.setX(player.getX() - 64);
                     currentX--;
@@ -125,6 +146,7 @@ public class gameTest implements Initializable {
                 map[currentY][currentX] = 3;
                 changeBox();
                 isQuest = true;
+                openQuest();
                 System.out.println("quest");
             }
         });
@@ -137,7 +159,7 @@ public class gameTest implements Initializable {
 
     public void changeBox() {
         for (int i = 0; i < listBox.size(); i++) {
-            if (map[(int) ((listBox.get(i).getY() - 20) / 64)][(int) ((listBox.get(i).getX() - 272) / 64)] == 3) {
+            if (map[(int) ((listBox.get(i).getY() - 40) / 64)][(int) ((listBox.get(i).getX() - 436) / 64)] == 3) {
                 listBox.get(i).setViewport(new Rectangle2D(48, 0, 48, 48));
             }
         }

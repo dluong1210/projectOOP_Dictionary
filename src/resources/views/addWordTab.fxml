@@ -15,7 +15,7 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.web.HTMLEditor?>
 
-<Pane fx:id="sceneTrans" prefHeight="660.0" prefWidth="925.0" style="-fx-background-color: #0E0C17; -fx-background-radius: 0 0 15 0;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AddWord">
+<Pane fx:id="sceneTrans" focusTraversable="true" prefHeight="660.0" prefWidth="925.0" style="-fx-background-color: #0E0C17; -fx-background-radius: 0 0 15 0;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AddWord">
    <children>
       <TextField fx:id="textNewWord" depthTest="ENABLE" layoutX="419.0" layoutY="30.0" prefHeight="31.0" prefWidth="225.0" promptText="New Word" style="-fx-background-color: #2A2931; -fx-background-radius: 5 0 0 5;">
          <font>

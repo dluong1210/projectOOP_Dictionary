@@ -3,14 +3,14 @@
 ## **Thành viên**
 
 + Trần Đức Lương - 22021148 - K67-CB (leader)
-+ Trần Vũ Đức Huy - 2202**** - K67-CB
++ Trần Vũ Đức Huy - 22021111 - K67-CB
 + Nguyễn Ngọc Hiệp - 22021169 - K67-CB
 
 + Bài tập lớn: **Dictionary** / INT2204 1	Lập trình hướng đối tượng.
 
 
 ## **Mô tả ứng dụng**
-Ứng dụng Từ điển ************ là một công cụ mạnh mẽ giúp người dùng tra cứu từ vựng và dịch thuật hiệu quả. Với giao diện thân thiện và các tính năng đa dạng, người dùng có thể dễ dàng sử dụng ứng dụng này trong việc học tập và giao tiếp hàng ngày.
+Ứng dụng Từ điển là một công cụ mạnh mẽ giúp người dùng tra cứu từ vựng và dịch thuật hiệu quả. Với giao diện thân thiện và các tính năng đa dạng, người dùng có thể dễ dàng sử dụng ứng dụng này trong việc học tập và giao tiếp hàng ngày.
 
 ### Tính năng chính
 - Tra từ vựng Anh - Việt

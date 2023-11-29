@@ -16,12 +16,12 @@
    <children>
       <ImageView fitHeight="640.0" fitWidth="640.0" focusTraversable="true" layoutX="436.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../Pictures/app/dictionary_map.png" />
+            <Image url="@../icon/game-map.png" />
          </image>
       </ImageView>
       <ImageView fx:id="player" fitHeight="64.0" fitWidth="64.0" focusTraversable="true" layoutX="566.0" layoutY="94.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../Pictures/app/Pink_Monster_Idle_4.png" />
+            <Image url="@../icon/Pink_Monster_Idle_4.png" />
          </image>
       </ImageView>
       <Pane prefHeight="720.0" prefWidth="440.0" style="-fx-background-color: linear-gradient(to right, #0e0c17, #3f3851);">

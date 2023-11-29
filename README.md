@@ -6,7 +6,7 @@
 + Trần Vũ Đức Huy - 22021111 - K67-CB
 + Nguyễn Ngọc Hiệp - 22021169 - K67-CB
 
-+ Bài tập lớn: **Dictionary** / INT2204 1	Lập trình hướng đối tượng.
+#### Bài tập lớn: **Dictionary** / INT2204 1	Lập trình hướng đối tượng.
 
 
 ## **Mô tả ứng dụng**
@@ -34,10 +34,6 @@
 5. Chọn "Game" để mở giao diện game, giúp bạn học từ vựng hiểu quả hơn
 6. Ở giao diện chính của app, nhập từ bạn muốn tra vào phần kính lúp, app sẽ hiện ra kê quả mà bạn muốn. Xem hướng dẫn tai: https://youtu.be/EyzMisDONsA
 
-### Mô tả Game
-Nhân vật chính và Gnuol là 2 người bạn thân. Một ngày Gnuol bất ngờ bị một thế lực bí ẩn bắt cóc, nhân vật chính của chúng ta quyết định tấn công vào lâu đài - nơi sào huyệt của thế lực kia để giải cứu người bạn của mình. Tại đây, anh ta sẽ đối mặt với nhiều chướng ngại vật, liệu nhân vật chính của chúng ta có thành công ? Where's Gnuol !?.
-#### Luật chơi
-#### Hướng dẫn chơi 
 ## **Các kỹ thuật sử dụng trong App**
 
 - Sử dụng cây Trie để lưu trữ từ, các thao tác đều thực hiện trên cây
@@ -53,5 +49,15 @@ Nhân vật chính và Gnuol là 2 người bạn thân. Một ngày Gnuol bất
 ![tratu](https://github.com/dluong1210/projectOOP_Dictionary/assets/145144451/8df67f33-0334-4e85-a736-06e0024c8d39)
 ![add_tu](https://github.com/dluong1210/projectOOP_Dictionary/assets/145144451/81403c67-d8ca-45ba-b1a1-25afac312c37)
 ![bookmark](https://github.com/dluong1210/projectOOP_Dictionary/assets/145144451/c86b28c2-8bc9-4412-ad0e-d09b374281b0)
-## **Tổng Kết**
 
+## **Tổng Kết**
+### **Hướng phát triển**
+-  Phát triển thông qua lưu trữ data người dùng: Thời gian học, số từ đã học, chuỗi ngày học, số từ đã thêm và xóa...
+-  Phát triển dữ liệu từ điển: Cài thêm API gợi ý từ.
+-  Xây dựng giao diện light mode.
+-  Phát triển thêm game nhiều màn chơi hơn, thêm âm thanh và tương tác với người chơi.
+### **Tham khảo**
+-  https://stackoverflow.com
+-  https://chat.openai.com
+-  Một số project từ các anh/chị khóa trước
+* Em xin cam kết toàn bộ dự án không có sự sao chép. *

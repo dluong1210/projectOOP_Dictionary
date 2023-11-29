@@ -39,10 +39,14 @@ public class gameTest implements Initializable {
     @FXML
     private Text pointText;
 
+    @FXML
+    private Text questionText;
+    @FXML
+    private Text content;
 
     private WordChoiceGame wordGame = new WordChoiceGame();     // Su dung game nay by TVDH
     private MeaningChoiceGame meaningGame = new MeaningChoiceGame();     // Su dung game nay by TVDH
-
+    private String correctAnswer;
     private ArrayList<ImageView> listBox = new ArrayList<>();
     private final Image boxImage = new Image(getClass().getResourceAsStream("/icon/box.png"));
     private final Image idleImage = new Image(getClass().getResourceAsStream("/icon/Pink_Monster_Idle_4.png"));
@@ -77,7 +81,6 @@ public class gameTest implements Initializable {
 
         wordGame.initGame();            // Chuan bi choi game
         meaningGame.initGame();
-        openQuest();
 
         scene.requestFocus();
         for (int i = 1; i < map.length - 1; i++) {
@@ -124,6 +127,19 @@ public class gameTest implements Initializable {
 
         controllerKey();
         controllerMouse();
+        firstScene();
+    }
+
+    private void firstScene() {
+        questionText.setVisible(false);
+        setButtonVisible(false);
+        HPText.setVisible(false);
+        pointText.setVisible(false);
+        content.setText("\n HOW TO PLAY:\n" +
+                        "  - Move the OASIS to all the yellow boxes by using keyboard then answer the question in each box by click at the button.\n" +
+                        "  - You get 0 points at first, it will increase by 10 when you answer correctly.\n" +
+                        "  - You get 3 HP at first, it will decrease by 1 when you answer incorrectly and you gonna lose if your HP reach 0.\n"
+                );
     }
 
     public void controllerKey() {
@@ -132,19 +148,15 @@ public class gameTest implements Initializable {
             if (isQuest) {
                 if (e.getCode().equals(KeyCode.A)) {
                     getResult("A");
-
                 }
                 else if (e.getCode().equals(KeyCode.B)) {
                     getResult("B");
-
                 }
                 if (e.getCode().equals(KeyCode.C)) {
                     getResult("C");
-
                 }
                 if (e.getCode().equals(KeyCode.D)) {
                     getResult("D");
-
                 }
             }
             if (isQuest) return;
@@ -201,8 +213,6 @@ public class gameTest implements Initializable {
     }
 
     public void openQuest() {
-        // Hiện câu hỏi lên
-        //
         int randomGame = (int) (Math.random() * 2);
         wordGame.getPrepared();  // tao cau hoi va cac lua chon moi
         meaningGame.getPrepared();
@@ -212,54 +222,75 @@ public class gameTest implements Initializable {
         String choiceC;
         String choiceD;
         if (randomGame == 0) {
-            question = "Which word has the following meaning? " + wordGame.giveQuestion().substring(14, wordGame.giveQuestion().length());
+            content.setText("\n  Which word has this meaning? \n");
+            questionText.setText(wordGame.giveQuestion().substring(14, wordGame.giveQuestion().length()));
+            question = wordGame.giveQuestion().substring(14, wordGame.giveQuestion().length());
             choiceA = wordGame.giveChoice(0);
             choiceB = wordGame.giveChoice(1);
             choiceC = wordGame.giveChoice(2);
             choiceD = wordGame.giveChoice(3);
+            correctAnswer = option[wordGame.getCorrectChoice()];
         } else {
-            question = "Which is the meaning of the following word? " + meaningGame.giveQuestion().substring(14, meaningGame.giveQuestion().length());
+            content.setText("\nWhich is the meaning of this word? \n");
+            questionText.setText(meaningGame.giveQuestion().substring(14, meaningGame.giveQuestion().length()));
+            question = meaningGame.giveQuestion().substring(14, meaningGame.giveQuestion().length());
             choiceA = meaningGame.giveChoice(0);
             choiceB = meaningGame.giveChoice(1);
             choiceC = meaningGame.giveChoice(2);
             choiceD = meaningGame.giveChoice(3);
+            correctAnswer = option[meaningGame.getCorrectChoice()];
         }
+
         System.out.println(question);
         System.out.println(choiceA);
         System.out.println(choiceB);
         System.out.println(choiceC);
         System.out.println(choiceD);
+        System.out.println(correctAnswer);
 
-        // SetText dong nay
         buttonA.setText(choiceA);
         buttonB.setText(choiceB);
         buttonC.setText(choiceC);
         buttonD.setText(choiceD);
 
-        buttonA.setVisible(true);
-        buttonB.setVisible(true);
-        buttonC.setVisible(true);
-        buttonD.setVisible(true);
+        content.setVisible(true);
+        questionText.setVisible(true);
+        HPText.setVisible(true);
+        pointText.setVisible(true);
+        setButtonVisible(true);
     }
 
     public void getResult(String playerInput) {
-        boolean result = playerInput.equals(option[wordGame.getCorrectChoice()]);
+        boolean result = playerInput.equals(correctAnswer);
         if (result) {
+            content.setText("\t  OASIS is so happyyy <3");
+            questionText.setText("CORRECT!");
             increasePoint();
         } else {
+            content.setText("\t  OASIS is so saddd TT");
+            questionText.setText("INCORRECT!");
             decreaseHP();
         }
         isQuest = false;
 
-        buttonA.setVisible(false);
-        buttonB.setVisible(false);
-        buttonC.setVisible(false);
-        buttonD.setVisible(false);
+        setButtonVisible(false);
+    }
+
+    private void setButtonVisible(boolean b) {
+        buttonA.setVisible(b);
+        buttonB.setVisible(b);
+        buttonC.setVisible(b);
+        buttonD.setVisible(b);
     }
 
     public void increasePoint() {
         point += 10;
         pointText.setText("Point: " + point);
+
+        if ((point / 10) + (3 - HP) == 11) {
+            // da xong het cac cau hoi
+            // thang
+        }
     }
 
     public void decreaseHP() {
@@ -269,6 +300,10 @@ public class gameTest implements Initializable {
         player.setImage(hurtImage); // Hiệu ứng khi trả lời sai
         HPText.setText("HP: " + HP);
 
+        if (HP == 0) {
+            // ket thuc game
+            // thua
+        }
     }
 
 

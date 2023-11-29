@@ -24,15 +24,15 @@
             <Image url="@../icon/Pink_Monster_Idle_4.png" />
          </image>
       </ImageView>
-      <Pane prefHeight="720.0" prefWidth="440.0" style="-fx-background-color: linear-gradient(to right, #0e0c17, #3f3851);">
+      <Pane layoutY="14.0" prefHeight="720.0" prefWidth="440.0" style="-fx-background-color: linear-gradient(to right, #0e0c17, #3f3851);">
          <children>
-            <BorderPane layoutX="40.0" layoutY="47.0" prefHeight="200.0" prefWidth="360.0" style="-fx-background-color: #1C1A24; -fx-background-radius: 15;">
+            <BorderPane layoutX="50.0" layoutY="60.0" prefHeight="180.0" prefWidth="360.0" style="-fx-background-color: #1C1A24; -fx-background-radius: 15;">
                <top>
                   <HBox prefHeight="35.0" prefWidth="544.0" style="-fx-background-color: #2A2931; -fx-background-radius: 15 15 0 0;" BorderPane.alignment="CENTER">
                      <children>
-                        <Text fill="#bb86fc" strokeType="OUTSIDE" strokeWidth="0.0" text="Queston" wrappingWidth="80">
+                        <Text fx:id="content" fill="#bb86fc" lineSpacing="2.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Content" wrappingWidth="310.0">
                            <font>
-                              <Font size="16.0" />
+                              <Font name="System Bold" size="18.0" />
                            </font>
                            <HBox.margin>
                               <Insets left="30.0" top="5.0" />
@@ -42,10 +42,17 @@
                      </children>
                   </HBox>
                </top>
+               <center>
+                  <Text fx:id="questionText" fill="WHITE" lineSpacing="1.0" strokeType="OUTSIDE" strokeWidth="0.0" text="QuestionText" BorderPane.alignment="CENTER">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Text>
+               </center>
             </BorderPane>
-            <Button fx:id="buttonB" focusTraversable="false" layoutX="225.0" layoutY="284.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="175.0" style="-fx-border-radius: 20;" styleClass="button1" stylesheets="@../css/button.css" text="Edit" textFill="WHITE">
+            <Button fx:id="buttonB" focusTraversable="false" layoutX="70.0" layoutY="360.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="320.0" style="-fx-border-radius: 20;" styleClass="button1" stylesheets="@../css/button.css" text="Choice B" textFill="WHITE">
                <font>
-                  <Font size="14.0" />
+                  <Font size="20.0" />
                </font>
                <effect>
                   <Glow level="0.5" />
@@ -54,9 +61,9 @@
                   <Insets />
                </opaqueInsets>
             </Button>
-            <Button fx:id="buttonA" focusTraversable="false" layoutX="40.0" layoutY="284.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="175.0" style="-fx-border-radius: 20;" styleClass="button1" stylesheets="@../css/button.css" text="Edit" textFill="WHITE">
+            <Button fx:id="buttonA" focusTraversable="false" layoutX="70.0" layoutY="280.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="320.0" style="-fx-border-radius: 20;" styleClass="button1" stylesheets="@../css/button.css" text="Choice A" textFill="WHITE">
                <font>
-                  <Font size="14.0" />
+                  <Font size="20.0" />
                </font>
                <effect>
                   <Glow level="0.5" />
@@ -65,9 +72,9 @@
                   <Insets />
                </opaqueInsets>
             </Button>
-            <Button fx:id="buttonC" focusTraversable="false" layoutX="40.0" layoutY="394.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="175.0" style="-fx-border-radius: 20;" styleClass="button1" stylesheets="@../css/button.css" text="Edit" textFill="WHITE">
+            <Button fx:id="buttonC" focusTraversable="false" layoutX="70.0" layoutY="440.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="320.0" style="-fx-border-radius: 20;" styleClass="button1" stylesheets="@../css/button.css" text="Choice C" textFill="WHITE">
                <font>
-                  <Font size="14.0" />
+                  <Font size="20.0" />
                </font>
                <effect>
                   <Glow level="0.5" />
@@ -76,9 +83,9 @@
                   <Insets />
                </opaqueInsets>
             </Button>
-            <Button fx:id="buttonD" focusTraversable="false" layoutX="225.0" layoutY="394.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="175.0" style="-fx-border-radius: 20;" styleClass="button1" stylesheets="@../css/button.css" text="Edit" textFill="WHITE">
+            <Button fx:id="buttonD" focusTraversable="false" layoutX="70.0" layoutY="520.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="320.0" style="-fx-border-radius: 20;" styleClass="button1" stylesheets="@../css/button.css" text="Choice D" textFill="WHITE">
                <font>
-                  <Font size="14.0" />
+                  <Font size="20.0" />
                </font>
                <effect>
                   <Glow level="0.5" />
@@ -87,12 +94,12 @@
                   <Insets />
                </opaqueInsets>
             </Button>
-            <Text fx:id="HPText" fill="WHITE" layoutX="40.0" layoutY="584.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HP: 3">
+            <Text fx:id="HPText" fill="WHITE" layoutX="110.0" layoutY="630.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HP: 3">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
             </Text>
-            <Text fx:id="pointText" fill="WHITE" layoutX="235.0" layoutY="583.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Point: 0">
+            <Text fx:id="pointText" fill="WHITE" layoutX="270.0" layoutY="630.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Point: 0">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>

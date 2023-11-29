@@ -2,11 +2,17 @@ package controllers;
 
 import game.*;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -19,6 +25,8 @@ public class GameController implements Initializable {
     private Button C = new Button();
     @FXML
     private Button D = new Button();
+    @FXML
+    private Button E = new Button();
     @FXML
     private Button Play = new Button();
     @FXML
@@ -50,16 +58,18 @@ public class GameController implements Initializable {
 
         setVisibleItem(false);
 
-        Question.setText("\t  Which game do you want to play?");
-        A.setText("\t\t Choosing Word Game");
-        B.setText("\t\t Memory Word Game");
-        C.setText("\t\t Choosing Meaning Game");
-        D.setText("\t\t Memory Meaning Game");
+        Question.setText("Which game do you want to play?");
+        A.setText("  Choosing Word Game");
+        B.setText("   Memory Word Game");
+        C.setText("Choosing Meaning Game");
+        D.setText(" Memory Meaning Game");
+        E.setText("OASIS's Bizarre Adventure");
 
         A.setOnAction(e -> initGame("A"));
         B.setOnAction(e -> initGame("B"));
         C.setOnAction(e -> initGame("C"));
         D.setOnAction(e -> initGame("D"));
+        E.setOnAction(e -> switchToOASISGame());
     }
 
     /**
@@ -119,6 +129,7 @@ public class GameController implements Initializable {
         initItem();
         game.initGame();
         printIntroduceAndPlay();                                          // in luat
+        E.setVisible(false);
     }
 
     /**
@@ -147,11 +158,11 @@ public class GameController implements Initializable {
         setQuestionAndChoicesVisible(true);
 
         // Noi dung cac lua chon
-        Question.setText("   " + game.giveQuestion());
-        A.setText("   " + game.giveChoice(0));
-        B.setText("   " + game.giveChoice(1));
-        C.setText("   " + game.giveChoice(2));
-        D.setText("   " + game.giveChoice(3));
+        Question.setText("  " + game.giveQuestion());
+        A.setText("  " + game.giveChoice(0));
+        B.setText("  " + game.giveChoice(1));
+        C.setText("  " + game.giveChoice(2));
+        D.setText("  " + game.giveChoice(3));
 
         // Cac lua chon
         A.setOnAction(e -> getClickInput("A"));
@@ -275,5 +286,30 @@ public class GameController implements Initializable {
         eliminateOne.setNumber(0);
         secondChance.setNumber(0);
         fiftyFifty.setNumber(0);
+    }
+
+//// Method for E button
+    public void switchToOASISGame() {
+        Stage newStage = new Stage();
+
+        try {
+            loadGamePage(newStage);
+        } catch (IOException ex) {
+            throw new RuntimeException(ex);
+        }
+
+        newStage.show();
+    }
+
+    public void loadGamePage(Stage stage) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(Login.class.getResource("/views/gametest.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 1080, 720);
+        scene.setFill(Color.TRANSPARENT);
+
+        stage.setTitle("Game");
+        stage.initStyle(StageStyle.TRANSPARENT);
+        stage.setResizable(false);
+        stage.setScene(scene);
+
     }
 }

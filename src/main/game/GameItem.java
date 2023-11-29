@@ -38,7 +38,7 @@ public abstract class GameItem {
     }
 
     public String getText() {
-        return name + " [" + number + "]";
+        return name + "\n      [" + number + "]";
     }
 
     /**

@@ -11,34 +11,34 @@
          <font>
             <Font name="System Bold" size="36.0" />
          </font></Text>
-      <Button fx:id="A" alignment="BASELINE_LEFT" layoutX="240.0" layoutY="150.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="450.0" styleClass="button2" stylesheets="@../css/button.css" text="Choice A text" textFill="WHITE">
+      <Button fx:id="A" alignment="BASELINE_LEFT" layoutX="130.0" layoutY="145.0" mnemonicParsing="false" prefHeight="110.0" prefWidth="290.0" styleClass="button2" stylesheets="@../css/button.css" text="Choice A text" textFill="WHITE">
          <font>
             <Font size="22.0" />
          </font></Button>
-      <Button fx:id="B" alignment="BASELINE_LEFT" layoutX="240.0" layoutY="240.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="450.0" styleClass="button2" stylesheets="@../css/button.css" text="Choice B text" textFill="WHITE">
+      <Button fx:id="B" alignment="BASELINE_LEFT" layoutX="505.0" layoutY="145.0" mnemonicParsing="false" prefHeight="110.0" prefWidth="290.0" styleClass="button2" stylesheets="@../css/button.css" text="Choice B text" textFill="WHITE">
          <font>
             <Font size="22.0" />
          </font>
       </Button>
-      <Button fx:id="C" alignment="BASELINE_LEFT" layoutX="240.0" layoutY="330.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="450.0" styleClass="button2" stylesheets="@../css/button.css" text="Choice C text" textFill="WHITE">
+      <Button fx:id="C" alignment="BASELINE_LEFT" layoutX="130.0" layoutY="305.0" mnemonicParsing="false" prefHeight="110.0" prefWidth="290.0" styleClass="button2" stylesheets="@../css/button.css" text="Choice C text" textFill="WHITE">
          <font>
             <Font size="22.0" />
          </font></Button>
-      <Button fx:id="D" alignment="BASELINE_LEFT" layoutX="240.0" layoutY="420.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="450.0" styleClass="button2" stylesheets="@../css/button.css" text="Choice D text" textFill="WHITE">
+      <Button fx:id="D" alignment="BASELINE_LEFT" layoutX="505.0" layoutY="305.0" mnemonicParsing="false" prefHeight="110.0" prefWidth="290.0" styleClass="button2" stylesheets="@../css/button.css" text="Choice D text" textFill="WHITE">
          <font>
             <Font size="22.0" />
          </font></Button>
-      <Button fx:id="EliminateOne" layoutX="90.0" layoutY="530.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="130.0" styleClass="button2" stylesheets="@../css/button.css" text="-1 Item" textFill="WHITE">
+      <Button fx:id="EliminateOne" layoutX="160.0" layoutY="500.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="130.0" styleClass="button2" stylesheets="@../css/button.css" text="-1 Item" textFill="WHITE">
          <font>
-            <Font size="18.0" />
+            <Font size="20.0" />
          </font></Button>
-      <Button fx:id="SecondChance" layoutX="400.0" layoutY="530.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="130.0" styleClass="button2" stylesheets="@../css/button.css" text="x2 Item" textFill="WHITE">
+      <Button fx:id="SecondChance" layoutX="400.0" layoutY="500.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="130.0" styleClass="button2" stylesheets="@../css/button.css" text="x2 Item" textFill="WHITE">
          <font>
-            <Font size="18.0" />
+            <Font size="20.0" />
          </font></Button>
-      <Button fx:id="FiftyFifty" layoutX="705.0" layoutY="530.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="130.0" styleClass="button2" stylesheets="@../css/button.css" text="50/50 Item" textFill="WHITE">
+      <Button fx:id="FiftyFifty" layoutX="635.0" layoutY="500.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="130.0" styleClass="button2" stylesheets="@../css/button.css" text="50/50 Item" textFill="WHITE">
          <font>
-            <Font size="18.0" />
+            <Font size="20.0" />
          </font></Button>
       <Text fx:id="Introduce" disable="true" fill="WHITE" layoutX="70.0" layoutY="70.0" lineSpacing="1.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Print the game's rule / Show the result" wrappingWidth="785.0">
          <font>
@@ -49,5 +49,10 @@
          <font>
             <Font size="30.0" />
          </font></Button>
+      <Button fx:id="E" alignment="BASELINE_LEFT" layoutX="320.0" layoutY="480.0" mnemonicParsing="false" prefHeight="110.0" prefWidth="290.0" styleClass="button2" stylesheets="@../css/button.css" text="Choice E text" textFill="WHITE" visible="false">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

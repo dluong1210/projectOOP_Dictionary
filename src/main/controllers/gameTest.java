@@ -4,7 +4,6 @@ import game.*;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Rectangle2D;
@@ -13,12 +12,12 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
 import javafx.util.Duration;
 
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-import java.util.Scanner;
 
 import static game.MultipleChoiceGame.option;
 
@@ -35,8 +34,10 @@ public class gameTest implements Initializable {
     private Button buttonC;
     @FXML
     private Button buttonD;
-//    @FXML
-//    private ;
+    @FXML
+    private Text HPText;
+    @FXML
+    private Text pointText;
 
 
     private WordChoiceGame wordGame = new WordChoiceGame();     // Su dung game nay by TVDH
@@ -106,6 +107,12 @@ public class gameTest implements Initializable {
                 if (isHurt) {
                     isHurt = false;
                     player.setImage(idleImage);
+                    if (HP == 0) {
+                        // endgame
+                        isDie = true;
+                        index = 0;
+                        player.setImage(dieImage); // Hiệu ứng khi chết
+                    }
                 }
                 index = 0;
             } else if (index >= 8) {
@@ -114,10 +121,9 @@ public class gameTest implements Initializable {
         }));
         timeline.setCycleCount(Animation.INDEFINITE);
         timeline.play();
-//        Platform.runLater(()->{
-//            if (!isQuest) controllerKey();
-//        });
 
+        controllerKey();
+        controllerMouse();
     }
 
     public void controllerKey() {
@@ -125,24 +131,20 @@ public class gameTest implements Initializable {
             System.out.println(e.getCode());
             if (isQuest) {
                 if (e.getCode().equals(KeyCode.A)) {
-                    isHurt = true;
-                    index = 0;
-                    player.setImage(hurtImage); // Hiệu ứng khi trả lời sai
-                    isQuest = false;
+                    getResult("A");
+
                 }
                 else if (e.getCode().equals(KeyCode.B)) {
-                    isDie = true;
-                    index = 0;
-                    player.setImage(dieImage); // Hiệu ứng khi chết
-                    isQuest = false;
+                    getResult("B");
+
                 }
                 if (e.getCode().equals(KeyCode.C)) {
-                    //
-                    isQuest = false;
+                    getResult("C");
+
                 }
                 if (e.getCode().equals(KeyCode.D)) {
-                    //
-                    isQuest = false;
+                    getResult("D");
+
                 }
             }
             if (isQuest) return;
@@ -174,8 +176,27 @@ public class gameTest implements Initializable {
                 changeBox();
                 isQuest = true;
                 openQuest();
-                System.out.println("quest");
+
             }
+        });
+    }
+
+    public void controllerMouse() {
+        buttonA.setOnAction(e -> {
+            getResult("A");
+
+        });
+            buttonB.setOnAction(e -> {
+            getResult("B");
+
+        });
+            buttonC.setOnAction(e -> {
+            getResult("C");
+
+        });
+            buttonD.setOnAction(e -> {
+            getResult("D");
+
         });
     }
 
@@ -215,33 +236,39 @@ public class gameTest implements Initializable {
         buttonC.setText(choiceC);
         buttonD.setText(choiceD);
 
+        buttonA.setVisible(true);
+        buttonB.setVisible(true);
+        buttonC.setVisible(true);
+        buttonD.setVisible(true);
     }
 
-    public void getResult() {
-        String playerInput = "";   // can 1 method lay input tra ve duoi dang "A" / "B" / "C" / "D"
-
+    public void getResult(String playerInput) {
         boolean result = playerInput.equals(option[wordGame.getCorrectChoice()]);
         if (result) {
             increasePoint();
         } else {
             decreaseHP();
         }
-        // Co result thi xu li controller tiep
+        isQuest = false;
+
+        buttonA.setVisible(false);
+        buttonB.setVisible(false);
+        buttonC.setVisible(false);
+        buttonD.setVisible(false);
     }
 
     public void increasePoint() {
-        point += 1;
-        // cap nhat point o giao dien
-        // bat dau vong choi moi
+        point += 10;
+        pointText.setText("Point: " + point);
     }
 
     public void decreaseHP() {
         HP -= 1;
-        if (HP == 0) {
-            // endgame
-        } else {
-            // bat dau vong choi moi
-        }
+        isHurt = true;
+        index = 0;
+        player.setImage(hurtImage); // Hiệu ứng khi trả lời sai
+        HPText.setText("HP: " + HP);
+
     }
 
 

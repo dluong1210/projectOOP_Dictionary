@@ -87,12 +87,12 @@
                   <Insets />
                </opaqueInsets>
             </Button>
-            <Text fx:id="HPText" fill="WHITE" layoutX="40.0" layoutY="584.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HP: ">
+            <Text fx:id="HPText" fill="WHITE" layoutX="40.0" layoutY="584.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HP: 3">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
             </Text>
-            <Text fx:id="pointText" fill="WHITE" layoutX="235.0" layoutY="583.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Point:">
+            <Text fx:id="pointText" fill="WHITE" layoutX="235.0" layoutY="583.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Point: 0">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>

@@ -170,10 +170,10 @@ public class DictionaryManagement extends Dictionary {
         Scanner scan = new Scanner(System.in);
         String word;
         while (true) {
-            System.out.print("Nhập từ cần tra cứu: ");
+            System.out.print("Enter your word: ");
             word = scan.nextLine();
             if (!word.isEmpty()) break;
-            System.out.println("Bạn chưa nhập từ !");
+            System.out.println("Error: No information!");
         }
         if (listWord.lookup(word) == null) {
             System.out.println("Word not exist in dictionary");
@@ -210,7 +210,7 @@ public class DictionaryManagement extends Dictionary {
      */
     public void dictionaryUpdate() {
         Scanner scan = new Scanner(System.in);
-        System.out.print("Nhập từ cần sửa: ");
+        System.out.print("Enter your word: ");
         String old_word_target = scan.nextLine();
         if (listWord.lookup(old_word_target) == null) {
             System.out.println("Word not exist in dictionary");
@@ -231,9 +231,9 @@ public class DictionaryManagement extends Dictionary {
             listWord.addWord(new Word(old_word_target, word_explain));
             return;
         }
-        System.out.print("Nhập từ mới: ");
+        System.out.print("New word: ");
         String new_word_target = scan.nextLine();
-        System.out.print("Nghĩa mới là: ");
+        System.out.print("New explain: ");
         String new_word_explain = scan.nextLine();
         listWord.editWord(old_word_target, new_word_target, new_word_explain);
     }
@@ -243,7 +243,7 @@ public class DictionaryManagement extends Dictionary {
      */
     public void dictionaryRemove() {
         Scanner scan = new Scanner(System.in);
-        System.out.print("Nhập từ cần xóa: ");
+        System.out.print("Enter the word you want to remove: ");
         String word_target = scan.nextLine();
         listWord.delete(word_target);
     }
@@ -252,7 +252,7 @@ public class DictionaryManagement extends Dictionary {
      * Exports data stored in the Dictionary to a file.
      */
     public void dictionaryExportToFile() {
-        System.out.print("Nhập tên file +(.txt): ");
+        System.out.print("Enter file + (.txt): ");
         Scanner scan = new Scanner(System.in);
         String nameFile = scan.nextLine();
         try {
@@ -279,7 +279,7 @@ public class DictionaryManagement extends Dictionary {
      */
     public void dictionaryImportFromFile() {
         // tu tu roi nghien cuu hihi na na insert voi export
-        System.out.print("Nhập đường dẫn file: ");
+        System.out.print("Enter path: ");
         Scanner scanPath = new Scanner(System.in);
         String nameFile = scanPath.nextLine();
         try {

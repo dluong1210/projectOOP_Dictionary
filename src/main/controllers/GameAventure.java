@@ -13,6 +13,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.net.URL;
@@ -21,7 +22,7 @@ import java.util.ResourceBundle;
 
 import static game.MultipleChoiceGame.option;
 
-public class gameTest implements Initializable {
+public class GameAventure implements Initializable {
     @FXML
     private ImageView player;
     @FXML
@@ -38,6 +39,8 @@ public class gameTest implements Initializable {
     private Text HPText;
     @FXML
     private Text pointText;
+    @FXML
+    private Button exitButton;
 
     @FXML
     private Text questionText;
@@ -120,6 +123,8 @@ public class gameTest implements Initializable {
                 index = 0;
             } else if (index >= 8) {
                 player.setVisible(false);
+                buttonA.setText("Play again !?");
+                buttonA.setVisible(true);
             }
         }));
         timeline.setCycleCount(Animation.INDEFINITE);
@@ -131,35 +136,35 @@ public class gameTest implements Initializable {
     }
 
     private void firstScene() {
-        questionText.setVisible(false);
+        questionText.setVisible(true);
         setButtonVisible(false);
         HPText.setVisible(false);
         pointText.setVisible(false);
-        content.setText("\n HOW TO PLAY:\n" +
-                        "  - Move the OASIS to all the yellow boxes by using keyboard then answer the question in each box by click at the button.\n" +
-                        "  - You get 0 points at first, it will increase by 10 when you answer correctly.\n" +
-                        "  - You get 3 HP at first, it will decrease by 1 when you answer incorrectly and you gonna lose if your HP reach 0.\n"
-                );
+        content.setText("HOW TO PLAY:");
+        questionText.setText("  - Move the OASIS to all the yellow boxes by using keyboard then answer the question in each box by click at the button.\n" +
+                "  - You get 0 points at first, it will increase by 10 when you answer correctly.\n" +
+                "  - You get 3 HP at first, it will decrease by 1 when you answer incorrectly and you gonna lose if your HP reach 0.\n");
+
     }
 
     public void controllerKey() {
         scene.setOnKeyPressed( e -> {
             System.out.println(e.getCode());
-            if (isQuest) {
-                if (e.getCode().equals(KeyCode.A)) {
-                    getResult("A");
-                }
-                else if (e.getCode().equals(KeyCode.B)) {
-                    getResult("B");
-                }
-                if (e.getCode().equals(KeyCode.C)) {
-                    getResult("C");
-                }
-                if (e.getCode().equals(KeyCode.D)) {
-                    getResult("D");
-                }
-            }
-            if (isQuest) return;
+//            if (isQuest) {
+//                if (e.getCode().equals(KeyCode.A)) {
+//                    getResult("A");
+//                }
+//                else if (e.getCode().equals(KeyCode.B)) {
+//                    getResult("B");
+//                }
+//                if (e.getCode().equals(KeyCode.C)) {
+//                    getResult("C");
+//                }
+//                if (e.getCode().equals(KeyCode.D)) {
+//                    getResult("D");
+//                }
+//            }
+            if (isQuest || isHurt || isDie) return;
             if (e.getCode().equals(KeyCode.RIGHT)) {
                 player.setScaleX(1);
                 if (map[currentY][currentX + 1] != 0) {
@@ -195,20 +200,29 @@ public class gameTest implements Initializable {
 
     public void controllerMouse() {
         buttonA.setOnAction(e -> {
+            if (isDie || ((point / 10) + (3 - HP) == 11)) {
+                resetGame();
+                return;
+            }
             getResult("A");
 
         });
-            buttonB.setOnAction(e -> {
+        buttonB.setOnAction(e -> {
             getResult("B");
 
         });
-            buttonC.setOnAction(e -> {
+        buttonC.setOnAction(e -> {
             getResult("C");
 
         });
-            buttonD.setOnAction(e -> {
+        buttonD.setOnAction(e -> {
             getResult("D");
 
+        });
+
+        exitButton.setOnAction(e -> {
+            Stage stage = (Stage) exitButton.getScene().getWindow();
+            stage.close();
         });
     }
 
@@ -222,7 +236,7 @@ public class gameTest implements Initializable {
         String choiceC;
         String choiceD;
         if (randomGame == 0) {
-            content.setText("\n  Which word has this meaning? \n");
+            content.setText("Which word has this meaning?");
             questionText.setText(wordGame.giveQuestion().substring(14, wordGame.giveQuestion().length()));
             question = wordGame.giveQuestion().substring(14, wordGame.giveQuestion().length());
             choiceA = wordGame.giveChoice(0);
@@ -231,7 +245,7 @@ public class gameTest implements Initializable {
             choiceD = wordGame.giveChoice(3);
             correctAnswer = option[wordGame.getCorrectChoice()];
         } else {
-            content.setText("\nWhich is the meaning of this word? \n");
+            content.setText("Which is the meaning of this word?");
             questionText.setText(meaningGame.giveQuestion().substring(14, meaningGame.giveQuestion().length()));
             question = meaningGame.giveQuestion().substring(14, meaningGame.giveQuestion().length());
             choiceA = meaningGame.giveChoice(0);
@@ -263,11 +277,11 @@ public class gameTest implements Initializable {
     public void getResult(String playerInput) {
         boolean result = playerInput.equals(correctAnswer);
         if (result) {
-            content.setText("\t  OASIS is so happyyy <3");
+            content.setText("Congratulation !!!");
             questionText.setText("CORRECT!");
             increasePoint();
         } else {
-            content.setText("\t  OASIS is so saddd TT");
+            content.setText("OASIS is so saddd TT");
             questionText.setText("INCORRECT!");
             decreaseHP();
         }
@@ -288,8 +302,10 @@ public class gameTest implements Initializable {
         pointText.setText("Point: " + point);
 
         if ((point / 10) + (3 - HP) == 11) {
-            // da xong het cac cau hoi
-            // thang
+            content.setText("Congratulation. You Won !!!");
+            questionText.setText("GAME OVER!\n Your Point: " + point);
+            buttonA.setText("Play again !?");
+            buttonA.setVisible(true);
         }
     }
 
@@ -301,8 +317,7 @@ public class gameTest implements Initializable {
         HPText.setText("HP: " + HP);
 
         if (HP == 0) {
-            // ket thuc game
-            // thua
+            questionText.setText("GAME OVER!\n Your Point: " + point);
         }
     }
 
@@ -311,8 +326,37 @@ public class gameTest implements Initializable {
         for (int i = 0; i < listBox.size(); i++) {
             if (map[(int) ((listBox.get(i).getY() - 40) / 64)][(int) ((listBox.get(i).getX() - 436) / 64)] == 3) {
                 listBox.get(i).setViewport(new Rectangle2D(48, 0, 48, 48));
+            } else {
+                listBox.get(i).setViewport(new Rectangle2D(0, 0, 48, 48));
             }
         }
+    }
+
+    public void resetGame() {
+        player.setX(player.getX() - 64 * --currentX);
+        player.setY(player.getY() - 64 * --currentY);
+
+        index = 0;
+        point = 0;
+        HP = 3;
+        currentX = 1;
+        currentY = 1;
+        isDie = false;
+
+        player.setImage(idleImage);
+        player.setVisible(true);
+        pointText.setText("Point: 0");
+        HPText.setText("HP: 0");
+
+        for (int i = 1; i < map.length; i++) {
+            for (int j = 1; j < map[0].length; j++) {
+                if (map[i][j] == 3) {
+                    map[i][j] = 2;
+                }
+            }
+        }
+        changeBox();
+        firstScene();
     }
 
 }

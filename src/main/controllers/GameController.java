@@ -6,7 +6,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -55,6 +54,7 @@ public class GameController implements Initializable {
      */
     public void printChooseGame() {
         setQuestionAndChoicesVisible(true);
+        E.setVisible(true);
 
         setVisibleItem(false);
 
@@ -302,7 +302,7 @@ public class GameController implements Initializable {
     }
 
     public void loadGamePage(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Login.class.getResource("/views/gametest.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Login.class.getResource("/views/gameAventure.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1080, 720);
         scene.setFill(Color.TRANSPARENT);
 

@@ -113,7 +113,6 @@ public class SearchWord implements Initializable {
             Parent addWordTab = loaderAddwordTab.load();
             Parent bookmarkTab = loaderBookmarkTab.load();
             Parent gameTab = loaderGameTab.load();
-            gameTab.setFocusTraversable(true);
 
             Tab tab2 = new Tab("Google Translate", translateTab);
             Tab tab3 = new Tab("Add new word", addWordTab);
@@ -197,15 +196,15 @@ public class SearchWord implements Initializable {
 
             tabPane.getSelectionModel().select(4);
 
-            Stage newStage = new Stage();
-
-            try {
-                loadGamePage(newStage);
-            } catch (IOException ex) {
-                throw new RuntimeException(ex);
-            }
-
-            newStage.show();
+//            Stage newStage = new Stage();
+//
+//            try {
+//                loadGamePage(newStage);
+//            } catch (IOException ex) {
+//                throw new RuntimeException(ex);
+//            }
+//
+//            newStage.show();
         });
 
         logoutButton.setOnAction(e -> {
@@ -446,7 +445,7 @@ public class SearchWord implements Initializable {
     }
 
     public void loadGamePage(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Login.class.getResource("/views/gametest.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Login.class.getResource("/views/gameAventure.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1080, 720);
         scene.setFill(Color.TRANSPARENT);
 
